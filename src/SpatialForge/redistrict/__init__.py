@@ -27,10 +27,10 @@ Example usage:
     simulator.run_simulation_with_animation(num_iterations=10000)
 """
 
-from .gerrymanderingSimulator import GerrymanderSimulator
-from .animationCapabilities import add_animation_methods
-from .visualization import add_visualization_methods, plot_metrics_evolution, compare_scenarios_metrics
-from .runSimulation import run_gerrymandering_animation, compare_gerrymandering_scenarios, main
+from .gerrymandering_simulator import GerrymanderSimulator
+from .animation_capabilities import add_animation_methods
+from ..core.post.visualization import add_visualization_methods, plot_metrics_evolution, compare_scenarios_metrics
+from .run_imulation import run_gerrymandering_animation, compare_gerrymandering_scenarios, main
 
 __all__ = [
     'GerrymanderSimulator',

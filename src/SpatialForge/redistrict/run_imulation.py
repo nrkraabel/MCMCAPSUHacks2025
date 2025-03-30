@@ -11,8 +11,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time
 import pandas as pd
-from gerrymanderingSimulator import GerrymanderSimulator
-from animationCapabilities import add_animation_methods
+from SpatialForgeHack2025.src.SpatialForge.redistrict.gerrymandering_simulator import GerrymanderSimulator
+from SpatialForgeHack2025.src.SpatialForge.redistrict.animation_capabilities import add_animation_methods
 from MCMCAPSUHacks2025.Redistricting.visualization import add_visualization_methods, plot_metrics_evolution, compare_scenarios_metrics, create_comparison_visualization
 import subprocess
 from tqdm import tqdm
