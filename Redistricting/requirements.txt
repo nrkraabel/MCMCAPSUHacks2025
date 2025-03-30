@@ -1,0 +1,10 @@
+numpy
+matplotlib
+geopandas
+pandas
+scipy
+shapely
+tqdm
+requests
+zipfile36
+numba
