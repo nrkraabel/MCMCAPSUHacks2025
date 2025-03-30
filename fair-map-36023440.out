@@ -1,360 +1,0 @@
-
-================================================================================
-Running scenario: fair_redistricting
-================================================================================
-Flipped state map orientation
-Using 36 CPU cores for parallelization
-Found 2 potential holes or unassigned regions
-Filling hole with size 31
-District map saved to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/initial_district_map.npy
-District statistics saved to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/initial_district_stats.csv
-Starting simulation for scenario 'fair_redistricting'...
-Will capture animation frame every 1666 iterations
-Saved animation frame 0 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0000.png
-Iteration 0: Phase 1 - Equalizing population
-Running simulation using 36 CPU cores in parallel with 30 pixels per move
-  0%|          | 0/250000 [00:00<?, ?it/s]/storage/work/nrk5343/MCMCAPSUHacks2025/Redistricting/gerrymanderingSimulator.py:419: RuntimeWarning: invalid value encountered in sqrt
-  compactness_scores = self.district_stats['perimeter'] / np.sqrt(self.district_stats['area'] +epsilon )
-  2%|▏         | 5000/250000 [02:25<1:58:31, 34.45it/s]Saved animation frame 1 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0001.png
-  2%|▏         | 5000/250000 [02:40<1:58:31, 34.45it/s]  4%|▍         | 10000/250000 [05:15<2:08:09, 31.21it/s]
-Iteration 5000/250000, Score: 23.14
-Population imbalance: 507.72%, Min: 77893, Max: 3960819
-Districts: 14 Red, 3 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 2 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0002.png
-  4%|▍         | 10000/250000 [05:30<2:08:09, 31.21it/s]  6%|▌         | 15000/250000 [08:21<2:14:34, 29.10it/s]
-Iteration 10000/250000, Score: 22.97
-Population imbalance: 500.33%, Min: 77704, Max: 3904100
-Districts: 14 Red, 3 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 3 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0003.png
-  6%|▌         | 15000/250000 [08:40<2:14:34, 29.10it/s]  8%|▊         | 20000/250000 [11:42<2:20:28, 27.29it/s]
-Iteration 15000/250000, Score: 22.58
-Population imbalance: 488.68%, Min: 86684, Max: 3824011
-Districts: 14 Red, 3 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 4 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0004.png
-  8%|▊         | 20000/250000 [12:00<2:20:28, 27.29it/s] 10%|█         | 25000/250000 [15:14<2:25:15, 25.82it/s]
-Iteration 20000/250000, Score: 22.28
-Population imbalance: 473.17%, Min: 84665, Max: 3703375
-Districts: 14 Red, 3 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 5 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0005.png
- 10%|█         | 25000/250000 [15:30<2:25:15, 25.82it/s] 12%|█▏        | 30000/250000 [19:00<2:30:11, 24.41it/s]
-Iteration 25000/250000, Score: 23.65
-Population imbalance: 440.06%, Min: 89587, Max: 3455120
-Districts: 14 Red, 3 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 6 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0006.png
- 12%|█▏        | 30000/250000 [19:20<2:30:11, 24.41it/s] 14%|█▍        | 35000/250000 [23:23<2:40:22, 22.34it/s]
-Iteration 30000/250000, Score: 23.79
-Population imbalance: 417.48%, Min: 95224, Max: 3288027
-Districts: 13 Red, 4 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 7 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0007.png
- 14%|█▍        | 35000/250000 [23:40<2:40:22, 22.34it/s] 16%|█▌        | 40000/250000 [28:09<2:50:27, 20.53it/s]
-Iteration 35000/250000, Score: 23.94
-Population imbalance: 430.52%, Min: 93569, Max: 3386139
-Districts: 13 Red, 4 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 8 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0008.png
- 16%|█▌        | 40000/250000 [28:20<2:50:27, 20.53it/s] 18%|█▊        | 45000/250000 [33:16<2:59:58, 18.98it/s]
-Iteration 40000/250000, Score: 24.19
-Population imbalance: 427.84%, Min: 91253, Max: 3363291
-Districts: 13 Red, 4 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 9 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0009.png
- 18%|█▊        | 45000/250000 [33:30<2:59:58, 18.98it/s] 20%|██        | 50000/250000 [38:37<3:07:29, 17.78it/s]
-Iteration 45000/250000, Score: 24.07
-Population imbalance: 418.50%, Min: 92048, Max: 3292674
-Districts: 13 Red, 4 Blue
-Temperature: 0.7000, Phase: 1
-Iteration 50000: Phase 2 - Optimizing vote distribution
-Saved animation frame 10 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0010.png
- 20%|██        | 50000/250000 [38:50<3:07:29, 17.78it/s] 22%|██▏       | 55000/250000 [40:20<2:27:13, 22.07it/s]
-Iteration 50000/250000, Score: 89.15
-Population imbalance: 373.12%, Min: 95432, Max: 2949007
-Districts: 13 Red, 4 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 11 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0011.png
- 22%|██▏       | 55000/250000 [40:30<2:27:13, 22.07it/s] 24%|██▍       | 60000/250000 [42:04<1:59:52, 26.42it/s]
-Iteration 55000/250000, Score: 94.92
-Population imbalance: 374.99%, Min: 93509, Max: 2961357
-Districts: 12 Red, 5 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 12 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0012.png
- 24%|██▍       | 60000/250000 [42:20<1:59:52, 26.42it/s] 26%|██▌       | 65000/250000 [43:46<1:40:24, 30.71it/s]
-Iteration 60000/250000, Score: 100.10
-Population imbalance: 353.28%, Min: 91556, Max: 2793383
-Districts: 12 Red, 5 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 13 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0013.png
- 26%|██▌       | 65000/250000 [44:00<1:40:24, 30.71it/s] 28%|██▊       | 70000/250000 [45:27<1:26:33, 34.66it/s]
-Iteration 65000/250000, Score: 103.92
-Population imbalance: 335.76%, Min: 95171, Max: 2663026
-Districts: 11 Red, 6 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 14 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0014.png
- 28%|██▊       | 70000/250000 [45:40<1:26:33, 34.66it/s] 30%|███       | 75000/250000 [47:08<1:16:31, 38.11it/s]
-Iteration 70000/250000, Score: 107.38
-Population imbalance: 332.47%, Min: 99790, Max: 2642429
-Districts: 11 Red, 6 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 15 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0015.png
- 30%|███       | 75000/250000 [47:20<1:16:31, 38.11it/s] 32%|███▏      | 80000/250000 [48:50<1:09:16, 40.90it/s]
-Iteration 75000/250000, Score: 111.21
-Population imbalance: 325.82%, Min: 101701, Max: 2593483
-Districts: 12 Red, 5 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 16 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0016.png
- 32%|███▏      | 80000/250000 [49:00<1:09:16, 40.90it/s] 34%|███▍      | 85000/250000 [50:33<1:04:05, 42.90it/s]
-Iteration 80000/250000, Score: 114.70
-Population imbalance: 323.76%, Min: 96349, Max: 2572391
-Districts: 12 Red, 5 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 17 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0017.png
- 34%|███▍      | 85000/250000 [50:50<1:04:05, 42.90it/s] 36%|███▌      | 90000/250000 [52:15<59:51, 44.55it/s]  
-Iteration 85000/250000, Score: 117.65
-Population imbalance: 303.69%, Min: 97975, Max: 2420520
-Districts: 12 Red, 5 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 18 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0018.png
- 36%|███▌      | 90000/250000 [52:30<59:51, 44.55it/s] 38%|███▊      | 95000/250000 [54:01<56:58, 45.34it/s]
-Iteration 90000/250000, Score: 121.87
-Population imbalance: 295.53%, Min: 97481, Max: 2357634
-Districts: 12 Red, 5 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 19 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0019.png
- 38%|███▊      | 95000/250000 [54:20<56:58, 45.34it/s] 40%|████      | 100000/250000 [55:44<54:03, 46.25it/s]
-Iteration 95000/250000, Score: 125.59
-Population imbalance: 296.10%, Min: 96050, Max: 2360573
-Districts: 12 Red, 5 Blue
-Temperature: 0.6000, Phase: 2
-Iteration 100000: Phase 3 - Improving district compactness
-Saved animation frame 20 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0020.png
-
-Iteration 100000/250000, Score: 194.14
-Population imbalance: 263.76%, Min: 101123, Max: 2118322
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
- 42%|████▏     | 105000/250000 [55:47<37:02, 65.25it/s]Created process pool with 36 workers
-Saved animation frame 21 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0021.png
- 44%|████▍     | 110000/250000 [55:50<25:28, 91.58it/s]
-Iteration 105000/250000, Score: 194.19
-Population imbalance: 264.01%, Min: 98852, Max: 2117961
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 22 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0022.png
- 46%|████▌     | 115000/250000 [55:53<17:36, 127.76it/s]
-Iteration 110000/250000, Score: 194.20
-Population imbalance: 265.58%, Min: 98781, Max: 2129891
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 23 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0023.png
- 48%|████▊     | 120000/250000 [55:57<12:17, 176.26it/s]
-Iteration 115000/250000, Score: 194.22
-Population imbalance: 265.58%, Min: 98794, Max: 2129891
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 24 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0024.png
- 50%|█████     | 125000/250000 [56:00<08:40, 240.09it/s]
-Iteration 120000/250000, Score: 194.35
-Population imbalance: 265.60%, Min: 98847, Max: 2130080
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 25 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0025.png
- 52%|█████▏    | 130000/250000 [56:03<06:10, 323.79it/s]
-Iteration 125000/250000, Score: 194.43
-Population imbalance: 265.16%, Min: 98861, Max: 2126728
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 26 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0026.png
- 54%|█████▍    | 135000/250000 [56:06<04:29, 427.27it/s]
-Iteration 130000/250000, Score: 194.57
-Population imbalance: 265.11%, Min: 98867, Max: 2126365
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 27 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0027.png
- 56%|█████▌    | 140000/250000 [56:09<03:20, 549.09it/s]
-Iteration 135000/250000, Score: 194.70
-Population imbalance: 264.89%, Min: 99072, Max: 2124885
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 28 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0028.png
- 58%|█████▊    | 145000/250000 [56:12<02:31, 691.37it/s]
-Iteration 140000/250000, Score: 194.94
-Population imbalance: 265.12%, Min: 99381, Max: 2126980
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 29 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0029.png
- 60%|██████    | 150000/250000 [56:14<01:58, 847.37it/s]
-Iteration 145000/250000, Score: 195.00
-Population imbalance: 264.86%, Min: 101198, Max: 2126793
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 30 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0030.png
- 62%|██████▏   | 155000/250000 [56:17<01:34, 1003.10it/s]
-Iteration 150000/250000, Score: 195.04
-Population imbalance: 263.58%, Min: 101140, Max: 2116974
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 31 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0031.png
- 64%|██████▍   | 160000/250000 [56:20<01:17, 1154.11it/s]
-Iteration 155000/250000, Score: 195.14
-Population imbalance: 261.02%, Min: 101090, Max: 2097352
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 32 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0032.png
- 66%|██████▌   | 165000/250000 [56:23<01:05, 1298.97it/s]
-Iteration 160000/250000, Score: 195.13
-Population imbalance: 261.05%, Min: 101168, Max: 2097638
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 33 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0033.png
- 68%|██████▊   | 170000/250000 [56:26<00:57, 1392.98it/s]
-Iteration 165000/250000, Score: 195.29
-Population imbalance: 259.88%, Min: 101059, Max: 2088551
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 34 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0034.png
- 70%|███████   | 175000/250000 [56:29<00:50, 1472.38it/s]
-Iteration 170000/250000, Score: 195.26
-Population imbalance: 260.04%, Min: 100970, Max: 2089692
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 35 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0035.png
- 72%|███████▏  | 180000/250000 [56:32<00:45, 1540.69it/s]
-Iteration 175000/250000, Score: 195.31
-Population imbalance: 260.21%, Min: 99413, Max: 2089414
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 36 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0036.png
- 74%|███████▍  | 185000/250000 [56:34<00:40, 1603.53it/s]
-Iteration 180000/250000, Score: 195.42
-Population imbalance: 259.98%, Min: 99384, Max: 2087625
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 37 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0037.png
- 76%|███████▌  | 190000/250000 [56:37<00:36, 1640.40it/s]
-Iteration 185000/250000, Score: 195.48
-Population imbalance: 259.87%, Min: 99425, Max: 2086829
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 38 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0038.png
- 78%|███████▊  | 195000/250000 [56:40<00:33, 1638.36it/s]
-Iteration 190000/250000, Score: 195.72
-Population imbalance: 260.52%, Min: 99520, Max: 2091957
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 39 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0039.png
- 80%|████████  | 200000/250000 [56:43<00:30, 1651.59it/s]
-Iteration 195000/250000, Score: 195.84
-Population imbalance: 256.10%, Min: 99569, Max: 2058165
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 40 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0040.png
- 82%|████████▏ | 205000/250000 [56:46<00:27, 1664.64it/s]
-Iteration 200000/250000, Score: 196.06
-Population imbalance: 256.01%, Min: 99654, Max: 2057557
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 41 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0041.png
- 84%|████████▍ | 210000/250000 [56:49<00:23, 1693.85it/s]
-Iteration 205000/250000, Score: 196.06
-Population imbalance: 256.07%, Min: 99300, Max: 2057700
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 42 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0042.png
- 86%|████████▌ | 215000/250000 [56:52<00:20, 1691.32it/s]
-Iteration 210000/250000, Score: 196.10
-Population imbalance: 255.98%, Min: 99252, Max: 2056969
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 43 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0043.png
- 88%|████████▊ | 220000/250000 [56:55<00:17, 1713.49it/s]
-Iteration 215000/250000, Score: 196.30
-Population imbalance: 255.79%, Min: 99218, Max: 2055462
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 44 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0044.png
- 90%|█████████ | 225000/250000 [56:58<00:14, 1725.79it/s]
-Iteration 220000/250000, Score: 196.53
-Population imbalance: 255.76%, Min: 99235, Max: 2055271
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 45 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0045.png
- 92%|█████████▏| 230000/250000 [57:01<00:11, 1723.71it/s]
-Iteration 225000/250000, Score: 196.62
-Population imbalance: 255.42%, Min: 99400, Max: 2052810
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 46 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0046.png
- 94%|█████████▍| 235000/250000 [57:03<00:08, 1741.33it/s]
-Iteration 230000/250000, Score: 196.80
-Population imbalance: 254.59%, Min: 99610, Max: 2046673
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 47 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0047.png
- 96%|█████████▌| 240000/250000 [57:06<00:05, 1752.98it/s]
-Iteration 235000/250000, Score: 197.01
-Population imbalance: 255.12%, Min: 99701, Max: 2050815
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 48 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0048.png
- 98%|█████████▊| 245000/250000 [57:09<00:02, 1725.02it/s]
-Iteration 240000/250000, Score: 197.07
-Population imbalance: 255.56%, Min: 99932, Max: 2054436
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 49 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0049.png
-100%|██████████| 250000/250000 [57:12<00:00, 1732.11it/s]
-Iteration 245000/250000, Score: 197.23
-Population imbalance: 255.57%, Min: 99791, Max: 2054342
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 50 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0050.png
-100%|██████████| 250000/250000 [57:13<00:00, 72.82it/s]  
-
-Iteration 250000/250000, Score: 197.39
-Population imbalance: 255.79%, Min: 99815, Max: 2056073
-Districts: 12 Red, 5 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 51 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames/frame_0051.png
-Simulation complete!
-Creating animation with 52 frames...
-Attempting to compile video from frames in /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation_frames...
-Found 52 frames to compile.
-Trying video compilation method 1...
-Method 1 failed with error: ffmpeg version 4.3.2 Copyright (c) 2000-2021 the FFmpeg developers
-  built with gcc 8 (GCC)
-  configuration: --prefix=/swst/apps/ffmpeg/4.3.2_gcc-8.5.0 --enable-pic --cc=/tmp/jenkins_swst_build/workspace/SWST_Build_QA/build/spack/lib/spack/env/gcc/gcc --cxx=/tmp/jenkins_swst_build/workspace/SWST_Build_QA/build/spack/lib/spack/env/gcc/g++ --disable-libxcb --disable-libxcb-shape --disable-libxcb-shm --disable-libxcb-xfixes --disable-xlib --disable-libfontconfig --disable-libfreetype --disable-libfribidi --enable-bzlib --disable-libmp3lame --disable-libopenjpeg --disable-libopus --disable-libspeex --disable-libvorbis --disable-libvpx --disable-avresample --disable-openssl --enable-shared --disable-libzmq --disable-libssh --disable-libwebp --disable-lzma --disable-libsnappy --disable-sdl2 --disable-libaom
-  libavutil      56. 51.100 / 56. 51.100
-  libavcodec     58. 91.100 / 58. 91.100
-  libavformat    58. 45.100 / 58. 45.100
-  libavdevice    58. 10.100 / 58. 10.100
-  libavfilter     7. 85.100 /  7. 85.100
-  libswscale      5.  7.100 /  5.  7.100
-  libswresample   3.  7.100 /  3.  7.100
-Unrecognized option 'preset'.
-Error splitting the argument list: Option not found
-
-Trying video compilation method 2...
-Successfully compiled video using method 2.
-Video saved to: /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_animation.mp4
-District map saved to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/final_district_map.npy
-District statistics saved to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/final_district_stats.csv
-Running simulation and tracking district stats for 10000 iterations...
-  0%|          | 0/10000 [00:00<?, ?it/s]Created process pool with 36 workers
- 50%|█████     | 5000/10000 [00:02<00:02, 1903.43it/s]100%|██████████| 10000/10000 [00:05<00:00, 1991.81it/s]100%|██████████| 10000/10000 [00:05<00:00, 1977.94it/s]
-District stats tracking completed in 5.07 seconds
-Stats saved to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting/fair_redistricting_stats_evolution.csv
-Scenario 'fair_redistricting' completed. Results saved to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting
-
-
-========================================
-SIMULATION BATCH COMPLETE
-========================================
-Output directory: /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643
-Scenarios completed: 1
-  - fair_redistricting: /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_021643/fair_redistricting
-========================================

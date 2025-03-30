@@ -1,1460 +1,0 @@
-
-================================================================================
-Running scenario: blue_gerrymander
-================================================================================
-Flipped state map orientation
-Using 36 CPU cores for parallelization
-Found 2 potential holes or unassigned regions
-Filling hole with size 31
-District map saved to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/initial_district_map.npy
-District statistics saved to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/initial_district_stats.csv
-Starting simulation for scenario 'blue_gerrymander'...
-Will capture animation frame every 1666 iterations
-Saved animation frame 0 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0000.png
-Iteration 0: Phase 1 - Equalizing population
-Running simulation using 36 CPU cores in parallel with 15 pixels per move
-  0%|          | 0/250000 [00:00<?, ?it/s]  0%|          | 1000/250000 [00:26<1:51:12, 37.32it/s]  0%|          | 1000/250000 [00:40<1:51:12, 37.32it/s]  1%|          | 2000/250000 [00:57<1:59:46, 34.51it/s]
-Iteration 1000/250000, Score: 32.42
-Population imbalance: 671.72%, Min: 69552, Max: 5206775
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 1 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0001.png
-  1%|          | 2000/250000 [01:10<1:59:46, 34.51it/s]  1%|          | 3000/250000 [01:31<2:08:35, 32.01it/s]
-Iteration 2000/250000, Score: 31.90
-Population imbalance: 668.40%, Min: 70333, Max: 5182116
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-  1%|          | 3000/250000 [01:50<2:08:35, 32.01it/s]  2%|▏         | 4000/250000 [02:09<2:19:32, 29.38it/s]
-Iteration 3000/250000, Score: 31.59
-Population imbalance: 667.44%, Min: 72542, Max: 5176987
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 2 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0002.png
-  2%|▏         | 4000/250000 [02:20<2:19:32, 29.38it/s]  2%|▏         | 5000/250000 [02:52<2:31:48, 26.90it/s]
-Iteration 4000/250000, Score: 31.20
-Population imbalance: 665.60%, Min: 74637, Max: 5165027
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 3 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0003.png
-  2%|▏         | 5000/250000 [03:10<2:31:48, 26.90it/s]  2%|▏         | 6000/250000 [03:38<2:43:39, 24.85it/s]
-Iteration 5000/250000, Score: 30.71
-Population imbalance: 662.45%, Min: 76197, Max: 5142474
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-  2%|▏         | 6000/250000 [03:50<2:43:39, 24.85it/s]  3%|▎         | 7000/250000 [04:28<2:56:26, 22.95it/s]
-Iteration 6000/250000, Score: 30.80
-Population imbalance: 665.55%, Min: 74846, Max: 5164860
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 4 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0004.png
-  3%|▎         | 7000/250000 [04:40<2:56:26, 22.95it/s]  3%|▎         | 8000/250000 [05:23<3:09:37, 21.27it/s]
-Iteration 7000/250000, Score: 30.69
-Population imbalance: 664.97%, Min: 76193, Max: 5161726
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-  3%|▎         | 8000/250000 [05:40<3:09:37, 21.27it/s]  4%|▎         | 9000/250000 [06:20<3:22:08, 19.87it/s]
-Iteration 8000/250000, Score: 30.05
-Population imbalance: 658.62%, Min: 78208, Max: 5115247
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 5 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0005.png
-  4%|▎         | 9000/250000 [06:40<3:22:08, 19.87it/s]  4%|▍         | 10000/250000 [07:22<3:35:16, 18.58it/s]
-Iteration 9000/250000, Score: 30.01
-Population imbalance: 659.98%, Min: 76506, Max: 5123879
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 6 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0006.png
-  4%|▍         | 10000/250000 [07:40<3:35:16, 18.58it/s]  4%|▍         | 11000/250000 [08:27<3:47:37, 17.50it/s]
-Iteration 10000/250000, Score: 30.23
-Population imbalance: 663.18%, Min: 79381, Max: 5151283
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-  4%|▍         | 11000/250000 [08:40<3:47:37, 17.50it/s]  5%|▍         | 12000/250000 [09:35<3:59:59, 16.53it/s]
-Iteration 11000/250000, Score: 30.00
-Population imbalance: 660.88%, Min: 80425, Max: 5134745
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 7 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0007.png
-  5%|▍         | 12000/250000 [09:50<3:59:59, 16.53it/s]  5%|▌         | 13000/250000 [10:48<4:14:13, 15.54it/s]
-Iteration 12000/250000, Score: 30.22
-Population imbalance: 659.64%, Min: 87030, Max: 5131806
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-  5%|▌         | 13000/250000 [11:00<4:14:13, 15.54it/s]  6%|▌         | 14000/250000 [12:04<4:27:02, 14.73it/s]
-Iteration 13000/250000, Score: 30.03
-Population imbalance: 655.74%, Min: 88901, Max: 5103875
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 8 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0008.png
-  6%|▌         | 14000/250000 [12:20<4:27:02, 14.73it/s]  6%|▌         | 15000/250000 [13:24<4:40:32, 13.96it/s]
-Iteration 14000/250000, Score: 30.13
-Population imbalance: 655.70%, Min: 86080, Max: 5100785
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 9 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0009.png
-  6%|▌         | 15000/250000 [13:40<4:40:32, 13.96it/s]  6%|▋         | 16000/250000 [14:54<4:59:46, 13.01it/s]
-Iteration 15000/250000, Score: 30.08
-Population imbalance: 652.78%, Min: 91321, Max: 5083627
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-  6%|▋         | 16000/250000 [15:10<4:59:46, 13.01it/s]  7%|▋         | 17000/250000 [16:11<4:59:40, 12.96it/s]
-Iteration 16000/250000, Score: 29.87
-Population imbalance: 653.00%, Min: 93415, Max: 5087463
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 10 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0010.png
-  7%|▋         | 17000/250000 [16:30<4:59:40, 12.96it/s]  7%|▋         | 18000/250000 [17:35<5:05:18, 12.66it/s]
-Iteration 17000/250000, Score: 28.38
-Population imbalance: 631.29%, Min: 103014, Max: 4931005
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-  7%|▋         | 18000/250000 [17:50<5:05:18, 12.66it/s]  8%|▊         | 19000/250000 [18:57<5:08:36, 12.48it/s]
-Iteration 18000/250000, Score: 28.42
-Population imbalance: 631.07%, Min: 104084, Max: 4930424
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 11 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0011.png
-  8%|▊         | 19000/250000 [19:10<5:08:36, 12.48it/s]  8%|▊         | 20000/250000 [20:25<5:15:12, 12.16it/s]
-Iteration 19000/250000, Score: 28.43
-Population imbalance: 627.49%, Min: 113809, Max: 4912716
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 12 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0012.png
-  8%|▊         | 20000/250000 [20:40<5:15:12, 12.16it/s]  8%|▊         | 21000/250000 [21:56<5:24:41, 11.75it/s]
-Iteration 20000/250000, Score: 28.42
-Population imbalance: 625.43%, Min: 108756, Max: 4891916
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-  8%|▊         | 21000/250000 [22:10<5:24:41, 11.75it/s]  9%|▉         | 22000/250000 [23:31<5:34:11, 11.37it/s]
-Iteration 21000/250000, Score: 28.71
-Population imbalance: 626.78%, Min: 112963, Max: 4906444
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 13 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0013.png
-  9%|▉         | 22000/250000 [23:50<5:34:11, 11.37it/s]  9%|▉         | 23000/250000 [25:08<5:42:59, 11.03it/s]
-Iteration 22000/250000, Score: 28.44
-Population imbalance: 621.81%, Min: 111365, Max: 4866880
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-  9%|▉         | 23000/250000 [25:20<5:42:59, 11.03it/s] 10%|▉         | 24000/250000 [26:48<5:52:15, 10.69it/s]
-Iteration 23000/250000, Score: 28.65
-Population imbalance: 624.61%, Min: 114109, Max: 4890986
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 14 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0014.png
- 10%|█         | 25000/250000 [28:32<6:02:08, 10.36it/s]
-Iteration 24000/250000, Score: 28.56
-Population imbalance: 620.60%, Min: 115293, Max: 4861554
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 15 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0015.png
- 10%|█         | 26000/250000 [30:24<6:17:51,  9.88it/s]
-Iteration 25000/250000, Score: 28.58
-Population imbalance: 620.50%, Min: 120183, Max: 4865622
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
- 11%|█         | 27000/250000 [32:11<6:23:07,  9.70it/s]
-Iteration 26000/250000, Score: 28.75
-Population imbalance: 619.55%, Min: 131260, Max: 4869480
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 16 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0016.png
- 11%|█         | 28000/250000 [34:02<6:29:59,  9.49it/s]
-Iteration 27000/250000, Score: 28.64
-Population imbalance: 614.97%, Min: 129656, Max: 4832812
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
- 12%|█▏        | 29000/250000 [36:02<6:44:16,  9.11it/s]
-Iteration 28000/250000, Score: 28.38
-Population imbalance: 611.24%, Min: 118638, Max: 4793265
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 17 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0017.png
- 12%|█▏        | 30000/250000 [37:56<6:47:02,  9.01it/s]
-Iteration 29000/250000, Score: 28.58
-Population imbalance: 613.54%, Min: 117647, Max: 4809848
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 18 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0018.png
- 12%|█▏        | 31000/250000 [39:53<6:51:32,  8.87it/s]
-Iteration 30000/250000, Score: 28.35
-Population imbalance: 608.26%, Min: 125011, Max: 4776870
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
- 13%|█▎        | 32000/250000 [41:50<6:54:58,  8.76it/s]
-Iteration 31000/250000, Score: 28.62
-Population imbalance: 609.13%, Min: 128200, Max: 4786710
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 19 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0019.png
- 13%|█▎        | 33000/250000 [43:51<7:00:21,  8.60it/s]
-Iteration 32000/250000, Score: 28.51
-Population imbalance: 606.06%, Min: 133765, Max: 4768767
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
- 14%|█▎        | 34000/250000 [45:54<7:05:33,  8.46it/s]
-Iteration 33000/250000, Score: 28.72
-Population imbalance: 606.78%, Min: 130573, Max: 4771136
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 20 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0020.png
- 14%|█▍        | 35000/250000 [48:00<7:11:37,  8.30it/s]
-Iteration 34000/250000, Score: 28.81
-Population imbalance: 607.07%, Min: 136860, Max: 4779642
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 21 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0021.png
- 14%|█▍        | 36000/250000 [50:07<7:16:36,  8.17it/s]
-Iteration 35000/250000, Score: 29.19
-Population imbalance: 608.98%, Min: 145710, Max: 4803072
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
- 15%|█▍        | 37000/250000 [52:15<7:20:13,  8.06it/s]
-Iteration 36000/250000, Score: 29.55
-Population imbalance: 612.75%, Min: 148327, Max: 4834487
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 22 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0022.png
- 15%|█▌        | 38000/250000 [54:24<7:23:42,  7.96it/s]
-Iteration 37000/250000, Score: 29.46
-Population imbalance: 609.59%, Min: 154239, Max: 4816237
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
- 16%|█▌        | 39000/250000 [56:35<7:27:19,  7.86it/s]
-Iteration 38000/250000, Score: 29.45
-Population imbalance: 609.41%, Min: 147975, Max: 4808641
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 23 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0023.png
- 16%|█▌        | 40000/250000 [58:48<7:31:41,  7.75it/s]
-Iteration 39000/250000, Score: 29.74
-Population imbalance: 611.26%, Min: 151021, Max: 4825848
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 24 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0024.png
- 16%|█▋        | 41000/250000 [1:01:03<7:35:34,  7.65it/s]
-Iteration 40000/250000, Score: 29.77
-Population imbalance: 610.63%, Min: 143029, Max: 4813007
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
- 17%|█▋        | 42000/250000 [1:03:18<7:37:25,  7.58it/s]
-Iteration 41000/250000, Score: 30.25
-Population imbalance: 615.86%, Min: 140468, Max: 4850417
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 25 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0025.png
- 17%|█▋        | 43000/250000 [1:05:34<7:40:13,  7.50it/s]
-Iteration 42000/250000, Score: 30.31
-Population imbalance: 618.08%, Min: 141797, Max: 4868744
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
- 18%|█▊        | 44000/250000 [1:07:51<7:41:42,  7.44it/s]
-Iteration 43000/250000, Score: 30.01
-Population imbalance: 613.98%, Min: 141664, Max: 4837248
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 26 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0026.png
- 18%|█▊        | 45000/250000 [1:10:11<7:44:47,  7.35it/s]
-Iteration 44000/250000, Score: 29.66
-Population imbalance: 606.25%, Min: 142377, Max: 4778867
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 27 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0027.png
- 18%|█▊        | 46000/250000 [1:12:30<7:45:38,  7.30it/s]
-Iteration 45000/250000, Score: 29.78
-Population imbalance: 604.29%, Min: 148607, Max: 4770092
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
- 19%|█▉        | 47000/250000 [1:14:51<7:47:15,  7.24it/s]
-Iteration 46000/250000, Score: 30.13
-Population imbalance: 606.69%, Min: 147450, Max: 4787291
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 28 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0028.png
- 19%|█▉        | 48000/250000 [1:17:13<7:48:40,  7.18it/s]
-Iteration 47000/250000, Score: 29.88
-Population imbalance: 602.70%, Min: 154531, Max: 4763851
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
- 20%|█▉        | 49000/250000 [1:19:34<7:48:53,  7.14it/s]
-Iteration 48000/250000, Score: 29.90
-Population imbalance: 600.85%, Min: 154520, Max: 4749698
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Saved animation frame 29 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0029.png
- 20%|██        | 50000/250000 [1:22:11<8:02:59,  6.90it/s]
-Iteration 49000/250000, Score: 29.29
-Population imbalance: 589.98%, Min: 158906, Max: 4670984
-Districts: 15 Red, 2 Blue
-Temperature: 0.7000, Phase: 1
-Iteration 50000: Phase 2 - Optimizing vote distribution
-Saved animation frame 30 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0030.png
- 20%|██        | 51000/250000 [1:22:31<5:56:27,  9.30it/s]
-Iteration 50000/250000, Score: 153.84
-Population imbalance: 596.24%, Min: 156339, Max: 4716264
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
- 20%|██        | 51000/250000 [1:22:42<5:56:27,  9.30it/s] 21%|██        | 52000/250000 [1:22:51<4:28:13, 12.30it/s]
-Iteration 51000/250000, Score: 154.52
-Population imbalance: 594.82%, Min: 157186, Max: 4706234
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 31 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0031.png
- 21%|██        | 52000/250000 [1:23:02<4:28:13, 12.30it/s] 21%|██        | 53000/250000 [1:23:12<3:27:23, 15.83it/s]
-Iteration 52000/250000, Score: 156.13
-Population imbalance: 587.79%, Min: 156727, Max: 4652022
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
- 21%|██        | 53000/250000 [1:23:32<3:27:23, 15.83it/s] 22%|██▏       | 54000/250000 [1:23:32<2:43:57, 19.92it/s]
-Iteration 53000/250000, Score: 156.93
-Population imbalance: 592.72%, Min: 158230, Max: 4691248
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 32 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0032.png
- 22%|██▏       | 54000/250000 [1:23:52<2:43:57, 19.92it/s] 22%|██▏       | 55000/250000 [1:23:52<2:14:04, 24.24it/s]
-Iteration 54000/250000, Score: 158.37
-Population imbalance: 593.22%, Min: 157081, Max: 4693915
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 33 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0033.png
- 22%|██▏       | 55000/250000 [1:24:12<2:14:04, 24.24it/s] 22%|██▏       | 56000/250000 [1:24:13<1:53:41, 28.44it/s]
-Iteration 55000/250000, Score: 159.14
-Population imbalance: 595.53%, Min: 159161, Max: 4713630
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
- 22%|██▏       | 56000/250000 [1:24:32<1:53:41, 28.44it/s] 23%|██▎       | 57000/250000 [1:24:33<1:38:20, 32.71it/s]
-Iteration 56000/250000, Score: 159.21
-Population imbalance: 589.00%, Min: 159475, Max: 4664019
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 34 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0034.png
- 23%|██▎       | 57000/250000 [1:24:52<1:38:20, 32.71it/s] 23%|██▎       | 58000/250000 [1:24:54<1:28:02, 36.35it/s]
-Iteration 57000/250000, Score: 159.67
-Population imbalance: 580.80%, Min: 168287, Max: 4610131
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
- 23%|██▎       | 58000/250000 [1:25:12<1:28:02, 36.35it/s] 24%|██▎       | 59000/250000 [1:25:13<1:20:18, 39.64it/s]
-Iteration 58000/250000, Score: 161.14
-Population imbalance: 579.08%, Min: 160802, Max: 4589460
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 35 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0035.png
- 24%|██▎       | 59000/250000 [1:25:32<1:20:18, 39.64it/s] 24%|██▍       | 60000/250000 [1:25:34<1:15:06, 42.16it/s]
-Iteration 59000/250000, Score: 161.70
-Population imbalance: 579.34%, Min: 167045, Max: 4597696
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 36 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0036.png
- 24%|██▍       | 60000/250000 [1:25:52<1:15:06, 42.16it/s] 24%|██▍       | 61000/250000 [1:25:54<1:11:23, 44.12it/s]
-Iteration 60000/250000, Score: 162.42
-Population imbalance: 582.98%, Min: 153392, Max: 4611927
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
- 24%|██▍       | 61000/250000 [1:26:12<1:11:23, 44.12it/s] 25%|██▍       | 62000/250000 [1:26:14<1:08:14, 45.91it/s]
-Iteration 61000/250000, Score: 163.20
-Population imbalance: 576.81%, Min: 161836, Max: 4573205
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 37 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0037.png
- 25%|██▍       | 62000/250000 [1:26:32<1:08:14, 45.91it/s] 25%|██▌       | 63000/250000 [1:26:34<1:06:22, 46.95it/s]
-Iteration 62000/250000, Score: 164.29
-Population imbalance: 578.79%, Min: 164310, Max: 4590785
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
- 25%|██▌       | 63000/250000 [1:26:52<1:06:22, 46.95it/s] 26%|██▌       | 64000/250000 [1:26:54<1:04:36, 47.98it/s]
-Iteration 63000/250000, Score: 164.11
-Population imbalance: 573.12%, Min: 166364, Max: 4549472
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 38 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0038.png
- 26%|██▌       | 64000/250000 [1:27:12<1:04:36, 47.98it/s] 26%|██▌       | 65000/250000 [1:27:14<1:03:43, 48.38it/s]
-Iteration 64000/250000, Score: 164.54
-Population imbalance: 574.37%, Min: 166329, Max: 4558965
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 39 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0039.png
- 26%|██▌       | 65000/250000 [1:27:32<1:03:43, 48.38it/s] 26%|██▋       | 66000/250000 [1:27:34<1:03:02, 48.64it/s]
-Iteration 65000/250000, Score: 165.75
-Population imbalance: 577.29%, Min: 169527, Max: 4584525
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
- 26%|██▋       | 66000/250000 [1:27:52<1:03:02, 48.64it/s] 27%|██▋       | 67000/250000 [1:27:54<1:02:00, 49.19it/s]
-Iteration 66000/250000, Score: 165.58
-Population imbalance: 570.43%, Min: 171868, Max: 4534430
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 40 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0040.png
- 27%|██▋       | 67000/250000 [1:28:12<1:02:00, 49.19it/s] 27%|██▋       | 68000/250000 [1:28:14<1:01:31, 49.31it/s]
-Iteration 67000/250000, Score: 165.36
-Population imbalance: 564.65%, Min: 171189, Max: 4489555
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
- 27%|██▋       | 68000/250000 [1:28:32<1:01:31, 49.31it/s] 28%|██▊       | 69000/250000 [1:28:34<1:00:47, 49.63it/s]
-Iteration 68000/250000, Score: 165.55
-Population imbalance: 568.08%, Min: 173048, Max: 4517597
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 41 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0041.png
- 28%|██▊       | 69000/250000 [1:28:52<1:00:47, 49.63it/s] 28%|██▊       | 70000/250000 [1:28:54<1:00:31, 49.57it/s]
-Iteration 69000/250000, Score: 166.22
-Population imbalance: 567.35%, Min: 173233, Max: 4512217
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 42 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0042.png
- 28%|██▊       | 70000/250000 [1:29:12<1:00:31, 49.57it/s] 28%|██▊       | 71000/250000 [1:29:14<1:00:13, 49.54it/s]
-Iteration 70000/250000, Score: 166.48
-Population imbalance: 566.61%, Min: 163421, Max: 4496739
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
- 28%|██▊       | 71000/250000 [1:29:32<1:00:13, 49.54it/s] 29%|██▉       | 72000/250000 [1:29:34<59:30, 49.86it/s]  
-Iteration 71000/250000, Score: 167.58
-Population imbalance: 565.57%, Min: 160225, Max: 4485603
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 43 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0043.png
- 29%|██▉       | 72000/250000 [1:29:52<59:30, 49.86it/s] 29%|██▉       | 73000/250000 [1:29:55<59:27, 49.61it/s]
-Iteration 72000/250000, Score: 167.84
-Population imbalance: 565.54%, Min: 163570, Max: 4488696
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
- 29%|██▉       | 73000/250000 [1:30:12<59:27, 49.61it/s] 30%|██▉       | 74000/250000 [1:30:14<58:56, 49.77it/s]
-Iteration 73000/250000, Score: 167.14
-Population imbalance: 562.66%, Min: 160117, Max: 4463240
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 44 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0044.png
- 30%|██▉       | 74000/250000 [1:30:32<58:56, 49.77it/s] 30%|███       | 75000/250000 [1:30:35<58:46, 49.62it/s]
-Iteration 74000/250000, Score: 166.89
-Population imbalance: 559.87%, Min: 159212, Max: 4441019
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 45 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0045.png
- 30%|███       | 75000/250000 [1:30:52<58:46, 49.62it/s] 30%|███       | 76000/250000 [1:30:55<58:35, 49.50it/s]
-Iteration 75000/250000, Score: 167.79
-Population imbalance: 561.45%, Min: 158113, Max: 4451981
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
- 30%|███       | 76000/250000 [1:31:12<58:35, 49.50it/s] 31%|███       | 77000/250000 [1:31:15<58:01, 49.69it/s]
-Iteration 76000/250000, Score: 168.02
-Population imbalance: 557.12%, Min: 166216, Max: 4426997
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 46 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0046.png
- 31%|███       | 77000/250000 [1:31:32<58:01, 49.69it/s] 31%|███       | 78000/250000 [1:31:35<57:52, 49.53it/s]
-Iteration 77000/250000, Score: 166.72
-Population imbalance: 538.45%, Min: 171048, Max: 4289038
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
- 31%|███       | 78000/250000 [1:31:52<57:52, 49.53it/s] 32%|███▏      | 79000/250000 [1:31:55<57:13, 49.81it/s]
-Iteration 78000/250000, Score: 167.93
-Population imbalance: 536.89%, Min: 168849, Max: 4274855
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 47 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0047.png
- 32%|███▏      | 79000/250000 [1:32:12<57:13, 49.81it/s] 32%|███▏      | 80000/250000 [1:32:15<57:02, 49.67it/s]
-Iteration 79000/250000, Score: 168.14
-Population imbalance: 538.22%, Min: 170180, Max: 4286414
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 48 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0048.png
- 32%|███▏      | 80000/250000 [1:32:32<57:02, 49.67it/s] 32%|███▏      | 81000/250000 [1:32:36<56:55, 49.48it/s]
-Iteration 80000/250000, Score: 167.92
-Population imbalance: 536.72%, Min: 169638, Max: 4274391
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
- 32%|███▏      | 81000/250000 [1:32:52<56:55, 49.48it/s] 33%|███▎      | 82000/250000 [1:32:56<56:21, 49.68it/s]
-Iteration 81000/250000, Score: 168.78
-Population imbalance: 529.43%, Min: 174989, Max: 4223998
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 49 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0049.png
- 33%|███▎      | 82000/250000 [1:33:12<56:21, 49.68it/s] 33%|███▎      | 83000/250000 [1:33:16<56:10, 49.55it/s]
-Iteration 82000/250000, Score: 168.76
-Population imbalance: 525.17%, Min: 175382, Max: 4191779
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
- 33%|███▎      | 83000/250000 [1:33:32<56:10, 49.55it/s] 34%|███▎      | 84000/250000 [1:33:36<55:30, 49.84it/s]
-Iteration 83000/250000, Score: 168.75
-Population imbalance: 527.10%, Min: 171522, Max: 4202672
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 50 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0050.png
- 34%|███▎      | 84000/250000 [1:33:52<55:30, 49.84it/s] 34%|███▍      | 85000/250000 [1:33:56<55:20, 49.68it/s]
-Iteration 84000/250000, Score: 168.23
-Population imbalance: 521.10%, Min: 182022, Max: 4167311
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 51 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0051.png
- 34%|███▍      | 85000/250000 [1:34:12<55:20, 49.68it/s] 34%|███▍      | 86000/250000 [1:34:16<55:09, 49.56it/s]
-Iteration 85000/250000, Score: 169.19
-Population imbalance: 522.15%, Min: 183465, Max: 4176760
-Districts: 15 Red, 2 Blue
-Temperature: 0.6000, Phase: 2
- 34%|███▍      | 86000/250000 [1:34:32<55:09, 49.56it/s] 35%|███▍      | 87000/250000 [1:34:36<54:28, 49.86it/s]
-Iteration 86000/250000, Score: 169.67
-Population imbalance: 518.44%, Min: 179085, Max: 4144048
-Districts: 14 Red, 3 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 52 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0052.png
- 35%|███▍      | 87000/250000 [1:34:52<54:28, 49.86it/s] 35%|███▌      | 88000/250000 [1:34:56<54:21, 49.67it/s]
-Iteration 87000/250000, Score: 169.58
-Population imbalance: 507.58%, Min: 177748, Max: 4059614
-Districts: 14 Red, 3 Blue
-Temperature: 0.6000, Phase: 2
- 35%|███▌      | 88000/250000 [1:35:12<54:21, 49.67it/s] 36%|███▌      | 89000/250000 [1:35:16<53:39, 50.00it/s]
-Iteration 88000/250000, Score: 169.49
-Population imbalance: 503.28%, Min: 181524, Max: 4030531
-Districts: 14 Red, 3 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 53 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0053.png
- 36%|███▌      | 89000/250000 [1:35:32<53:39, 50.00it/s] 36%|███▌      | 90000/250000 [1:35:36<53:29, 49.85it/s]
-Iteration 89000/250000, Score: 169.36
-Population imbalance: 501.81%, Min: 180052, Max: 4017798
-Districts: 14 Red, 3 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 54 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0054.png
- 36%|███▌      | 90000/250000 [1:35:52<53:29, 49.85it/s] 36%|███▋      | 91000/250000 [1:35:57<53:13, 49.79it/s]
-Iteration 90000/250000, Score: 169.13
-Population imbalance: 492.88%, Min: 192946, Max: 3962400
-Districts: 14 Red, 3 Blue
-Temperature: 0.6000, Phase: 2
- 36%|███▋      | 91000/250000 [1:36:12<53:13, 49.79it/s] 37%|███▋      | 92000/250000 [1:36:16<52:40, 49.99it/s]
-Iteration 91000/250000, Score: 169.33
-Population imbalance: 492.20%, Min: 188576, Max: 3952840
-Districts: 14 Red, 3 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 55 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0055.png
- 37%|███▋      | 92000/250000 [1:36:32<52:40, 49.99it/s] 37%|███▋      | 93000/250000 [1:36:37<52:55, 49.44it/s]
-Iteration 92000/250000, Score: 169.07
-Population imbalance: 492.64%, Min: 188539, Max: 3956173
-Districts: 14 Red, 3 Blue
-Temperature: 0.6000, Phase: 2
- 37%|███▋      | 93000/250000 [1:36:52<52:55, 49.44it/s] 38%|███▊      | 94000/250000 [1:36:57<52:18, 49.70it/s]
-Iteration 93000/250000, Score: 169.86
-Population imbalance: 493.26%, Min: 177573, Max: 3949948
-Districts: 14 Red, 3 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 56 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0056.png
- 38%|███▊      | 94000/250000 [1:37:12<52:18, 49.70it/s] 38%|███▊      | 95000/250000 [1:37:18<52:39, 49.05it/s]
-Iteration 94000/250000, Score: 170.33
-Population imbalance: 490.90%, Min: 173943, Max: 3928269
-Districts: 14 Red, 3 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 57 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0057.png
- 38%|███▊      | 95000/250000 [1:37:32<52:39, 49.05it/s] 38%|███▊      | 96000/250000 [1:37:38<52:22, 49.01it/s]
-Iteration 95000/250000, Score: 169.80
-Population imbalance: 482.56%, Min: 178983, Max: 3869543
-Districts: 14 Red, 3 Blue
-Temperature: 0.6000, Phase: 2
- 38%|███▊      | 96000/250000 [1:37:52<52:22, 49.01it/s] 39%|███▉      | 97000/250000 [1:37:58<51:44, 49.29it/s]
-Iteration 96000/250000, Score: 169.58
-Population imbalance: 470.21%, Min: 176753, Max: 3772799
-Districts: 14 Red, 3 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 58 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0058.png
- 39%|███▉      | 97000/250000 [1:38:12<51:44, 49.29it/s] 39%|███▉      | 98000/250000 [1:38:19<51:25, 49.26it/s]
-Iteration 97000/250000, Score: 169.86
-Population imbalance: 471.41%, Min: 174052, Max: 3779306
-Districts: 14 Red, 3 Blue
-Temperature: 0.6000, Phase: 2
- 39%|███▉      | 98000/250000 [1:38:32<51:25, 49.26it/s] 40%|███▉      | 99000/250000 [1:38:39<50:42, 49.63it/s]
-Iteration 98000/250000, Score: 169.88
-Population imbalance: 455.06%, Min: 172575, Max: 3652806
-Districts: 14 Red, 3 Blue
-Temperature: 0.6000, Phase: 2
-Saved animation frame 59 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0059.png
- 40%|███▉      | 99000/250000 [1:38:52<50:42, 49.63it/s] 40%|████      | 100000/250000 [1:38:59<50:28, 49.53it/s]
-Iteration 99000/250000, Score: 169.66
-Population imbalance: 451.15%, Min: 171305, Max: 3621630
-Districts: 14 Red, 3 Blue
-Temperature: 0.6000, Phase: 2
-Iteration 100000: Phase 3 - Improving district compactness
-Saved animation frame 60 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0060.png
-
-Iteration 100000/250000, Score: 255.57
-Population imbalance: 445.65%, Min: 172902, Max: 3581123
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 40%|████      | 101000/250000 [1:39:02<37:08, 66.86it/s]Created process pool with 36 workers
- 41%|████      | 102000/250000 [1:39:04<27:21, 90.19it/s]
-Iteration 101000/250000, Score: 255.54
-Population imbalance: 444.94%, Min: 172902, Max: 3575700
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 61 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0061.png
- 41%|████      | 103000/250000 [1:39:06<20:53, 117.31it/s]
-Iteration 102000/250000, Score: 255.48
-Population imbalance: 444.96%, Min: 172874, Max: 3575830
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 42%|████▏     | 104000/250000 [1:39:09<16:13, 149.91it/s]
-Iteration 103000/250000, Score: 255.53
-Population imbalance: 444.87%, Min: 172859, Max: 3575118
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 62 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0062.png
- 42%|████▏     | 105000/250000 [1:39:11<13:05, 184.60it/s]
-Iteration 104000/250000, Score: 255.62
-Population imbalance: 444.88%, Min: 172738, Max: 3575118
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 63 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0063.png
- 42%|████▏     | 106000/250000 [1:39:14<11:02, 217.31it/s]
-Iteration 105000/250000, Score: 255.69
-Population imbalance: 445.04%, Min: 172738, Max: 3576309
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 43%|████▎     | 107000/250000 [1:39:16<09:21, 254.64it/s]
-Iteration 106000/250000, Score: 255.73
-Population imbalance: 444.73%, Min: 172738, Max: 3573959
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 64 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0064.png
- 43%|████▎     | 108000/250000 [1:39:19<08:33, 276.35it/s]
-Iteration 107000/250000, Score: 255.77
-Population imbalance: 444.61%, Min: 172202, Max: 3572465
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 44%|████▎     | 109000/250000 [1:39:21<07:37, 307.96it/s]
-Iteration 108000/250000, Score: 255.73
-Population imbalance: 444.60%, Min: 172261, Max: 3572465
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 65 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0065.png
- 44%|████▍     | 110000/250000 [1:39:24<07:04, 330.07it/s]
-Iteration 109000/250000, Score: 255.71
-Population imbalance: 444.63%, Min: 172261, Max: 3572702
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 66 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0066.png
- 44%|████▍     | 111000/250000 [1:39:26<06:41, 345.89it/s]
-Iteration 110000/250000, Score: 255.68
-Population imbalance: 444.63%, Min: 172257, Max: 3572702
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 45%|████▍     | 112000/250000 [1:39:28<06:02, 380.23it/s]
-Iteration 111000/250000, Score: 255.71
-Population imbalance: 444.68%, Min: 171861, Max: 3572702
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 67 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0067.png
- 45%|████▌     | 113000/250000 [1:39:31<05:53, 387.83it/s]
-Iteration 112000/250000, Score: 255.79
-Population imbalance: 444.89%, Min: 171861, Max: 3574314
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 46%|████▌     | 114000/250000 [1:39:33<05:38, 402.06it/s]
-Iteration 113000/250000, Score: 255.75
-Population imbalance: 445.13%, Min: 171861, Max: 3576093
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 68 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0068.png
- 46%|████▌     | 115000/250000 [1:39:36<05:44, 392.21it/s]
-Iteration 114000/250000, Score: 255.75
-Population imbalance: 445.40%, Min: 171832, Max: 3578149
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 69 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0069.png
- 46%|████▋     | 116000/250000 [1:39:39<05:46, 387.16it/s]
-Iteration 115000/250000, Score: 255.77
-Population imbalance: 445.39%, Min: 171902, Max: 3578149
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 47%|████▋     | 117000/250000 [1:39:41<05:27, 405.88it/s]
-Iteration 116000/250000, Score: 255.71
-Population imbalance: 445.39%, Min: 171861, Max: 3578149
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 70 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0070.png
- 47%|████▋     | 118000/250000 [1:39:43<05:30, 399.44it/s]
-Iteration 117000/250000, Score: 255.71
-Population imbalance: 445.37%, Min: 171613, Max: 3577719
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 48%|████▊     | 119000/250000 [1:39:46<05:19, 410.43it/s]
-Iteration 118000/250000, Score: 255.70
-Population imbalance: 445.06%, Min: 171613, Max: 3575379
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 71 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0071.png
- 48%|████▊     | 120000/250000 [1:39:48<05:25, 399.69it/s]
-Iteration 119000/250000, Score: 255.66
-Population imbalance: 444.87%, Min: 171630, Max: 3573945
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 72 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0072.png
- 48%|████▊     | 121000/250000 [1:39:51<05:29, 391.35it/s]
-Iteration 120000/250000, Score: 255.66
-Population imbalance: 444.87%, Min: 171666, Max: 3573945
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 49%|████▉     | 122000/250000 [1:39:53<05:15, 405.38it/s]
-Iteration 121000/250000, Score: 255.71
-Population imbalance: 444.68%, Min: 171685, Max: 3572478
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 73 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0073.png
- 49%|████▉     | 123000/250000 [1:39:56<05:14, 403.38it/s]
-Iteration 122000/250000, Score: 255.76
-Population imbalance: 444.68%, Min: 171685, Max: 3572478
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 50%|████▉     | 124000/250000 [1:39:58<05:03, 415.65it/s]
-Iteration 123000/250000, Score: 255.78
-Population imbalance: 444.68%, Min: 171792, Max: 3572603
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 74 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0074.png
- 50%|█████     | 125000/250000 [1:40:01<05:09, 403.94it/s]
-Iteration 124000/250000, Score: 255.76
-Population imbalance: 444.68%, Min: 171792, Max: 3572603
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 75 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0075.png
- 50%|█████     | 126000/250000 [1:40:03<05:07, 403.23it/s]
-Iteration 125000/250000, Score: 255.83
-Population imbalance: 444.66%, Min: 171919, Max: 3572603
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 51%|█████     | 127000/250000 [1:40:05<04:54, 417.12it/s]
-Iteration 126000/250000, Score: 255.96
-Population imbalance: 448.47%, Min: 171807, Max: 3601654
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 76 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0076.png
- 51%|█████     | 128000/250000 [1:40:08<04:59, 407.11it/s]
-Iteration 127000/250000, Score: 255.98
-Population imbalance: 448.41%, Min: 171807, Max: 3601170
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 52%|█████▏    | 129000/250000 [1:40:10<04:49, 417.49it/s]
-Iteration 128000/250000, Score: 255.99
-Population imbalance: 448.34%, Min: 171807, Max: 3600605
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 77 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0077.png
- 52%|█████▏    | 130000/250000 [1:40:13<04:52, 410.78it/s]
-Iteration 129000/250000, Score: 256.05
-Population imbalance: 448.34%, Min: 171807, Max: 3600605
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 78 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0078.png
- 52%|█████▏    | 131000/250000 [1:40:15<04:55, 403.27it/s]
-Iteration 130000/250000, Score: 256.03
-Population imbalance: 448.37%, Min: 171807, Max: 3600840
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 53%|█████▎    | 132000/250000 [1:40:18<04:48, 409.34it/s]
-Iteration 131000/250000, Score: 256.06
-Population imbalance: 448.13%, Min: 171870, Max: 3599097
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 79 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0079.png
- 53%|█████▎    | 133000/250000 [1:40:20<04:51, 401.39it/s]
-Iteration 132000/250000, Score: 256.10
-Population imbalance: 446.84%, Min: 171810, Max: 3589164
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 54%|█████▎    | 134000/250000 [1:40:23<04:45, 406.41it/s]
-Iteration 133000/250000, Score: 256.11
-Population imbalance: 446.87%, Min: 171859, Max: 3589455
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 80 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0080.png
- 54%|█████▍    | 135000/250000 [1:40:25<04:49, 397.63it/s]
-Iteration 134000/250000, Score: 256.16
-Population imbalance: 447.30%, Min: 172108, Max: 3592999
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 81 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0081.png
- 54%|█████▍    | 136000/250000 [1:40:28<04:53, 388.23it/s]
-Iteration 135000/250000, Score: 256.26
-Population imbalance: 446.89%, Min: 171942, Max: 3589663
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 55%|█████▍    | 137000/250000 [1:40:30<04:40, 403.38it/s]
-Iteration 136000/250000, Score: 256.26
-Population imbalance: 446.88%, Min: 171984, Max: 3589663
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 82 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0082.png
- 55%|█████▌    | 138000/250000 [1:40:33<04:43, 394.39it/s]
-Iteration 137000/250000, Score: 256.35
-Population imbalance: 447.28%, Min: 171936, Max: 3592647
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 56%|█████▌    | 139000/250000 [1:40:35<04:30, 410.84it/s]
-Iteration 138000/250000, Score: 256.42
-Population imbalance: 447.72%, Min: 171936, Max: 3596050
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 83 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0083.png
- 56%|█████▌    | 140000/250000 [1:40:38<04:41, 390.95it/s]
-Iteration 139000/250000, Score: 256.41
-Population imbalance: 447.72%, Min: 171953, Max: 3596050
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 84 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0084.png
- 56%|█████▋    | 141000/250000 [1:40:40<04:39, 390.23it/s]
-Iteration 140000/250000, Score: 256.42
-Population imbalance: 447.98%, Min: 171790, Max: 3597852
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 57%|█████▋    | 142000/250000 [1:40:43<04:26, 405.83it/s]
-Iteration 141000/250000, Score: 256.48
-Population imbalance: 447.98%, Min: 171790, Max: 3597852
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 85 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0085.png
- 57%|█████▋    | 143000/250000 [1:40:45<04:29, 397.49it/s]
-Iteration 142000/250000, Score: 256.47
-Population imbalance: 447.93%, Min: 171921, Max: 3597602
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 58%|█████▊    | 144000/250000 [1:40:48<04:14, 415.78it/s]
-Iteration 143000/250000, Score: 256.53
-Population imbalance: 447.92%, Min: 171984, Max: 3597602
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 86 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0086.png
- 58%|█████▊    | 145000/250000 [1:40:50<04:19, 404.30it/s]
-Iteration 144000/250000, Score: 256.52
-Population imbalance: 448.19%, Min: 171984, Max: 3599690
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 87 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0087.png
- 58%|█████▊    | 146000/250000 [1:40:53<04:25, 392.07it/s]
-Iteration 145000/250000, Score: 256.49
-Population imbalance: 448.19%, Min: 172014, Max: 3599690
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 59%|█████▉    | 147000/250000 [1:40:55<04:14, 405.17it/s]
-Iteration 146000/250000, Score: 256.56
-Population imbalance: 448.13%, Min: 172446, Max: 3599690
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 88 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0088.png
- 59%|█████▉    | 148000/250000 [1:40:58<04:17, 396.29it/s]
-Iteration 147000/250000, Score: 256.52
-Population imbalance: 448.13%, Min: 172446, Max: 3599690
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 60%|█████▉    | 149000/250000 [1:41:00<04:05, 411.76it/s]
-Iteration 148000/250000, Score: 256.49
-Population imbalance: 446.13%, Min: 172446, Max: 3584354
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 89 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0089.png
- 60%|██████    | 150000/250000 [1:41:03<04:18, 387.42it/s]
-Iteration 149000/250000, Score: 256.48
-Population imbalance: 446.19%, Min: 172446, Max: 3584796
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 90 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0090.png
- 60%|██████    | 151000/250000 [1:41:06<04:18, 383.43it/s]
-Iteration 150000/250000, Score: 256.56
-Population imbalance: 445.42%, Min: 172446, Max: 3578953
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 61%|██████    | 152000/250000 [1:41:08<04:03, 403.14it/s]
-Iteration 151000/250000, Score: 256.54
-Population imbalance: 445.00%, Min: 172425, Max: 3575678
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 91 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0091.png
- 61%|██████    | 153000/250000 [1:41:11<04:09, 388.73it/s]
-Iteration 152000/250000, Score: 256.49
-Population imbalance: 445.00%, Min: 172425, Max: 3575678
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 62%|██████▏   | 154000/250000 [1:41:13<03:54, 409.35it/s]
-Iteration 153000/250000, Score: 256.56
-Population imbalance: 445.00%, Min: 172425, Max: 3575678
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 92 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0092.png
- 62%|██████▏   | 155000/250000 [1:41:16<04:03, 390.42it/s]
-Iteration 154000/250000, Score: 256.54
-Population imbalance: 445.06%, Min: 172161, Max: 3575860
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 93 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0093.png
- 62%|██████▏   | 156000/250000 [1:41:18<04:01, 389.80it/s]
-Iteration 155000/250000, Score: 256.53
-Population imbalance: 445.06%, Min: 172111, Max: 3575860
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 63%|██████▎   | 157000/250000 [1:41:20<03:52, 400.86it/s]
-Iteration 156000/250000, Score: 256.61
-Population imbalance: 445.12%, Min: 171910, Max: 3576079
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 94 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0094.png
- 63%|██████▎   | 158000/250000 [1:41:23<03:54, 392.43it/s]
-Iteration 157000/250000, Score: 256.64
-Population imbalance: 445.09%, Min: 171910, Max: 3575885
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 64%|██████▎   | 159000/250000 [1:41:25<03:42, 408.42it/s]
-Iteration 158000/250000, Score: 256.64
-Population imbalance: 445.22%, Min: 171910, Max: 3576866
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 95 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0095.png
- 64%|██████▍   | 160000/250000 [1:41:28<03:46, 398.17it/s]
-Iteration 159000/250000, Score: 256.66
-Population imbalance: 445.38%, Min: 171910, Max: 3578107
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 96 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0096.png
- 64%|██████▍   | 161000/250000 [1:41:31<03:46, 393.30it/s]
-Iteration 160000/250000, Score: 256.70
-Population imbalance: 445.37%, Min: 171982, Max: 3578107
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 65%|██████▍   | 162000/250000 [1:41:33<03:34, 410.05it/s]
-Iteration 161000/250000, Score: 256.62
-Population imbalance: 445.24%, Min: 172164, Max: 3577292
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 97 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0097.png
- 65%|██████▌   | 163000/250000 [1:41:35<03:37, 400.67it/s]
-Iteration 162000/250000, Score: 256.61
-Population imbalance: 445.20%, Min: 172219, Max: 3577044
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 66%|██████▌   | 164000/250000 [1:41:38<03:30, 409.30it/s]
-Iteration 163000/250000, Score: 256.64
-Population imbalance: 445.30%, Min: 172071, Max: 3577604
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 98 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0098.png
- 66%|██████▌   | 165000/250000 [1:41:41<03:36, 393.11it/s]
-Iteration 164000/250000, Score: 256.65
-Population imbalance: 445.30%, Min: 172069, Max: 3577604
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 99 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0099.png
- 66%|██████▋   | 166000/250000 [1:41:43<03:39, 382.80it/s]
-Iteration 165000/250000, Score: 256.68
-Population imbalance: 444.50%, Min: 172069, Max: 3571553
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 67%|██████▋   | 167000/250000 [1:41:46<03:28, 398.97it/s]
-Iteration 166000/250000, Score: 256.69
-Population imbalance: 444.50%, Min: 172069, Max: 3571553
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 100 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0100.png
- 67%|██████▋   | 168000/250000 [1:41:48<03:31, 387.81it/s]
-Iteration 167000/250000, Score: 256.75
-Population imbalance: 444.51%, Min: 172022, Max: 3571553
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 68%|██████▊   | 169000/250000 [1:41:50<03:18, 408.09it/s]
-Iteration 168000/250000, Score: 256.81
-Population imbalance: 444.54%, Min: 172022, Max: 3571770
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 101 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0101.png
- 68%|██████▊   | 170000/250000 [1:41:53<03:17, 404.81it/s]
-Iteration 169000/250000, Score: 256.77
-Population imbalance: 444.58%, Min: 171990, Max: 3572047
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 102 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0102.png
- 68%|██████▊   | 171000/250000 [1:41:56<03:19, 395.54it/s]
-Iteration 170000/250000, Score: 256.83
-Population imbalance: 444.46%, Min: 171969, Max: 3571079
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 69%|██████▉   | 172000/250000 [1:41:58<03:07, 417.06it/s]
-Iteration 171000/250000, Score: 256.83
-Population imbalance: 444.34%, Min: 171969, Max: 3570203
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 103 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0103.png
- 69%|██████▉   | 173000/250000 [1:42:01<03:15, 394.11it/s]
-Iteration 172000/250000, Score: 256.81
-Population imbalance: 444.40%, Min: 171969, Max: 3570678
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 70%|██████▉   | 174000/250000 [1:42:03<03:01, 418.80it/s]
-Iteration 173000/250000, Score: 256.80
-Population imbalance: 444.38%, Min: 172134, Max: 3570678
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 104 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0104.png
- 70%|███████   | 175000/250000 [1:42:05<03:04, 407.43it/s]
-Iteration 174000/250000, Score: 256.82
-Population imbalance: 444.41%, Min: 172134, Max: 3570864
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 105 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0105.png
- 70%|███████   | 176000/250000 [1:42:08<03:06, 397.41it/s]
-Iteration 175000/250000, Score: 256.82
-Population imbalance: 444.41%, Min: 172134, Max: 3570864
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 71%|███████   | 177000/250000 [1:42:10<02:57, 411.22it/s]
-Iteration 176000/250000, Score: 256.81
-Population imbalance: 444.41%, Min: 172134, Max: 3570916
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 106 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0106.png
- 71%|███████   | 178000/250000 [1:42:13<02:58, 402.28it/s]
-Iteration 177000/250000, Score: 256.84
-Population imbalance: 444.41%, Min: 172134, Max: 3570916
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 72%|███████▏  | 179000/250000 [1:42:15<02:53, 409.22it/s]
-Iteration 178000/250000, Score: 256.80
-Population imbalance: 444.48%, Min: 172045, Max: 3571373
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 107 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0107.png
- 72%|███████▏  | 180000/250000 [1:42:18<02:55, 398.89it/s]
-Iteration 179000/250000, Score: 256.82
-Population imbalance: 444.47%, Min: 172011, Max: 3571251
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 108 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0108.png
- 72%|███████▏  | 181000/250000 [1:42:21<02:57, 388.28it/s]
-Iteration 180000/250000, Score: 256.83
-Population imbalance: 444.37%, Min: 171902, Max: 3570381
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 73%|███████▎  | 182000/250000 [1:42:23<02:50, 398.40it/s]
-Iteration 181000/250000, Score: 256.77
-Population imbalance: 444.25%, Min: 171902, Max: 3569477
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 109 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0109.png
- 73%|███████▎  | 183000/250000 [1:42:25<02:49, 396.17it/s]
-Iteration 182000/250000, Score: 256.83
-Population imbalance: 444.25%, Min: 171902, Max: 3569477
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 74%|███████▎  | 184000/250000 [1:42:28<02:42, 405.80it/s]
-Iteration 183000/250000, Score: 256.85
-Population imbalance: 444.25%, Min: 171902, Max: 3569477
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 110 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0110.png
- 74%|███████▍  | 185000/250000 [1:42:30<02:40, 404.44it/s]
-Iteration 184000/250000, Score: 256.81
-Population imbalance: 444.30%, Min: 171902, Max: 3569860
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 111 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0111.png
- 74%|███████▍  | 186000/250000 [1:42:33<02:40, 399.49it/s]
-Iteration 185000/250000, Score: 256.80
-Population imbalance: 444.30%, Min: 171902, Max: 3569860
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 75%|███████▍  | 187000/250000 [1:42:35<02:31, 415.17it/s]
-Iteration 186000/250000, Score: 256.79
-Population imbalance: 443.89%, Min: 171854, Max: 3566604
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 112 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0112.png
- 75%|███████▌  | 188000/250000 [1:42:38<02:32, 406.70it/s]
-Iteration 187000/250000, Score: 256.82
-Population imbalance: 443.85%, Min: 171902, Max: 3566403
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 76%|███████▌  | 189000/250000 [1:42:40<02:27, 413.45it/s]
-Iteration 188000/250000, Score: 256.78
-Population imbalance: 443.85%, Min: 171902, Max: 3566403
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 113 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0113.png
- 76%|███████▌  | 190000/250000 [1:42:43<02:31, 394.88it/s]
-Iteration 189000/250000, Score: 256.86
-Population imbalance: 443.87%, Min: 171902, Max: 3566551
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 114 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0114.png
- 76%|███████▋  | 191000/250000 [1:42:45<02:31, 390.14it/s]
-Iteration 190000/250000, Score: 256.95
-Population imbalance: 443.92%, Min: 171902, Max: 3566919
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 77%|███████▋  | 192000/250000 [1:42:48<02:23, 403.82it/s]
-Iteration 191000/250000, Score: 256.96
-Population imbalance: 443.99%, Min: 171746, Max: 3567271
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 115 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0115.png
- 77%|███████▋  | 193000/250000 [1:42:50<02:25, 391.88it/s]
-Iteration 192000/250000, Score: 257.02
-Population imbalance: 443.92%, Min: 171661, Max: 3566688
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 78%|███████▊  | 194000/250000 [1:42:53<02:19, 400.88it/s]
-Iteration 193000/250000, Score: 256.92
-Population imbalance: 444.02%, Min: 171661, Max: 3567449
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 116 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0116.png
- 78%|███████▊  | 195000/250000 [1:42:55<02:19, 393.95it/s]
-Iteration 194000/250000, Score: 256.92
-Population imbalance: 443.94%, Min: 171714, Max: 3566918
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 117 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0117.png
- 78%|███████▊  | 196000/250000 [1:42:58<02:18, 390.95it/s]
-Iteration 195000/250000, Score: 256.95
-Population imbalance: 443.98%, Min: 171714, Max: 3567184
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 79%|███████▉  | 197000/250000 [1:43:00<02:10, 405.08it/s]
-Iteration 196000/250000, Score: 256.95
-Population imbalance: 443.97%, Min: 171764, Max: 3567184
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 118 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0118.png
- 79%|███████▉  | 198000/250000 [1:43:03<02:08, 403.23it/s]
-Iteration 197000/250000, Score: 256.97
-Population imbalance: 443.97%, Min: 171764, Max: 3567184
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 80%|███████▉  | 199000/250000 [1:43:05<02:04, 410.65it/s]
-Iteration 198000/250000, Score: 257.03
-Population imbalance: 443.96%, Min: 171874, Max: 3567184
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 119 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0119.png
- 80%|████████  | 200000/250000 [1:43:08<02:04, 401.67it/s]
-Iteration 199000/250000, Score: 257.03
-Population imbalance: 443.88%, Min: 171874, Max: 3566613
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 120 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0120.png
- 80%|████████  | 201000/250000 [1:43:10<02:03, 396.78it/s]
-Iteration 200000/250000, Score: 257.03
-Population imbalance: 443.88%, Min: 171874, Max: 3566613
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 81%|████████  | 202000/250000 [1:43:13<01:57, 410.12it/s]
-Iteration 201000/250000, Score: 257.06
-Population imbalance: 443.72%, Min: 171809, Max: 3565265
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 121 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0121.png
- 81%|████████  | 203000/250000 [1:43:15<01:57, 401.04it/s]
-Iteration 202000/250000, Score: 257.12
-Population imbalance: 444.22%, Min: 171710, Max: 3569014
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 82%|████████▏ | 204000/250000 [1:43:17<01:51, 411.05it/s]
-Iteration 203000/250000, Score: 257.19
-Population imbalance: 444.33%, Min: 171710, Max: 3569826
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 122 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0122.png
- 82%|████████▏ | 205000/250000 [1:43:20<01:52, 399.23it/s]
-Iteration 204000/250000, Score: 257.14
-Population imbalance: 444.50%, Min: 171710, Max: 3571128
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 123 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0123.png
- 82%|████████▏ | 206000/250000 [1:43:23<01:52, 392.47it/s]
-Iteration 205000/250000, Score: 257.17
-Population imbalance: 443.11%, Min: 171710, Max: 3560499
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 83%|████████▎ | 207000/250000 [1:43:25<01:45, 405.66it/s]
-Iteration 206000/250000, Score: 257.14
-Population imbalance: 443.11%, Min: 171662, Max: 3560499
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 124 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0124.png
- 83%|████████▎ | 208000/250000 [1:43:28<01:47, 391.58it/s]
-Iteration 207000/250000, Score: 257.10
-Population imbalance: 443.11%, Min: 171662, Max: 3560499
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 84%|████████▎ | 209000/250000 [1:43:30<01:40, 406.19it/s]
-Iteration 208000/250000, Score: 257.16
-Population imbalance: 443.11%, Min: 171662, Max: 3560499
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 125 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0125.png
- 84%|████████▍ | 210000/250000 [1:43:33<01:42, 389.29it/s]
-Iteration 209000/250000, Score: 257.19
-Population imbalance: 443.09%, Min: 171850, Max: 3560499
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 126 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0126.png
- 84%|████████▍ | 211000/250000 [1:43:36<01:42, 381.53it/s]
-Iteration 210000/250000, Score: 257.20
-Population imbalance: 443.07%, Min: 171850, Max: 3560339
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 85%|████████▍ | 212000/250000 [1:43:38<01:34, 400.75it/s]
-Iteration 211000/250000, Score: 257.30
-Population imbalance: 443.36%, Min: 171748, Max: 3562484
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 127 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0127.png
- 85%|████████▌ | 213000/250000 [1:43:40<01:32, 400.74it/s]
-Iteration 212000/250000, Score: 257.32
-Population imbalance: 443.41%, Min: 171605, Max: 3562698
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 86%|████████▌ | 214000/250000 [1:43:43<01:28, 406.85it/s]
-Iteration 213000/250000, Score: 257.31
-Population imbalance: 443.32%, Min: 171623, Max: 3562017
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 128 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0128.png
- 86%|████████▌ | 215000/250000 [1:43:46<01:30, 387.57it/s]
-Iteration 214000/250000, Score: 257.40
-Population imbalance: 443.24%, Min: 171623, Max: 3561469
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 129 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0129.png
- 86%|████████▋ | 216000/250000 [1:43:48<01:27, 386.59it/s]
-Iteration 215000/250000, Score: 257.44
-Population imbalance: 443.24%, Min: 171623, Max: 3561469
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 87%|████████▋ | 217000/250000 [1:43:50<01:22, 398.23it/s]
-Iteration 216000/250000, Score: 257.35
-Population imbalance: 443.24%, Min: 171623, Max: 3561469
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 130 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0130.png
- 87%|████████▋ | 218000/250000 [1:43:53<01:22, 387.33it/s]
-Iteration 217000/250000, Score: 257.34
-Population imbalance: 443.34%, Min: 171623, Max: 3562195
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 88%|████████▊ | 219000/250000 [1:43:55<01:16, 404.53it/s]
-Iteration 218000/250000, Score: 257.35
-Population imbalance: 443.35%, Min: 171555, Max: 3562195
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 131 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0131.png
- 88%|████████▊ | 220000/250000 [1:43:58<01:15, 395.05it/s]
-Iteration 219000/250000, Score: 257.36
-Population imbalance: 443.35%, Min: 171563, Max: 3562195
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 132 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0132.png
- 88%|████████▊ | 221000/250000 [1:44:01<01:14, 387.93it/s]
-Iteration 220000/250000, Score: 257.35
-Population imbalance: 443.49%, Min: 171469, Max: 3563185
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 89%|████████▉ | 222000/250000 [1:44:03<01:09, 402.17it/s]
-Iteration 221000/250000, Score: 257.27
-Population imbalance: 443.41%, Min: 171506, Max: 3562615
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 133 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0133.png
- 89%|████████▉ | 223000/250000 [1:44:06<01:09, 390.58it/s]
-Iteration 222000/250000, Score: 257.37
-Population imbalance: 443.62%, Min: 171506, Max: 3564257
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 90%|████████▉ | 224000/250000 [1:44:08<01:04, 403.81it/s]
-Iteration 223000/250000, Score: 257.36
-Population imbalance: 443.62%, Min: 171506, Max: 3564257
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 134 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0134.png
- 90%|█████████ | 225000/250000 [1:44:11<01:04, 387.22it/s]
-Iteration 224000/250000, Score: 257.35
-Population imbalance: 442.98%, Min: 171392, Max: 3559226
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 135 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0135.png
- 90%|█████████ | 226000/250000 [1:44:14<01:03, 380.42it/s]
-Iteration 225000/250000, Score: 257.34
-Population imbalance: 443.01%, Min: 171198, Max: 3559226
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 91%|█████████ | 227000/250000 [1:44:16<00:57, 399.38it/s]
-Iteration 226000/250000, Score: 257.40
-Population imbalance: 443.01%, Min: 171198, Max: 3559226
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 136 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0136.png
- 91%|█████████ | 228000/250000 [1:44:19<00:57, 380.54it/s]
-Iteration 227000/250000, Score: 257.39
-Population imbalance: 443.37%, Min: 171335, Max: 3562111
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 92%|█████████▏| 229000/250000 [1:44:21<00:52, 398.34it/s]
-Iteration 228000/250000, Score: 257.44
-Population imbalance: 443.39%, Min: 171335, Max: 3562275
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 137 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0137.png
- 92%|█████████▏| 230000/250000 [1:44:24<00:51, 385.77it/s]
-Iteration 229000/250000, Score: 257.44
-Population imbalance: 443.00%, Min: 171246, Max: 3559219
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 138 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0138.png
- 92%|█████████▏| 231000/250000 [1:44:26<00:49, 386.02it/s]
-Iteration 230000/250000, Score: 257.42
-Population imbalance: 442.99%, Min: 171294, Max: 3559219
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 93%|█████████▎| 232000/250000 [1:44:29<00:45, 394.90it/s]
-Iteration 231000/250000, Score: 257.37
-Population imbalance: 442.99%, Min: 171294, Max: 3559219
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 139 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0139.png
- 93%|█████████▎| 233000/250000 [1:44:32<00:44, 382.10it/s]
-Iteration 232000/250000, Score: 257.37
-Population imbalance: 443.02%, Min: 171294, Max: 3559405
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 94%|█████████▎| 234000/250000 [1:44:34<00:39, 400.79it/s]
-Iteration 233000/250000, Score: 257.38
-Population imbalance: 443.04%, Min: 171154, Max: 3559405
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 140 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0140.png
- 94%|█████████▍| 235000/250000 [1:44:36<00:38, 391.01it/s]
-Iteration 234000/250000, Score: 257.42
-Population imbalance: 443.01%, Min: 171005, Max: 3559079
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 141 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0141.png
- 94%|█████████▍| 236000/250000 [1:44:39<00:36, 380.38it/s]
-Iteration 235000/250000, Score: 257.43
-Population imbalance: 443.01%, Min: 171005, Max: 3559079
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 95%|█████████▍| 237000/250000 [1:44:42<00:33, 384.17it/s]
-Iteration 236000/250000, Score: 257.47
-Population imbalance: 441.84%, Min: 171005, Max: 3550100
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 142 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0142.png
- 95%|█████████▌| 238000/250000 [1:44:45<00:32, 374.44it/s]
-Iteration 237000/250000, Score: 257.46
-Population imbalance: 441.84%, Min: 171005, Max: 3550100
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 96%|█████████▌| 239000/250000 [1:44:47<00:28, 391.74it/s]
-Iteration 238000/250000, Score: 257.49
-Population imbalance: 441.61%, Min: 173549, Max: 3550921
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 143 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0143.png
- 96%|█████████▌| 240000/250000 [1:44:50<00:26, 383.97it/s]
-Iteration 239000/250000, Score: 257.52
-Population imbalance: 441.61%, Min: 173549, Max: 3550921
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 144 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0144.png
- 96%|█████████▋| 241000/250000 [1:44:52<00:23, 377.02it/s]
-Iteration 240000/250000, Score: 257.46
-Population imbalance: 441.59%, Min: 173691, Max: 3550853
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 97%|█████████▋| 242000/250000 [1:44:55<00:20, 393.28it/s]
-Iteration 241000/250000, Score: 257.47
-Population imbalance: 441.75%, Min: 172833, Max: 3551244
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 145 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0145.png
- 97%|█████████▋| 243000/250000 [1:44:57<00:18, 383.59it/s]
-Iteration 242000/250000, Score: 257.41
-Population imbalance: 441.48%, Min: 172833, Max: 3549164
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 98%|█████████▊| 244000/250000 [1:45:00<00:14, 401.11it/s]
-Iteration 243000/250000, Score: 257.45
-Population imbalance: 441.55%, Min: 172866, Max: 3549730
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 146 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0146.png
- 98%|█████████▊| 245000/250000 [1:45:02<00:12, 393.78it/s]
-Iteration 244000/250000, Score: 257.44
-Population imbalance: 441.53%, Min: 172981, Max: 3549730
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 147 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0147.png
- 98%|█████████▊| 246000/250000 [1:45:05<00:10, 381.30it/s]
-Iteration 245000/250000, Score: 257.51
-Population imbalance: 441.55%, Min: 172854, Max: 3549730
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
- 99%|█████████▉| 247000/250000 [1:45:07<00:07, 397.84it/s]
-Iteration 246000/250000, Score: 257.52
-Population imbalance: 441.56%, Min: 172799, Max: 3549730
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 148 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0148.png
- 99%|█████████▉| 248000/250000 [1:45:10<00:05, 388.29it/s]
-Iteration 247000/250000, Score: 257.48
-Population imbalance: 441.54%, Min: 172926, Max: 3549730
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-100%|█████████▉| 249000/250000 [1:45:12<00:02, 406.30it/s]
-Iteration 248000/250000, Score: 257.54
-Population imbalance: 441.25%, Min: 172878, Max: 3547450
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 149 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0149.png
-100%|██████████| 250000/250000 [1:45:15<00:00, 395.27it/s]
-Iteration 249000/250000, Score: 257.50
-Population imbalance: 440.84%, Min: 172926, Max: 3544370
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 150 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0150.png
-100%|██████████| 250000/250000 [1:45:16<00:00, 39.58it/s] 
-
-Iteration 250000/250000, Score: 257.48
-Population imbalance: 440.82%, Min: 173063, Max: 3544370
-Districts: 14 Red, 3 Blue
-Temperature: 0.3000, Phase: 3
-Saved animation frame 151 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames/frame_0151.png
-Simulation complete!
-Creating animation with 152 frames...
-Attempting to compile video from frames in /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation_frames...
-Found 152 frames to compile.
-Trying video compilation method 1...
-Method 1 failed with error: ffmpeg version 4.3.2 Copyright (c) 2000-2021 the FFmpeg developers
-  built with gcc 8 (GCC)
-  configuration: --prefix=/swst/apps/ffmpeg/4.3.2_gcc-8.5.0 --enable-pic --cc=/tmp/jenkins_swst_build/workspace/SWST_Build_QA/build/spack/lib/spack/env/gcc/gcc --cxx=/tmp/jenkins_swst_build/workspace/SWST_Build_QA/build/spack/lib/spack/env/gcc/g++ --disable-libxcb --disable-libxcb-shape --disable-libxcb-shm --disable-libxcb-xfixes --disable-xlib --disable-libfontconfig --disable-libfreetype --disable-libfribidi --enable-bzlib --disable-libmp3lame --disable-libopenjpeg --disable-libopus --disable-libspeex --disable-libvorbis --disable-libvpx --disable-avresample --disable-openssl --enable-shared --disable-libzmq --disable-libssh --disable-libwebp --disable-lzma --disable-libsnappy --disable-sdl2 --disable-libaom
-  libavutil      56. 51.100 / 56. 51.100
-  libavcodec     58. 91.100 / 58. 91.100
-  libavformat    58. 45.100 / 58. 45.100
-  libavdevice    58. 10.100 / 58. 10.100
-  libavfilter     7. 85.100 /  7. 85.100
-  libswscale      5.  7.100 /  5.  7.100
-  libswresample   3.  7.100 /  3.  7.100
-Unrecognized option 'preset'.
-Error splitting the argument list: Option not found
-
-Trying video compilation method 2...
-Successfully compiled video using method 2.
-Video saved to: /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_animation.mp4
-District map saved to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/final_district_map.npy
-District statistics saved to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/final_district_stats.csv
-Running simulation and tracking district stats for 10000 iterations...
-  0%|          | 0/10000 [00:00<?, ?it/s]Created process pool with 36 workers
- 10%|█         | 1000/10000 [00:02<00:22, 400.09it/s]Iteration 2000: Phase 2 - Optimizing vote distribution
- 20%|██        | 2000/10000 [00:04<00:18, 432.95it/s] 30%|███       | 3000/10000 [00:06<00:15, 444.57it/s]Iteration 4000: Phase 3 - Improving district compactness
- 40%|████      | 4000/10000 [00:09<00:13, 434.18it/s] 50%|█████     | 5000/10000 [00:11<00:11, 439.37it/s] 60%|██████    | 6000/10000 [00:13<00:08, 445.41it/s] 70%|███████   | 7000/10000 [00:16<00:07, 426.64it/s] 80%|████████  | 8000/10000 [00:18<00:04, 419.32it/s] 90%|█████████ | 9000/10000 [00:21<00:02, 412.61it/s]100%|██████████| 10000/10000 [00:23<00:00, 419.66it/s]100%|██████████| 10000/10000 [00:23<00:00, 426.02it/s]
-District stats tracking completed in 23.48 seconds
-Stats saved to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander/blue_gerrymander_stats_evolution.csv
-Scenario 'blue_gerrymander' completed. Results saved to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander
-
-
-========================================
-SIMULATION BATCH COMPLETE
-========================================
-Output directory: /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129
-Scenarios completed: 1
-  - blue_gerrymander: /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040129/blue_gerrymander
-========================================
