@@ -1,7 +1,8 @@
 import numpy as np
 from gerrymanderingSimulator import GerrymanderSimulator
 from animationCapabilities import add_animation_methods
-from MCMCAPSUHacks2025.Redistricting.visualization import add_visualization_methods
+
+from visualization import add_visualization_methods  # Use direct import if in same directory
 import os
 
 # Load your state map
@@ -30,7 +31,7 @@ def optimize_for_many_cores(simulator_class):
 EnhancedSimulator = optimize_for_many_cores(add_animation_methods(add_visualization_methods(GerrymanderSimulator)))
 
 # Initialize with optimized parameters
-simulator = EnhancedSimulator(state_map, num_districts=17)
+simulator = EnhancedSimulator(state_map, num_districts=17,use_gpu=True)
 
 # Set up the simulation parameters
 simulator.set_target_vote_distribution('fair')
