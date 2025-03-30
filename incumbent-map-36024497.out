@@ -1,0 +1,1462 @@
+
+================================================================================
+Running scenario: incumbent_protection
+================================================================================
+Flipped state map orientation
+Using 36 CPU cores for parallelization
+Found 2 potential holes or unassigned regions
+Filling hole with size 31
+District map saved to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/initial_district_map.npy
+District statistics saved to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/initial_district_stats.csv
+Starting simulation for scenario 'incumbent_protection'...
+Will capture animation frame every 1666 iterations
+Saved animation frame 0 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0000.png
+Iteration 0: Phase 1 - Equalizing population
+Running simulation using 36 CPU cores in parallel with 15 pixels per move
+  0%|          | 0/250000 [00:00<?, ?it/s]  0%|          | 1000/250000 [00:31<2:10:51, 31.71it/s]  0%|          | 1000/250000 [00:50<2:10:51, 31.71it/s]  1%|          | 2000/250000 [01:00<2:04:16, 33.26it/s]
+Iteration 1000/250000, Score: 35.37
+Population imbalance: 713.54%, Min: 52571, Max: 5509581
+Districts: 15 Red, 2 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 1 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0001.png
+  1%|          | 2000/250000 [01:20<2:04:16, 33.26it/s]  1%|          | 3000/250000 [01:34<2:11:13, 31.37it/s]
+Iteration 2000/250000, Score: 34.70
+Population imbalance: 707.28%, Min: 56290, Max: 5465437
+Districts: 14 Red, 3 Blue
+Temperature: 0.7000, Phase: 1
+  1%|          | 3000/250000 [01:50<2:11:13, 31.37it/s]  2%|▏         | 4000/250000 [02:11<2:18:23, 29.63it/s]
+Iteration 3000/250000, Score: 34.21
+Population imbalance: 701.54%, Min: 53751, Max: 5418995
+Districts: 15 Red, 2 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 2 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0002.png
+  2%|▏         | 4000/250000 [02:30<2:18:23, 29.63it/s]  2%|▏         | 5000/250000 [02:51<2:26:51, 27.81it/s]
+Iteration 4000/250000, Score: 33.54
+Population imbalance: 694.15%, Min: 55797, Max: 5364498
+Districts: 14 Red, 3 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 3 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0003.png
+  2%|▏         | 5000/250000 [03:10<2:26:51, 27.81it/s]  2%|▏         | 6000/250000 [03:35<2:37:16, 25.86it/s]
+Iteration 5000/250000, Score: 32.90
+Population imbalance: 686.11%, Min: 53457, Max: 5300692
+Districts: 14 Red, 3 Blue
+Temperature: 0.7000, Phase: 1
+  2%|▏         | 6000/250000 [03:50<2:37:16, 25.86it/s]  3%|▎         | 7000/250000 [04:23<2:49:51, 23.84it/s]
+Iteration 6000/250000, Score: 32.05
+Population imbalance: 675.35%, Min: 56233, Max: 5221213
+Districts: 14 Red, 3 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 4 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0004.png
+  3%|▎         | 7000/250000 [04:40<2:49:51, 23.84it/s]  3%|▎         | 8000/250000 [05:17<3:03:51, 21.94it/s]
+Iteration 7000/250000, Score: 31.05
+Population imbalance: 662.36%, Min: 63710, Max: 5129322
+Districts: 14 Red, 3 Blue
+Temperature: 0.7000, Phase: 1
+  3%|▎         | 8000/250000 [05:30<3:03:51, 21.94it/s]  4%|▎         | 9000/250000 [06:14<3:17:46, 20.31it/s]
+Iteration 8000/250000, Score: 31.18
+Population imbalance: 661.79%, Min: 62642, Max: 5123918
+Districts: 14 Red, 3 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 5 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0005.png
+  4%|▎         | 9000/250000 [06:30<3:17:46, 20.31it/s]  4%|▍         | 10000/250000 [07:17<3:33:32, 18.73it/s]
+Iteration 9000/250000, Score: 30.91
+Population imbalance: 657.42%, Min: 59550, Max: 5087355
+Districts: 14 Red, 3 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 6 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0006.png
+  4%|▍         | 10000/250000 [07:30<3:33:32, 18.73it/s]  4%|▍         | 11000/250000 [08:21<3:46:43, 17.57it/s]
+Iteration 10000/250000, Score: 30.80
+Population imbalance: 655.39%, Min: 58735, Max: 5071059
+Districts: 14 Red, 3 Blue
+Temperature: 0.7000, Phase: 1
+  4%|▍         | 11000/250000 [08:40<3:46:43, 17.57it/s]  5%|▍         | 12000/250000 [09:30<3:59:11, 16.58it/s]
+Iteration 11000/250000, Score: 30.62
+Population imbalance: 649.98%, Min: 66173, Max: 5037094
+Districts: 14 Red, 3 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 7 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0007.png
+  5%|▍         | 12000/250000 [09:40<3:59:11, 16.58it/s]  5%|▌         | 13000/250000 [10:42<4:13:04, 15.61it/s]
+Iteration 12000/250000, Score: 30.70
+Population imbalance: 648.95%, Min: 64958, Max: 5027975
+Districts: 14 Red, 3 Blue
+Temperature: 0.7000, Phase: 1
+  5%|▌         | 13000/250000 [11:00<4:13:04, 15.61it/s]  6%|▌         | 14000/250000 [11:56<4:23:32, 14.93it/s]
+Iteration 13000/250000, Score: 30.26
+Population imbalance: 642.91%, Min: 72444, Max: 4989288
+Districts: 14 Red, 3 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 8 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0008.png
+  6%|▌         | 14000/250000 [12:10<4:23:32, 14.93it/s]  6%|▌         | 15000/250000 [13:13<4:34:16, 14.28it/s]
+Iteration 14000/250000, Score: 30.37
+Population imbalance: 643.12%, Min: 70872, Max: 4989362
+Districts: 14 Red, 3 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 9 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0009.png
+  6%|▌         | 15000/250000 [13:30<4:34:16, 14.28it/s]  6%|▋         | 16000/250000 [14:40<4:52:31, 13.33it/s]
+Iteration 15000/250000, Score: 29.76
+Population imbalance: 632.21%, Min: 68833, Max: 4903855
+Districts: 14 Red, 3 Blue
+Temperature: 0.7000, Phase: 1
+  6%|▋         | 16000/250000 [14:50<4:52:31, 13.33it/s]  7%|▋         | 17000/250000 [15:59<4:55:48, 13.13it/s]
+Iteration 16000/250000, Score: 29.57
+Population imbalance: 629.34%, Min: 90299, Max: 4903402
+Districts: 14 Red, 3 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 10 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0010.png
+  7%|▋         | 17000/250000 [16:10<4:55:48, 13.13it/s]  7%|▋         | 18000/250000 [17:20<5:00:46, 12.86it/s]
+Iteration 17000/250000, Score: 29.12
+Population imbalance: 625.61%, Min: 87191, Max: 4871726
+Districts: 14 Red, 3 Blue
+Temperature: 0.7000, Phase: 1
+  7%|▋         | 18000/250000 [17:40<5:00:46, 12.86it/s]  8%|▊         | 19000/250000 [18:50<5:13:04, 12.30it/s]
+Iteration 18000/250000, Score: 28.68
+Population imbalance: 616.25%, Min: 87809, Max: 4800749
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 11 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0011.png
+  8%|▊         | 19000/250000 [19:00<5:13:04, 12.30it/s]  8%|▊         | 20000/250000 [20:22<5:24:11, 11.82it/s]
+Iteration 19000/250000, Score: 27.72
+Population imbalance: 600.72%, Min: 98647, Max: 4692802
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 12 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0012.png
+  8%|▊         | 20000/250000 [20:40<5:24:11, 11.82it/s]  8%|▊         | 21000/250000 [21:56<5:33:46, 11.43it/s]
+Iteration 20000/250000, Score: 26.96
+Population imbalance: 586.59%, Min: 105557, Max: 4591715
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+  8%|▊         | 21000/250000 [22:10<5:33:46, 11.43it/s]  9%|▉         | 22000/250000 [23:33<5:43:04, 11.08it/s]
+Iteration 21000/250000, Score: 25.98
+Population imbalance: 568.67%, Min: 108818, Max: 4457922
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 13 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0013.png
+  9%|▉         | 22000/250000 [23:50<5:43:04, 11.08it/s]  9%|▉         | 23000/250000 [25:13<5:53:21, 10.71it/s]
+Iteration 22000/250000, Score: 26.33
+Population imbalance: 571.82%, Min: 111048, Max: 4484253
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+ 10%|▉         | 24000/250000 [26:53<5:59:08, 10.49it/s]
+Iteration 23000/250000, Score: 26.20
+Population imbalance: 569.98%, Min: 107973, Max: 4467101
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 14 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0014.png
+ 10%|▉         | 24000/250000 [27:10<5:59:08, 10.49it/s] 10%|█         | 25000/250000 [28:31<6:00:26, 10.40it/s]
+Iteration 24000/250000, Score: 26.28
+Population imbalance: 568.04%, Min: 108439, Max: 4452689
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 15 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0015.png
+ 10%|█         | 25000/250000 [28:50<6:00:26, 10.40it/s] 10%|█         | 26000/250000 [31:00<6:57:27,  8.94it/s]
+Iteration 25000/250000, Score: 25.96
+Population imbalance: 559.49%, Min: 108007, Max: 4386911
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+ 11%|█         | 27000/250000 [32:50<6:53:39,  8.98it/s]
+Iteration 26000/250000, Score: 25.53
+Population imbalance: 548.75%, Min: 104969, Max: 4301695
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 16 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0016.png
+ 11%|█         | 28000/250000 [34:45<6:56:11,  8.89it/s]
+Iteration 27000/250000, Score: 25.75
+Population imbalance: 547.42%, Min: 112271, Max: 4298828
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+ 12%|█▏        | 29000/250000 [36:38<6:55:11,  8.87it/s]
+Iteration 28000/250000, Score: 25.64
+Population imbalance: 542.87%, Min: 109185, Max: 4260949
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 17 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0017.png
+ 12%|█▏        | 30000/250000 [38:32<6:54:04,  8.86it/s]
+Iteration 29000/250000, Score: 25.05
+Population imbalance: 531.09%, Min: 108398, Max: 4170074
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 18 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0018.png
+ 12%|█▏        | 31000/250000 [40:28<6:56:05,  8.77it/s]
+Iteration 30000/250000, Score: 24.40
+Population imbalance: 518.03%, Min: 112600, Max: 4074390
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+ 13%|█▎        | 32000/250000 [42:27<6:59:26,  8.66it/s]
+Iteration 31000/250000, Score: 24.20
+Population imbalance: 507.39%, Min: 110665, Max: 3991080
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 19 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0019.png
+ 13%|█▎        | 33000/250000 [44:29<7:04:15,  8.52it/s]
+Iteration 32000/250000, Score: 23.87
+Population imbalance: 493.54%, Min: 111639, Max: 3886150
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+ 14%|█▎        | 34000/250000 [46:33<7:09:58,  8.37it/s]
+Iteration 33000/250000, Score: 24.00
+Population imbalance: 496.02%, Min: 107848, Max: 3901352
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 20 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0020.png
+ 14%|█▍        | 35000/250000 [48:39<7:15:23,  8.23it/s]
+Iteration 34000/250000, Score: 23.73
+Population imbalance: 483.01%, Min: 102186, Max: 3796134
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 21 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0021.png
+ 14%|█▍        | 36000/250000 [50:45<7:17:57,  8.14it/s]
+Iteration 35000/250000, Score: 23.53
+Population imbalance: 465.57%, Min: 108086, Max: 3668639
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+ 15%|█▍        | 37000/250000 [52:48<7:16:07,  8.14it/s]
+Iteration 36000/250000, Score: 23.22
+Population imbalance: 453.81%, Min: 107052, Max: 3577685
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 22 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0022.png
+ 15%|█▌        | 38000/250000 [54:53<7:16:07,  8.10it/s]
+Iteration 37000/250000, Score: 22.61
+Population imbalance: 432.76%, Min: 106674, Max: 3416333
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+ 16%|█▌        | 39000/250000 [57:01<7:18:45,  8.02it/s]
+Iteration 38000/250000, Score: 23.01
+Population imbalance: 441.58%, Min: 102628, Max: 3479770
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 23 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0023.png
+ 16%|█▌        | 40000/250000 [59:12<7:22:50,  7.90it/s]
+Iteration 39000/250000, Score: 23.20
+Population imbalance: 448.27%, Min: 101839, Max: 3530088
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 24 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0024.png
+ 16%|█▋        | 41000/250000 [1:01:20<7:23:02,  7.86it/s]
+Iteration 40000/250000, Score: 23.13
+Population imbalance: 436.33%, Min: 96893, Max: 3433881
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+ 17%|█▋        | 42000/250000 [1:04:15<8:10:34,  7.07it/s]
+Iteration 41000/250000, Score: 22.33
+Population imbalance: 406.31%, Min: 96738, Max: 3204102
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 25 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0025.png
+ 17%|█▋        | 43000/250000 [1:06:18<7:49:13,  7.35it/s]
+Iteration 42000/250000, Score: 22.18
+Population imbalance: 413.19%, Min: 93849, Max: 3253864
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+ 18%|█▊        | 44000/250000 [1:08:25<7:37:44,  7.50it/s]
+Iteration 43000/250000, Score: 22.16
+Population imbalance: 426.58%, Min: 97687, Max: 3360082
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 26 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0026.png
+ 18%|█▊        | 45000/250000 [1:10:35<7:31:55,  7.56it/s]
+Iteration 44000/250000, Score: 22.52
+Population imbalance: 428.35%, Min: 99123, Max: 3375072
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 27 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0027.png
+ 18%|█▊        | 46000/250000 [1:12:47<7:29:25,  7.57it/s]
+Iteration 45000/250000, Score: 22.58
+Population imbalance: 425.97%, Min: 96232, Max: 3353975
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+ 19%|█▉        | 47000/250000 [1:15:54<8:22:55,  6.73it/s]
+Iteration 46000/250000, Score: 22.84
+Population imbalance: 426.62%, Min: 99472, Max: 3362196
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 28 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0028.png
+ 19%|█▉        | 48000/250000 [1:18:12<8:09:25,  6.88it/s]
+Iteration 47000/250000, Score: 22.60
+Population imbalance: 406.03%, Min: 100013, Max: 3205288
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+ 20%|█▉        | 49000/250000 [1:20:28<7:58:01,  7.01it/s]
+Iteration 48000/250000, Score: 22.66
+Population imbalance: 404.50%, Min: 98343, Max: 3191851
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+Saved animation frame 29 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0029.png
+/storage/work/nrk5343/MCMCAPSUHacks2025/Redistricting/gerrymanderingSimulator.py:419: RuntimeWarning: invalid value encountered in sqrt
+  compactness_scores = self.district_stats['perimeter'] / np.sqrt(self.district_stats['area'] +epsilon )
+ 20%|██        | 50000/250000 [1:22:51<7:55:05,  7.02it/s]
+Iteration 49000/250000, Score: 22.49
+Population imbalance: 409.08%, Min: 97607, Max: 3226138
+Districts: 13 Red, 4 Blue
+Temperature: 0.7000, Phase: 1
+Iteration 50000: Phase 2 - Optimizing vote distribution
+Saved animation frame 30 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0030.png
+ 20%|██        | 51000/250000 [1:23:12<5:51:49,  9.43it/s]
+Iteration 50000/250000, Score: 145.58
+Population imbalance: 398.97%, Min: 96382, Max: 3147627
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+ 20%|██        | 51000/250000 [1:23:22<5:51:49,  9.43it/s] 21%|██        | 52000/250000 [1:23:32<4:25:02, 12.45it/s]
+Iteration 51000/250000, Score: 147.97
+Population imbalance: 403.31%, Min: 94140, Max: 3178549
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 31 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0031.png
+ 21%|██        | 52000/250000 [1:23:52<4:25:02, 12.45it/s] 21%|██        | 53000/250000 [1:23:52<3:24:53, 16.02it/s]
+Iteration 52000/250000, Score: 149.24
+Population imbalance: 384.40%, Min: 94810, Max: 3034641
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+ 21%|██        | 53000/250000 [1:24:12<3:24:53, 16.02it/s] 22%|██▏       | 54000/250000 [1:24:12<2:42:17, 20.13it/s]
+Iteration 53000/250000, Score: 152.27
+Population imbalance: 392.05%, Min: 97200, Max: 3095493
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 32 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0032.png
+ 22%|██▏       | 54000/250000 [1:24:32<2:42:17, 20.13it/s] 22%|██▏       | 55000/250000 [1:24:33<2:13:09, 24.41it/s]
+Iteration 54000/250000, Score: 153.59
+Population imbalance: 384.77%, Min: 94853, Max: 3037497
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 33 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0033.png
+ 22%|██▏       | 55000/250000 [1:24:52<2:13:09, 24.41it/s] 22%|██▏       | 56000/250000 [1:24:54<1:52:39, 28.70it/s]
+Iteration 55000/250000, Score: 154.67
+Population imbalance: 386.98%, Min: 98319, Max: 3057892
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+ 22%|██▏       | 56000/250000 [1:25:12<1:52:39, 28.70it/s] 23%|██▎       | 57000/250000 [1:25:14<1:37:46, 32.90it/s]
+Iteration 56000/250000, Score: 155.77
+Population imbalance: 378.05%, Min: 97143, Max: 2988419
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 34 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0034.png
+ 23%|██▎       | 57000/250000 [1:25:32<1:37:46, 32.90it/s] 23%|██▎       | 58000/250000 [1:25:34<1:27:47, 36.45it/s]
+Iteration 57000/250000, Score: 157.36
+Population imbalance: 384.26%, Min: 95870, Max: 3034639
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+ 23%|██▎       | 58000/250000 [1:25:52<1:27:47, 36.45it/s] 24%|██▎       | 59000/250000 [1:25:54<1:20:25, 39.58it/s]
+Iteration 58000/250000, Score: 157.82
+Population imbalance: 369.57%, Min: 97760, Max: 2924147
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 35 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0035.png
+ 24%|██▎       | 59000/250000 [1:26:12<1:20:25, 39.58it/s] 24%|██▍       | 60000/250000 [1:26:15<1:15:22, 42.01it/s]
+Iteration 59000/250000, Score: 158.85
+Population imbalance: 380.57%, Min: 97017, Max: 3007561
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 36 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0036.png
+ 24%|██▍       | 60000/250000 [1:26:32<1:15:22, 42.01it/s] 24%|██▍       | 61000/250000 [1:26:35<1:11:56, 43.79it/s]
+Iteration 60000/250000, Score: 160.49
+Population imbalance: 384.33%, Min: 98459, Max: 3037740
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+ 24%|██▍       | 61000/250000 [1:26:52<1:11:56, 43.79it/s] 25%|██▍       | 62000/250000 [1:26:56<1:09:10, 45.30it/s]
+Iteration 61000/250000, Score: 161.09
+Population imbalance: 381.97%, Min: 97235, Max: 3018505
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 37 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0037.png
+ 25%|██▍       | 62000/250000 [1:27:12<1:09:10, 45.30it/s] 25%|██▌       | 63000/250000 [1:27:16<1:07:21, 46.28it/s]
+Iteration 62000/250000, Score: 162.24
+Population imbalance: 385.89%, Min: 97442, Max: 3048671
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+ 25%|██▌       | 63000/250000 [1:27:32<1:07:21, 46.28it/s] 26%|██▌       | 64000/250000 [1:27:37<1:06:01, 46.95it/s]
+Iteration 63000/250000, Score: 162.95
+Population imbalance: 386.21%, Min: 97374, Max: 3051025
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 38 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0038.png
+ 26%|██▌       | 64000/250000 [1:27:52<1:06:01, 46.95it/s] 26%|██▌       | 65000/250000 [1:27:57<1:04:59, 47.44it/s]
+Iteration 64000/250000, Score: 163.47
+Population imbalance: 370.20%, Min: 98506, Max: 2929739
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 39 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0039.png
+ 26%|██▌       | 65000/250000 [1:28:12<1:04:59, 47.44it/s] 26%|██▋       | 66000/250000 [1:28:19<1:05:26, 46.86it/s]
+Iteration 65000/250000, Score: 164.53
+Population imbalance: 354.91%, Min: 98806, Max: 2813065
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+ 26%|██▋       | 66000/250000 [1:28:32<1:05:26, 46.86it/s] 27%|██▋       | 67000/250000 [1:28:39<1:03:53, 47.74it/s]
+Iteration 66000/250000, Score: 165.23
+Population imbalance: 354.76%, Min: 102079, Max: 2815184
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 40 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0040.png
+ 27%|██▋       | 67000/250000 [1:28:52<1:03:53, 47.74it/s] 27%|██▋       | 68000/250000 [1:29:01<1:03:53, 47.48it/s]
+Iteration 67000/250000, Score: 166.14
+Population imbalance: 367.76%, Min: 99294, Max: 2911831
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+ 27%|██▋       | 68000/250000 [1:29:12<1:03:53, 47.48it/s] 28%|██▊       | 69000/250000 [1:29:21<1:02:48, 48.04it/s]
+Iteration 68000/250000, Score: 166.60
+Population imbalance: 342.98%, Min: 96536, Max: 2719600
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 41 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0041.png
+ 28%|██▊       | 69000/250000 [1:29:32<1:02:48, 48.04it/s] 28%|██▊       | 70000/250000 [1:29:41<1:02:10, 48.25it/s]
+Iteration 69000/250000, Score: 166.67
+Population imbalance: 343.01%, Min: 96889, Max: 2720155
+Districts: 14 Red, 3 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 42 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0042.png
+ 28%|██▊       | 70000/250000 [1:29:52<1:02:10, 48.25it/s] 28%|██▊       | 71000/250000 [1:30:02<1:01:51, 48.23it/s]
+Iteration 70000/250000, Score: 167.43
+Population imbalance: 359.92%, Min: 94782, Max: 2847383
+Districts: 14 Red, 3 Blue
+Temperature: 0.6000, Phase: 2
+ 28%|██▊       | 71000/250000 [1:30:22<1:01:51, 48.23it/s] 29%|██▉       | 72000/250000 [1:30:22<1:00:54, 48.70it/s]
+Iteration 71000/250000, Score: 167.01
+Population imbalance: 343.87%, Min: 95310, Max: 2725139
+Districts: 14 Red, 3 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 43 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0043.png
+ 29%|██▉       | 72000/250000 [1:30:42<1:00:54, 48.70it/s] 29%|██▉       | 73000/250000 [1:30:43<1:00:38, 48.65it/s]
+Iteration 72000/250000, Score: 167.86
+Population imbalance: 330.81%, Min: 93515, Max: 2623508
+Districts: 14 Red, 3 Blue
+Temperature: 0.6000, Phase: 2
+ 29%|██▉       | 73000/250000 [1:31:02<1:00:38, 48.65it/s] 30%|██▉       | 74000/250000 [1:31:04<1:00:24, 48.55it/s]
+Iteration 73000/250000, Score: 168.53
+Population imbalance: 333.78%, Min: 92289, Max: 2644939
+Districts: 14 Red, 3 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 44 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0044.png
+ 30%|██▉       | 74000/250000 [1:31:22<1:00:24, 48.55it/s] 30%|███       | 75000/250000 [1:31:24<1:00:10, 48.47it/s]
+Iteration 74000/250000, Score: 169.42
+Population imbalance: 334.11%, Min: 89416, Max: 2644604
+Districts: 14 Red, 3 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 45 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0045.png
+ 30%|███       | 75000/250000 [1:31:42<1:00:10, 48.47it/s] 30%|███       | 76000/250000 [1:31:45<59:55, 48.40it/s]  
+Iteration 75000/250000, Score: 169.54
+Population imbalance: 330.16%, Min: 89413, Max: 2614412
+Districts: 14 Red, 3 Blue
+Temperature: 0.6000, Phase: 2
+ 30%|███       | 76000/250000 [1:32:02<59:55, 48.40it/s] 31%|███       | 77000/250000 [1:32:05<58:57, 48.90it/s]
+Iteration 76000/250000, Score: 170.14
+Population imbalance: 331.68%, Min: 88279, Max: 2624941
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 46 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0046.png
+ 31%|███       | 77000/250000 [1:32:22<58:57, 48.90it/s] 31%|███       | 78000/250000 [1:32:26<58:44, 48.80it/s]
+Iteration 77000/250000, Score: 169.80
+Population imbalance: 333.85%, Min: 85631, Max: 2638887
+Districts: 14 Red, 3 Blue
+Temperature: 0.6000, Phase: 2
+ 31%|███       | 78000/250000 [1:32:42<58:44, 48.80it/s] 32%|███▏      | 79000/250000 [1:32:46<58:02, 49.11it/s]
+Iteration 78000/250000, Score: 170.68
+Population imbalance: 353.66%, Min: 86164, Max: 2790926
+Districts: 14 Red, 3 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 47 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0047.png
+ 32%|███▏      | 79000/250000 [1:33:02<58:02, 49.11it/s] 32%|███▏      | 80000/250000 [1:33:06<57:50, 48.99it/s]
+Iteration 79000/250000, Score: 170.48
+Population imbalance: 339.74%, Min: 86765, Max: 2685053
+Districts: 14 Red, 3 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 48 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0048.png
+ 32%|███▏      | 80000/250000 [1:33:22<57:50, 48.99it/s] 32%|███▏      | 81000/250000 [1:33:27<57:41, 48.82it/s]
+Iteration 80000/250000, Score: 170.18
+Population imbalance: 332.29%, Min: 80545, Max: 2621837
+Districts: 14 Red, 3 Blue
+Temperature: 0.6000, Phase: 2
+ 32%|███▏      | 81000/250000 [1:33:42<57:41, 48.82it/s] 33%|███▎      | 82000/250000 [1:33:47<57:28, 48.72it/s]
+Iteration 81000/250000, Score: 170.42
+Population imbalance: 338.45%, Min: 80290, Max: 2668708
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 49 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0049.png
+ 33%|███▎      | 82000/250000 [1:34:02<57:28, 48.72it/s] 33%|███▎      | 83000/250000 [1:34:08<57:16, 48.59it/s]
+Iteration 82000/250000, Score: 171.54
+Population imbalance: 353.58%, Min: 81573, Max: 2785684
+Districts: 14 Red, 3 Blue
+Temperature: 0.6000, Phase: 2
+ 33%|███▎      | 83000/250000 [1:34:22<57:16, 48.59it/s] 34%|███▎      | 84000/250000 [1:34:28<56:41, 48.80it/s]
+Iteration 83000/250000, Score: 171.40
+Population imbalance: 334.13%, Min: 82946, Max: 2638288
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 50 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0050.png
+ 34%|███▎      | 84000/250000 [1:34:42<56:41, 48.80it/s] 34%|███▍      | 85000/250000 [1:34:50<56:54, 48.33it/s]
+Iteration 84000/250000, Score: 172.13
+Population imbalance: 344.20%, Min: 77583, Max: 2709936
+Districts: 14 Red, 3 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 51 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0051.png
+ 34%|███▍      | 85000/250000 [1:35:02<56:54, 48.33it/s] 34%|███▍      | 86000/250000 [1:35:10<56:23, 48.47it/s]
+Iteration 85000/250000, Score: 172.33
+Population imbalance: 346.70%, Min: 80261, Max: 2731739
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+ 34%|███▍      | 86000/250000 [1:35:22<56:23, 48.47it/s] 35%|███▍      | 87000/250000 [1:35:31<56:02, 48.48it/s]
+Iteration 86000/250000, Score: 172.23
+Population imbalance: 344.07%, Min: 80070, Max: 2711429
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 52 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0052.png
+ 35%|███▍      | 87000/250000 [1:35:42<56:02, 48.48it/s] 35%|███▌      | 88000/250000 [1:35:51<55:52, 48.33it/s]
+Iteration 87000/250000, Score: 171.64
+Population imbalance: 347.03%, Min: 83191, Max: 2737234
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+ 35%|███▌      | 88000/250000 [1:36:02<55:52, 48.33it/s] 36%|███▌      | 89000/250000 [1:36:12<55:32, 48.31it/s]
+Iteration 88000/250000, Score: 171.85
+Population imbalance: 326.69%, Min: 78634, Max: 2577081
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 53 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0053.png
+ 36%|███▌      | 89000/250000 [1:36:32<55:32, 48.31it/s] 36%|███▌      | 90000/250000 [1:36:33<55:13, 48.28it/s]
+Iteration 89000/250000, Score: 172.28
+Population imbalance: 324.23%, Min: 81493, Max: 2561164
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 54 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0054.png
+ 36%|███▌      | 90000/250000 [1:36:52<55:13, 48.28it/s] 36%|███▋      | 91000/250000 [1:36:53<54:39, 48.48it/s]
+Iteration 90000/250000, Score: 171.92
+Population imbalance: 329.78%, Min: 83544, Max: 2605611
+Districts: 14 Red, 3 Blue
+Temperature: 0.6000, Phase: 2
+ 36%|███▋      | 91000/250000 [1:37:12<54:39, 48.48it/s] 37%|███▋      | 92000/250000 [1:37:14<54:02, 48.73it/s]
+Iteration 91000/250000, Score: 172.29
+Population imbalance: 328.16%, Min: 86517, Max: 2596235
+Districts: 14 Red, 3 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 55 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0055.png
+ 37%|███▋      | 92000/250000 [1:37:32<54:02, 48.73it/s] 37%|███▋      | 93000/250000 [1:37:34<53:47, 48.65it/s]
+Iteration 92000/250000, Score: 172.91
+Population imbalance: 331.16%, Min: 87009, Max: 2619623
+Districts: 14 Red, 3 Blue
+Temperature: 0.6000, Phase: 2
+ 37%|███▋      | 93000/250000 [1:37:52<53:47, 48.65it/s] 38%|███▊      | 94000/250000 [1:37:54<53:05, 48.97it/s]
+Iteration 93000/250000, Score: 173.11
+Population imbalance: 343.72%, Min: 80829, Max: 2709521
+Districts: 14 Red, 3 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 56 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0056.png
+ 38%|███▊      | 94000/250000 [1:38:12<53:05, 48.97it/s] 38%|███▊      | 95000/250000 [1:38:15<53:01, 48.71it/s]
+Iteration 94000/250000, Score: 173.49
+Population imbalance: 343.11%, Min: 77863, Max: 2701889
+Districts: 14 Red, 3 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 57 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0057.png
+ 38%|███▊      | 95000/250000 [1:38:32<53:01, 48.71it/s] 38%|███▊      | 96000/250000 [1:38:36<53:10, 48.27it/s]
+Iteration 95000/250000, Score: 174.07
+Population imbalance: 333.90%, Min: 75088, Max: 2628674
+Districts: 14 Red, 3 Blue
+Temperature: 0.6000, Phase: 2
+ 38%|███▊      | 96000/250000 [1:38:52<53:10, 48.27it/s] 39%|███▉      | 97000/250000 [1:38:56<52:24, 48.65it/s]
+Iteration 96000/250000, Score: 174.27
+Population imbalance: 308.53%, Min: 80267, Max: 2439870
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 58 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0058.png
+ 39%|███▉      | 97000/250000 [1:39:12<52:24, 48.65it/s] 39%|███▉      | 98000/250000 [1:39:17<51:58, 48.73it/s]
+Iteration 97000/250000, Score: 173.26
+Population imbalance: 313.41%, Min: 85017, Max: 2481937
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+ 39%|███▉      | 98000/250000 [1:39:32<51:58, 48.73it/s] 40%|███▉      | 99000/250000 [1:39:37<51:26, 48.93it/s]
+Iteration 98000/250000, Score: 173.73
+Population imbalance: 334.44%, Min: 77525, Max: 2635257
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+Saved animation frame 59 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0059.png
+ 40%|███▉      | 99000/250000 [1:39:52<51:26, 48.93it/s] 40%|████      | 100000/250000 [1:39:58<51:10, 48.85it/s]
+Iteration 99000/250000, Score: 173.61
+Population imbalance: 339.25%, Min: 82652, Max: 2677174
+Districts: 13 Red, 4 Blue
+Temperature: 0.6000, Phase: 2
+Iteration 100000: Phase 3 - Improving district compactness
+Saved animation frame 60 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0060.png
+
+Iteration 100000/250000, Score: 259.44
+Population imbalance: 320.19%, Min: 83399, Max: 2532154
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 40%|████      | 101000/250000 [1:40:00<37:27, 66.28it/s]Created process pool with 36 workers
+ 41%|████      | 102000/250000 [1:40:02<27:27, 89.85it/s]
+Iteration 101000/250000, Score: 259.43
+Population imbalance: 320.19%, Min: 83412, Max: 2532154
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 61 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0061.png
+ 41%|████      | 103000/250000 [1:40:05<20:53, 117.23it/s]
+Iteration 102000/250000, Score: 259.38
+Population imbalance: 318.17%, Min: 83412, Max: 2516715
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 42%|████▏     | 104000/250000 [1:40:07<16:02, 151.71it/s]
+Iteration 103000/250000, Score: 259.46
+Population imbalance: 318.16%, Min: 83372, Max: 2516625
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 62 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0062.png
+ 42%|████▏     | 105000/250000 [1:40:09<12:48, 188.58it/s]
+Iteration 104000/250000, Score: 259.49
+Population imbalance: 318.17%, Min: 83365, Max: 2516695
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 63 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0063.png
+ 42%|████▏     | 106000/250000 [1:40:11<10:36, 226.08it/s]
+Iteration 105000/250000, Score: 259.47
+Population imbalance: 318.19%, Min: 83393, Max: 2516855
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 43%|████▎     | 107000/250000 [1:40:13<08:51, 268.87it/s]
+Iteration 106000/250000, Score: 259.50
+Population imbalance: 318.19%, Min: 83393, Max: 2516867
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 64 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0064.png
+ 43%|████▎     | 108000/250000 [1:40:16<08:08, 290.97it/s]
+Iteration 107000/250000, Score: 259.54
+Population imbalance: 318.19%, Min: 83382, Max: 2516867
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 44%|████▎     | 109000/250000 [1:40:18<07:13, 325.44it/s]
+Iteration 108000/250000, Score: 259.46
+Population imbalance: 318.16%, Min: 83382, Max: 2516574
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 65 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0065.png
+ 44%|████▍     | 110000/250000 [1:40:21<06:48, 343.04it/s]
+Iteration 109000/250000, Score: 259.48
+Population imbalance: 318.13%, Min: 83606, Max: 2516574
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 66 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0066.png
+ 44%|████▍     | 111000/250000 [1:40:23<06:24, 361.86it/s]
+Iteration 110000/250000, Score: 259.54
+Population imbalance: 318.17%, Min: 83615, Max: 2516883
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 45%|████▍     | 112000/250000 [1:40:25<05:49, 395.08it/s]
+Iteration 111000/250000, Score: 259.49
+Population imbalance: 318.18%, Min: 83615, Max: 2517000
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 67 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0067.png
+ 45%|████▌     | 113000/250000 [1:40:28<05:41, 400.83it/s]
+Iteration 112000/250000, Score: 259.53
+Population imbalance: 318.18%, Min: 83643, Max: 2517000
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 46%|████▌     | 114000/250000 [1:40:30<05:32, 409.55it/s]
+Iteration 113000/250000, Score: 259.55
+Population imbalance: 317.90%, Min: 83643, Max: 2514905
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 68 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0068.png
+ 46%|████▌     | 115000/250000 [1:40:33<05:32, 406.62it/s]
+Iteration 114000/250000, Score: 259.52
+Population imbalance: 317.89%, Min: 83777, Max: 2514905
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 69 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0069.png
+ 46%|████▋     | 116000/250000 [1:40:35<05:28, 407.89it/s]
+Iteration 115000/250000, Score: 259.56
+Population imbalance: 317.89%, Min: 83771, Max: 2514905
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 47%|████▋     | 117000/250000 [1:40:37<05:06, 434.38it/s]
+Iteration 116000/250000, Score: 259.60
+Population imbalance: 317.69%, Min: 83772, Max: 2513439
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 70 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0070.png
+ 47%|████▋     | 118000/250000 [1:40:39<05:09, 426.81it/s]
+Iteration 117000/250000, Score: 259.54
+Population imbalance: 317.63%, Min: 83772, Max: 2512913
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 48%|████▊     | 119000/250000 [1:40:42<05:02, 433.15it/s]
+Iteration 118000/250000, Score: 259.48
+Population imbalance: 318.36%, Min: 83719, Max: 2518465
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 71 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0071.png
+ 48%|████▊     | 120000/250000 [1:40:44<05:07, 422.98it/s]
+Iteration 119000/250000, Score: 259.49
+Population imbalance: 318.44%, Min: 83651, Max: 2519014
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 72 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0072.png
+ 48%|████▊     | 121000/250000 [1:40:47<05:17, 406.06it/s]
+Iteration 120000/250000, Score: 259.53
+Population imbalance: 319.40%, Min: 83651, Max: 2526365
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 49%|████▉     | 122000/250000 [1:40:49<05:01, 423.98it/s]
+Iteration 121000/250000, Score: 259.53
+Population imbalance: 319.45%, Min: 83651, Max: 2526781
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 73 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0073.png
+ 49%|████▉     | 123000/250000 [1:40:51<05:06, 414.62it/s]
+Iteration 122000/250000, Score: 259.48
+Population imbalance: 319.46%, Min: 83642, Max: 2526830
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 50%|████▉     | 124000/250000 [1:40:54<04:57, 423.07it/s]
+Iteration 123000/250000, Score: 259.50
+Population imbalance: 319.46%, Min: 83640, Max: 2526830
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 74 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0074.png
+ 50%|█████     | 125000/250000 [1:40:56<04:58, 419.39it/s]
+Iteration 124000/250000, Score: 259.51
+Population imbalance: 319.45%, Min: 83640, Max: 2526756
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 75 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0075.png
+ 50%|█████     | 126000/250000 [1:40:58<04:52, 424.34it/s]
+Iteration 125000/250000, Score: 259.60
+Population imbalance: 319.40%, Min: 83677, Max: 2526403
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 51%|█████     | 127000/250000 [1:41:00<04:35, 446.14it/s]
+Iteration 126000/250000, Score: 259.61
+Population imbalance: 319.42%, Min: 83665, Max: 2526492
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 76 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0076.png
+ 51%|█████     | 128000/250000 [1:41:03<04:35, 442.63it/s]
+Iteration 127000/250000, Score: 259.62
+Population imbalance: 319.57%, Min: 83554, Max: 2527558
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 52%|█████▏    | 129000/250000 [1:41:05<04:23, 458.92it/s]
+Iteration 128000/250000, Score: 259.62
+Population imbalance: 319.54%, Min: 83703, Max: 2527504
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 77 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0077.png
+ 52%|█████▏    | 130000/250000 [1:41:07<04:26, 449.78it/s]
+Iteration 129000/250000, Score: 259.65
+Population imbalance: 320.13%, Min: 83703, Max: 2532018
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 78 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0078.png
+ 52%|█████▏    | 131000/250000 [1:41:09<04:30, 440.25it/s]
+Iteration 130000/250000, Score: 259.63
+Population imbalance: 320.17%, Min: 83749, Max: 2532353
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 53%|█████▎    | 132000/250000 [1:41:11<04:19, 455.16it/s]
+Iteration 131000/250000, Score: 259.68
+Population imbalance: 320.14%, Min: 83741, Max: 2532137
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 79 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0079.png
+ 53%|█████▎    | 133000/250000 [1:41:14<04:20, 448.95it/s]
+Iteration 132000/250000, Score: 259.76
+Population imbalance: 320.00%, Min: 83741, Max: 2531044
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 54%|█████▎    | 134000/250000 [1:41:16<04:13, 457.51it/s]
+Iteration 133000/250000, Score: 259.76
+Population imbalance: 320.00%, Min: 83773, Max: 2531044
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 80 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0080.png
+ 54%|█████▍    | 135000/250000 [1:41:18<04:19, 442.93it/s]
+Iteration 134000/250000, Score: 259.75
+Population imbalance: 320.00%, Min: 83754, Max: 2531044
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 81 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0081.png
+ 54%|█████▍    | 136000/250000 [1:41:21<04:23, 432.17it/s]
+Iteration 135000/250000, Score: 259.77
+Population imbalance: 319.68%, Min: 83754, Max: 2528593
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 55%|█████▍    | 137000/250000 [1:41:23<04:16, 440.54it/s]
+Iteration 136000/250000, Score: 259.73
+Population imbalance: 319.57%, Min: 83720, Max: 2527738
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 82 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0082.png
+ 55%|█████▌    | 138000/250000 [1:41:25<04:20, 429.27it/s]
+Iteration 137000/250000, Score: 259.69
+Population imbalance: 319.72%, Min: 83720, Max: 2528872
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 56%|█████▌    | 139000/250000 [1:41:28<04:12, 439.53it/s]
+Iteration 138000/250000, Score: 259.76
+Population imbalance: 319.89%, Min: 83732, Max: 2530223
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 83 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0083.png
+ 56%|█████▌    | 140000/250000 [1:41:30<04:14, 432.84it/s]
+Iteration 139000/250000, Score: 259.72
+Population imbalance: 319.96%, Min: 83732, Max: 2530689
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 84 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0084.png
+ 56%|█████▋    | 141000/250000 [1:41:32<04:14, 428.94it/s]
+Iteration 140000/250000, Score: 259.76
+Population imbalance: 321.24%, Min: 83745, Max: 2540492
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 57%|█████▋    | 142000/250000 [1:41:34<04:07, 435.53it/s]
+Iteration 141000/250000, Score: 259.77
+Population imbalance: 321.36%, Min: 83742, Max: 2541460
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 85 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0085.png
+ 57%|█████▋    | 143000/250000 [1:41:37<04:12, 423.94it/s]
+Iteration 142000/250000, Score: 259.77
+Population imbalance: 321.58%, Min: 83742, Max: 2543160
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 58%|█████▊    | 144000/250000 [1:41:39<03:59, 442.37it/s]
+Iteration 143000/250000, Score: 259.82
+Population imbalance: 321.59%, Min: 83678, Max: 2543160
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 86 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0086.png
+ 58%|█████▊    | 145000/250000 [1:41:41<04:03, 430.80it/s]
+Iteration 144000/250000, Score: 259.79
+Population imbalance: 321.59%, Min: 83668, Max: 2543160
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 87 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0087.png
+ 58%|█████▊    | 146000/250000 [1:41:44<04:09, 416.48it/s]
+Iteration 145000/250000, Score: 259.83
+Population imbalance: 321.60%, Min: 83632, Max: 2543160
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 59%|█████▉    | 147000/250000 [1:41:46<04:02, 424.57it/s]
+Iteration 146000/250000, Score: 259.80
+Population imbalance: 321.58%, Min: 83671, Max: 2543055
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 88 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0088.png
+ 59%|█████▉    | 148000/250000 [1:41:49<04:08, 410.77it/s]
+Iteration 147000/250000, Score: 259.83
+Population imbalance: 321.58%, Min: 83649, Max: 2543055
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 60%|█████▉    | 149000/250000 [1:41:51<03:51, 435.67it/s]
+Iteration 148000/250000, Score: 259.92
+Population imbalance: 321.63%, Min: 83653, Max: 2543401
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 89 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0089.png
+ 60%|██████    | 150000/250000 [1:41:53<03:57, 421.92it/s]
+Iteration 149000/250000, Score: 260.03
+Population imbalance: 321.63%, Min: 83648, Max: 2543401
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 90 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0090.png
+ 60%|██████    | 151000/250000 [1:41:56<03:59, 412.87it/s]
+Iteration 150000/250000, Score: 260.02
+Population imbalance: 321.63%, Min: 83732, Max: 2543471
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 61%|██████    | 152000/250000 [1:41:58<03:42, 440.43it/s]
+Iteration 151000/250000, Score: 259.98
+Population imbalance: 321.63%, Min: 83714, Max: 2543471
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 91 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0091.png
+ 61%|██████    | 153000/250000 [1:42:01<03:50, 420.27it/s]
+Iteration 152000/250000, Score: 259.97
+Population imbalance: 321.46%, Min: 83765, Max: 2542226
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 62%|██████▏   | 154000/250000 [1:42:03<03:39, 436.98it/s]
+Iteration 153000/250000, Score: 259.95
+Population imbalance: 321.60%, Min: 83765, Max: 2543277
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 92 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0092.png
+ 62%|██████▏   | 155000/250000 [1:42:05<03:44, 422.61it/s]
+Iteration 154000/250000, Score: 260.01
+Population imbalance: 322.98%, Min: 83862, Max: 2553922
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 93 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0093.png
+ 62%|██████▏   | 156000/250000 [1:42:08<03:47, 413.89it/s]
+Iteration 155000/250000, Score: 259.98
+Population imbalance: 322.98%, Min: 83829, Max: 2553922
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 63%|██████▎   | 157000/250000 [1:42:10<03:30, 441.84it/s]
+Iteration 156000/250000, Score: 260.04
+Population imbalance: 322.98%, Min: 83836, Max: 2553922
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 94 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0094.png
+ 63%|██████▎   | 158000/250000 [1:42:12<03:34, 428.22it/s]
+Iteration 157000/250000, Score: 260.09
+Population imbalance: 322.98%, Min: 83872, Max: 2553968
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 64%|██████▎   | 159000/250000 [1:42:14<03:19, 455.46it/s]
+Iteration 158000/250000, Score: 260.07
+Population imbalance: 322.89%, Min: 83872, Max: 2553268
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 95 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0095.png
+ 64%|██████▍   | 160000/250000 [1:42:17<03:30, 427.99it/s]
+Iteration 159000/250000, Score: 260.04
+Population imbalance: 322.78%, Min: 84013, Max: 2552565
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 96 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0096.png
+ 64%|██████▍   | 161000/250000 [1:42:19<03:37, 409.57it/s]
+Iteration 160000/250000, Score: 260.05
+Population imbalance: 322.77%, Min: 84079, Max: 2552565
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 65%|██████▍   | 162000/250000 [1:42:21<03:23, 431.87it/s]
+Iteration 161000/250000, Score: 260.03
+Population imbalance: 322.76%, Min: 84051, Max: 2552447
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 97 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0097.png
+ 65%|██████▌   | 163000/250000 [1:42:24<03:26, 421.94it/s]
+Iteration 162000/250000, Score: 259.97
+Population imbalance: 322.77%, Min: 84051, Max: 2552565
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 66%|██████▌   | 164000/250000 [1:42:26<03:17, 436.06it/s]
+Iteration 163000/250000, Score: 259.97
+Population imbalance: 322.77%, Min: 84051, Max: 2552565
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 98 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0098.png
+ 66%|██████▌   | 165000/250000 [1:42:28<03:15, 435.01it/s]
+Iteration 164000/250000, Score: 259.90
+Population imbalance: 322.79%, Min: 84092, Max: 2552744
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 99 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0099.png
+ 66%|██████▋   | 166000/250000 [1:42:31<03:17, 425.34it/s]
+Iteration 165000/250000, Score: 259.94
+Population imbalance: 322.75%, Min: 84120, Max: 2552471
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 67%|██████▋   | 167000/250000 [1:42:33<03:04, 448.93it/s]
+Iteration 166000/250000, Score: 260.00
+Population imbalance: 322.59%, Min: 84117, Max: 2551233
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 100 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0100.png
+ 67%|██████▋   | 168000/250000 [1:42:35<03:10, 430.34it/s]
+Iteration 167000/250000, Score: 260.07
+Population imbalance: 324.88%, Min: 84122, Max: 2568738
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 68%|██████▊   | 169000/250000 [1:42:37<02:59, 451.32it/s]
+Iteration 168000/250000, Score: 260.07
+Population imbalance: 324.88%, Min: 84090, Max: 2568738
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 101 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0101.png
+ 68%|██████▊   | 170000/250000 [1:42:40<03:02, 438.79it/s]
+Iteration 169000/250000, Score: 260.04
+Population imbalance: 324.84%, Min: 84108, Max: 2568437
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 102 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0102.png
+ 68%|██████▊   | 171000/250000 [1:42:42<03:05, 426.82it/s]
+Iteration 170000/250000, Score: 260.02
+Population imbalance: 324.84%, Min: 84108, Max: 2568437
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 69%|██████▉   | 172000/250000 [1:42:44<02:55, 444.29it/s]
+Iteration 171000/250000, Score: 260.00
+Population imbalance: 324.84%, Min: 84108, Max: 2568411
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 103 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0103.png
+ 69%|██████▉   | 173000/250000 [1:42:47<03:01, 423.34it/s]
+Iteration 172000/250000, Score: 260.00
+Population imbalance: 324.18%, Min: 84223, Max: 2563474
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 70%|██████▉   | 174000/250000 [1:42:49<02:55, 433.68it/s]
+Iteration 173000/250000, Score: 259.99
+Population imbalance: 324.22%, Min: 83903, Max: 2563474
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 104 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0104.png
+ 70%|███████   | 175000/250000 [1:42:51<02:56, 425.32it/s]
+Iteration 174000/250000, Score: 259.95
+Population imbalance: 324.13%, Min: 83935, Max: 2562813
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 105 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0105.png
+ 70%|███████   | 176000/250000 [1:42:54<02:54, 422.89it/s]
+Iteration 175000/250000, Score: 260.04
+Population imbalance: 324.32%, Min: 84044, Max: 2564348
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 71%|███████   | 177000/250000 [1:42:56<02:42, 449.93it/s]
+Iteration 176000/250000, Score: 260.02
+Population imbalance: 324.90%, Min: 84044, Max: 2568820
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 106 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0106.png
+ 71%|███████   | 178000/250000 [1:42:58<02:40, 447.21it/s]
+Iteration 177000/250000, Score: 260.08
+Population imbalance: 324.93%, Min: 84206, Max: 2569182
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 72%|███████▏  | 179000/250000 [1:43:00<02:34, 458.18it/s]
+Iteration 178000/250000, Score: 260.15
+Population imbalance: 324.95%, Min: 84244, Max: 2569412
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 107 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0107.png
+ 72%|███████▏  | 180000/250000 [1:43:03<02:38, 440.65it/s]
+Iteration 179000/250000, Score: 260.21
+Population imbalance: 324.94%, Min: 84235, Max: 2569321
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 108 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0108.png
+ 72%|███████▏  | 181000/250000 [1:43:05<02:40, 430.05it/s]
+Iteration 180000/250000, Score: 260.20
+Population imbalance: 324.94%, Min: 84251, Max: 2569333
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 73%|███████▎  | 182000/250000 [1:43:07<02:30, 451.57it/s]
+Iteration 181000/250000, Score: 260.25
+Population imbalance: 324.94%, Min: 84249, Max: 2569333
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 109 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0109.png
+ 73%|███████▎  | 183000/250000 [1:43:09<02:33, 435.80it/s]
+Iteration 182000/250000, Score: 260.26
+Population imbalance: 324.91%, Min: 84249, Max: 2569066
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 74%|███████▎  | 184000/250000 [1:43:12<02:27, 446.20it/s]
+Iteration 183000/250000, Score: 260.26
+Population imbalance: 324.91%, Min: 84250, Max: 2569066
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 110 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0110.png
+ 74%|███████▍  | 185000/250000 [1:43:14<02:26, 442.70it/s]
+Iteration 184000/250000, Score: 260.29
+Population imbalance: 324.73%, Min: 84289, Max: 2567735
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 111 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0111.png
+ 74%|███████▍  | 186000/250000 [1:43:16<02:27, 433.00it/s]
+Iteration 185000/250000, Score: 260.28
+Population imbalance: 324.73%, Min: 84241, Max: 2567735
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 75%|███████▍  | 187000/250000 [1:43:18<02:20, 448.66it/s]
+Iteration 186000/250000, Score: 260.30
+Population imbalance: 324.73%, Min: 84241, Max: 2567735
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 112 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0112.png
+ 75%|███████▌  | 188000/250000 [1:43:21<02:24, 428.51it/s]
+Iteration 187000/250000, Score: 260.36
+Population imbalance: 324.78%, Min: 84241, Max: 2568134
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 76%|███████▌  | 189000/250000 [1:43:23<02:20, 434.63it/s]
+Iteration 188000/250000, Score: 260.38
+Population imbalance: 325.26%, Min: 84241, Max: 2571803
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 113 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0113.png
+ 76%|███████▌  | 190000/250000 [1:43:26<02:23, 418.70it/s]
+Iteration 189000/250000, Score: 260.39
+Population imbalance: 325.27%, Min: 84214, Max: 2571803
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 114 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0114.png
+ 76%|███████▋  | 191000/250000 [1:43:28<02:22, 413.72it/s]
+Iteration 190000/250000, Score: 260.42
+Population imbalance: 325.05%, Min: 84246, Max: 2570130
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 77%|███████▋  | 192000/250000 [1:43:30<02:16, 426.34it/s]
+Iteration 191000/250000, Score: 260.47
+Population imbalance: 325.05%, Min: 84246, Max: 2570170
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 115 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0115.png
+ 77%|███████▋  | 193000/250000 [1:43:33<02:18, 411.50it/s]
+Iteration 192000/250000, Score: 260.42
+Population imbalance: 324.68%, Min: 84246, Max: 2567315
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 78%|███████▊  | 194000/250000 [1:43:35<02:09, 431.77it/s]
+Iteration 193000/250000, Score: 260.47
+Population imbalance: 324.71%, Min: 84247, Max: 2567574
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 116 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0116.png
+ 78%|███████▊  | 195000/250000 [1:43:38<02:11, 419.12it/s]
+Iteration 194000/250000, Score: 260.55
+Population imbalance: 324.76%, Min: 84237, Max: 2567903
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 117 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0117.png
+ 78%|███████▊  | 196000/250000 [1:43:40<02:13, 404.62it/s]
+Iteration 195000/250000, Score: 260.48
+Population imbalance: 324.76%, Min: 84237, Max: 2567915
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 79%|███████▉  | 197000/250000 [1:43:42<02:07, 416.83it/s]
+Iteration 196000/250000, Score: 260.56
+Population imbalance: 324.46%, Min: 84210, Max: 2565622
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 118 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0118.png
+ 79%|███████▉  | 198000/250000 [1:43:45<02:05, 413.16it/s]
+Iteration 197000/250000, Score: 260.54
+Population imbalance: 324.30%, Min: 84161, Max: 2564379
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 80%|███████▉  | 199000/250000 [1:43:47<01:58, 431.09it/s]
+Iteration 198000/250000, Score: 260.52
+Population imbalance: 324.32%, Min: 84161, Max: 2564525
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 119 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0119.png
+ 80%|████████  | 200000/250000 [1:43:49<01:57, 425.93it/s]
+Iteration 199000/250000, Score: 260.55
+Population imbalance: 324.31%, Min: 84161, Max: 2564457
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 120 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0120.png
+ 80%|████████  | 201000/250000 [1:43:52<01:56, 421.58it/s]
+Iteration 200000/250000, Score: 260.55
+Population imbalance: 324.25%, Min: 84152, Max: 2563959
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 81%|████████  | 202000/250000 [1:43:54<01:48, 440.47it/s]
+Iteration 201000/250000, Score: 260.66
+Population imbalance: 324.00%, Min: 84107, Max: 2562027
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 121 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0121.png
+ 81%|████████  | 203000/250000 [1:43:56<01:51, 422.76it/s]
+Iteration 202000/250000, Score: 260.63
+Population imbalance: 324.00%, Min: 84107, Max: 2562027
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 82%|████████▏ | 204000/250000 [1:43:59<01:43, 442.67it/s]
+Iteration 203000/250000, Score: 260.67
+Population imbalance: 325.42%, Min: 84107, Max: 2572841
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 122 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0122.png
+ 82%|████████▏ | 205000/250000 [1:44:01<01:45, 425.98it/s]
+Iteration 204000/250000, Score: 260.70
+Population imbalance: 325.44%, Min: 84097, Max: 2573038
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 123 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0123.png
+ 82%|████████▏ | 206000/250000 [1:44:04<01:44, 420.69it/s]
+Iteration 205000/250000, Score: 260.74
+Population imbalance: 325.43%, Min: 84097, Max: 2572905
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 83%|████████▎ | 207000/250000 [1:44:06<01:39, 430.33it/s]
+Iteration 206000/250000, Score: 260.75
+Population imbalance: 325.51%, Min: 84103, Max: 2573540
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 124 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0124.png
+ 83%|████████▎ | 208000/250000 [1:44:08<01:37, 428.66it/s]
+Iteration 207000/250000, Score: 260.73
+Population imbalance: 325.51%, Min: 84088, Max: 2573540
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 84%|████████▎ | 209000/250000 [1:44:10<01:33, 440.30it/s]
+Iteration 208000/250000, Score: 260.75
+Population imbalance: 325.59%, Min: 83956, Max: 2574012
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 125 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0125.png
+ 84%|████████▍ | 210000/250000 [1:44:13<01:33, 426.49it/s]
+Iteration 209000/250000, Score: 260.72
+Population imbalance: 325.36%, Min: 83961, Max: 2572277
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 126 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0126.png
+ 84%|████████▍ | 211000/250000 [1:44:15<01:34, 413.47it/s]
+Iteration 210000/250000, Score: 260.73
+Population imbalance: 326.81%, Min: 83945, Max: 2583361
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 85%|████████▍ | 212000/250000 [1:44:18<01:30, 420.27it/s]
+Iteration 211000/250000, Score: 260.79
+Population imbalance: 326.79%, Min: 83892, Max: 2583139
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 127 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0127.png
+ 85%|████████▌ | 213000/250000 [1:44:20<01:29, 413.30it/s]
+Iteration 212000/250000, Score: 260.76
+Population imbalance: 326.79%, Min: 83906, Max: 2583139
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 86%|████████▌ | 214000/250000 [1:44:22<01:23, 431.15it/s]
+Iteration 213000/250000, Score: 260.78
+Population imbalance: 327.29%, Min: 83968, Max: 2587011
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 128 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0128.png
+ 86%|████████▌ | 215000/250000 [1:44:25<01:22, 425.79it/s]
+Iteration 214000/250000, Score: 260.84
+Population imbalance: 327.53%, Min: 83971, Max: 2588863
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 129 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0129.png
+ 86%|████████▋ | 216000/250000 [1:44:27<01:19, 428.21it/s]
+Iteration 215000/250000, Score: 260.84
+Population imbalance: 327.53%, Min: 84009, Max: 2588863
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 87%|████████▋ | 217000/250000 [1:44:29<01:13, 445.95it/s]
+Iteration 216000/250000, Score: 260.83
+Population imbalance: 327.53%, Min: 84007, Max: 2588863
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 130 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0130.png
+ 87%|████████▋ | 218000/250000 [1:44:32<01:15, 424.81it/s]
+Iteration 217000/250000, Score: 260.84
+Population imbalance: 327.52%, Min: 84047, Max: 2588863
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 88%|████████▊ | 219000/250000 [1:44:34<01:09, 443.74it/s]
+Iteration 218000/250000, Score: 260.84
+Population imbalance: 327.52%, Min: 84047, Max: 2588848
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 131 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0131.png
+ 88%|████████▊ | 220000/250000 [1:44:36<01:11, 417.23it/s]
+Iteration 219000/250000, Score: 260.82
+Population imbalance: 327.55%, Min: 84061, Max: 2589094
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 132 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0132.png
+ 88%|████████▊ | 221000/250000 [1:44:39<01:08, 422.32it/s]
+Iteration 220000/250000, Score: 260.87
+Population imbalance: 327.57%, Min: 84044, Max: 2589259
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 89%|████████▉ | 222000/250000 [1:44:41<01:02, 448.07it/s]
+Iteration 221000/250000, Score: 260.96
+Population imbalance: 327.61%, Min: 83943, Max: 2589437
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 133 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0133.png
+ 89%|████████▉ | 223000/250000 [1:44:43<01:01, 438.59it/s]
+Iteration 222000/250000, Score: 260.94
+Population imbalance: 327.68%, Min: 83910, Max: 2589914
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 90%|████████▉ | 224000/250000 [1:44:45<00:57, 449.90it/s]
+Iteration 223000/250000, Score: 260.96
+Population imbalance: 327.37%, Min: 83958, Max: 2587610
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 134 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0134.png
+ 90%|█████████ | 225000/250000 [1:44:47<00:57, 434.27it/s]
+Iteration 224000/250000, Score: 260.99
+Population imbalance: 327.34%, Min: 83958, Max: 2587378
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 135 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0135.png
+ 90%|█████████ | 226000/250000 [1:44:50<00:55, 434.76it/s]
+Iteration 225000/250000, Score: 261.05
+Population imbalance: 327.57%, Min: 83958, Max: 2589156
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 91%|█████████ | 227000/250000 [1:44:52<00:50, 453.97it/s]
+Iteration 226000/250000, Score: 261.04
+Population imbalance: 327.59%, Min: 83958, Max: 2589341
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 136 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0136.png
+ 91%|█████████ | 228000/250000 [1:44:54<00:51, 430.55it/s]
+Iteration 227000/250000, Score: 261.03
+Population imbalance: 327.53%, Min: 83979, Max: 2588870
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 92%|█████████▏| 229000/250000 [1:44:56<00:46, 451.57it/s]
+Iteration 228000/250000, Score: 260.97
+Population imbalance: 327.43%, Min: 83979, Max: 2588116
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 137 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0137.png
+ 92%|█████████▏| 230000/250000 [1:44:59<00:46, 431.25it/s]
+Iteration 229000/250000, Score: 260.92
+Population imbalance: 327.44%, Min: 83979, Max: 2588198
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 138 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0138.png
+ 92%|█████████▏| 231000/250000 [1:45:01<00:44, 423.43it/s]
+Iteration 230000/250000, Score: 261.02
+Population imbalance: 327.41%, Min: 84045, Max: 2588011
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 93%|█████████▎| 232000/250000 [1:45:03<00:40, 446.76it/s]
+Iteration 231000/250000, Score: 261.02
+Population imbalance: 327.38%, Min: 84053, Max: 2587803
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 139 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0139.png
+ 93%|█████████▎| 233000/250000 [1:45:06<00:40, 422.04it/s]
+Iteration 232000/250000, Score: 261.02
+Population imbalance: 327.33%, Min: 84063, Max: 2587396
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 94%|█████████▎| 234000/250000 [1:45:08<00:36, 442.09it/s]
+Iteration 233000/250000, Score: 261.03
+Population imbalance: 327.33%, Min: 84053, Max: 2587396
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 140 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0140.png
+ 94%|█████████▍| 235000/250000 [1:45:10<00:34, 434.83it/s]
+Iteration 234000/250000, Score: 261.02
+Population imbalance: 327.26%, Min: 84085, Max: 2586932
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 141 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0141.png
+ 94%|█████████▍| 236000/250000 [1:45:13<00:33, 416.89it/s]
+Iteration 235000/250000, Score: 261.07
+Population imbalance: 327.26%, Min: 84075, Max: 2586932
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 95%|█████████▍| 237000/250000 [1:45:15<00:30, 428.05it/s]
+Iteration 236000/250000, Score: 261.11
+Population imbalance: 327.26%, Min: 84075, Max: 2586932
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 142 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0142.png
+ 95%|█████████▌| 238000/250000 [1:45:18<00:29, 404.14it/s]
+Iteration 237000/250000, Score: 261.18
+Population imbalance: 327.29%, Min: 84087, Max: 2587147
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 96%|█████████▌| 239000/250000 [1:45:20<00:26, 419.40it/s]
+Iteration 238000/250000, Score: 261.21
+Population imbalance: 326.99%, Min: 84101, Max: 2584854
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 143 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0143.png
+ 96%|█████████▌| 240000/250000 [1:45:23<00:24, 414.69it/s]
+Iteration 239000/250000, Score: 261.17
+Population imbalance: 327.02%, Min: 84101, Max: 2585050
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 144 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0144.png
+ 96%|█████████▋| 241000/250000 [1:45:25<00:22, 407.33it/s]
+Iteration 240000/250000, Score: 261.22
+Population imbalance: 327.45%, Min: 84028, Max: 2588327
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 97%|█████████▋| 242000/250000 [1:45:27<00:18, 430.76it/s]
+Iteration 241000/250000, Score: 261.17
+Population imbalance: 326.69%, Min: 84039, Max: 2582474
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 145 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0145.png
+ 97%|█████████▋| 243000/250000 [1:45:30<00:16, 424.23it/s]
+Iteration 242000/250000, Score: 261.21
+Population imbalance: 326.72%, Min: 84048, Max: 2582722
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 98%|█████████▊| 244000/250000 [1:45:32<00:13, 433.17it/s]
+Iteration 243000/250000, Score: 261.27
+Population imbalance: 326.76%, Min: 84089, Max: 2583051
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 146 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0146.png
+ 98%|█████████▊| 245000/250000 [1:45:34<00:12, 416.47it/s]
+Iteration 244000/250000, Score: 261.26
+Population imbalance: 326.75%, Min: 84117, Max: 2583051
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 147 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0147.png
+ 98%|█████████▊| 246000/250000 [1:45:37<00:09, 401.75it/s]
+Iteration 245000/250000, Score: 261.32
+Population imbalance: 326.76%, Min: 84090, Max: 2583051
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+ 99%|█████████▉| 247000/250000 [1:45:39<00:07, 421.94it/s]
+Iteration 246000/250000, Score: 261.32
+Population imbalance: 327.33%, Min: 84333, Max: 2587704
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 148 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0148.png
+ 99%|█████████▉| 248000/250000 [1:45:42<00:04, 410.64it/s]
+Iteration 247000/250000, Score: 261.28
+Population imbalance: 327.33%, Min: 84322, Max: 2587704
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+100%|█████████▉| 249000/250000 [1:45:44<00:02, 425.46it/s]
+Iteration 248000/250000, Score: 261.22
+Population imbalance: 327.32%, Min: 84334, Max: 2587630
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 149 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0149.png
+100%|██████████| 250000/250000 [1:45:46<00:00, 421.91it/s]
+Iteration 249000/250000, Score: 261.21
+Population imbalance: 327.23%, Min: 84325, Max: 2586891
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 150 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0150.png
+100%|██████████| 250000/250000 [1:45:47<00:00, 39.38it/s] 
+
+Iteration 250000/250000, Score: 261.27
+Population imbalance: 327.23%, Min: 84336, Max: 2586891
+Districts: 13 Red, 4 Blue
+Temperature: 0.3000, Phase: 3
+Saved animation frame 151 to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames/frame_0151.png
+Simulation complete!
+Creating animation with 152 frames...
+Attempting to compile video from frames in /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation_frames...
+Found 152 frames to compile.
+Trying video compilation method 1...
+Method 1 failed with error: ffmpeg version 4.3.2 Copyright (c) 2000-2021 the FFmpeg developers
+  built with gcc 8 (GCC)
+  configuration: --prefix=/swst/apps/ffmpeg/4.3.2_gcc-8.5.0 --enable-pic --cc=/tmp/jenkins_swst_build/workspace/SWST_Build_QA/build/spack/lib/spack/env/gcc/gcc --cxx=/tmp/jenkins_swst_build/workspace/SWST_Build_QA/build/spack/lib/spack/env/gcc/g++ --disable-libxcb --disable-libxcb-shape --disable-libxcb-shm --disable-libxcb-xfixes --disable-xlib --disable-libfontconfig --disable-libfreetype --disable-libfribidi --enable-bzlib --disable-libmp3lame --disable-libopenjpeg --disable-libopus --disable-libspeex --disable-libvorbis --disable-libvpx --disable-avresample --disable-openssl --enable-shared --disable-libzmq --disable-libssh --disable-libwebp --disable-lzma --disable-libsnappy --disable-sdl2 --disable-libaom
+  libavutil      56. 51.100 / 56. 51.100
+  libavcodec     58. 91.100 / 58. 91.100
+  libavformat    58. 45.100 / 58. 45.100
+  libavdevice    58. 10.100 / 58. 10.100
+  libavfilter     7. 85.100 /  7. 85.100
+  libswscale      5.  7.100 /  5.  7.100
+  libswresample   3.  7.100 /  3.  7.100
+Unrecognized option 'preset'.
+Error splitting the argument list: Option not found
+
+Trying video compilation method 2...
+Successfully compiled video using method 2.
+Video saved to: /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_animation.mp4
+District map saved to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/final_district_map.npy
+District statistics saved to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/final_district_stats.csv
+Running simulation and tracking district stats for 10000 iterations...
+  0%|          | 0/10000 [00:00<?, ?it/s]Created process pool with 36 workers
+ 10%|█         | 1000/10000 [00:02<00:20, 444.42it/s]Iteration 2000: Phase 2 - Optimizing vote distribution
+ 20%|██        | 2000/10000 [00:04<00:16, 478.66it/s] 30%|███       | 3000/10000 [00:06<00:14, 491.47it/s]Iteration 4000: Phase 3 - Improving district compactness
+ 40%|████      | 4000/10000 [00:08<00:12, 488.04it/s] 50%|█████     | 5000/10000 [00:10<00:10, 493.62it/s] 60%|██████    | 6000/10000 [00:12<00:07, 500.26it/s] 70%|███████   | 7000/10000 [00:14<00:06, 498.69it/s] 80%|████████  | 8000/10000 [00:16<00:03, 503.89it/s] 90%|█████████ | 9000/10000 [00:18<00:02, 491.24it/s]100%|██████████| 10000/10000 [00:20<00:00, 498.89it/s]100%|██████████| 10000/10000 [00:20<00:00, 494.06it/s]
+District stats tracking completed in 20.26 seconds
+Stats saved to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection/incumbent_protection_stats_evolution.csv
+Scenario 'incumbent_protection' completed. Results saved to /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection
+
+
+========================================
+SIMULATION BATCH COMPLETE
+========================================
+Output directory: /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947
+Scenarios completed: 1
+  - incumbent_protection: /storage/home/nrk5343/work/MCMCAPSUHacks2025/results/20250330_040947/incumbent_protection
+========================================

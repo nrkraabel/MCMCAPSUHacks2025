@@ -12,14 +12,9 @@ import concurrent.futures
 import numba
 from numba import jit, prange, cuda
 import os
-import cupy as cp
-import dask_cuda
-import dask.array as da
-from dask.distributed import Client, wait, get_worker
-import time
 
 class GerrymanderSimulator:
-    def __init__(self, state_map, num_districts=13, use_gpu=True, num_gpus=None):
+    def __init__(self, state_map, num_districts=13, use_gpu=False):
         """
         Initialize the simulator with a state map and number of districts.
         
@@ -27,66 +22,28 @@ class GerrymanderSimulator:
         - state_map: A numpy array with shape (height, width, 3) where each pixel has
                     [population, red_votes, blue_votes]
         - num_districts: Number of districts to create
-        - use_gpu: Whether to use GPU acceleration
-        - num_gpus: Number of GPUs to use (None = use all available)
+        - use_gpu: Whether to use GPU acceleration (if available)
         """
         self.state_map = state_map
         self.height, self.width, _ = state_map.shape
         self.num_districts = num_districts
-        
-        # Determine GPU availability and count
         self.use_gpu = use_gpu and cuda.is_available()
-        if self.use_gpu:
-            # Get number of available GPUs
-            self.num_gpus = num_gpus if num_gpus is not None else cp.cuda.runtime.getDeviceCount()
-            print(f"Found {self.num_gpus} CUDA-capable GPUs")
-            
-            if self.num_gpus > 1:
-                # Initialize Dask CUDA cluster for multi-GPU processing
-                try:
-                    self.cluster = dask_cuda.LocalCUDACluster(n_workers=self.num_gpus, threads_per_worker=1)
-                    self.client = Client(self.cluster)
-                    print(f"Initialized Dask CUDA cluster with {self.num_gpus} workers")
-                    self.using_dask = True
-                except Exception as e:
-                    print(f"Failed to initialize Dask CUDA cluster: {e}")
-                    print("Falling back to single GPU mode")
-                    self.num_gpus = 1
-                    self.using_dask = False
-            else:
-                self.using_dask = False
-                
-            # Create GPU device contexts
-            self.devices = [cp.cuda.Device(i) for i in range(self.num_gpus)]
-            
-            # Partition the map for multi-GPU processing
-            self.partition_boundaries = self._calculate_partition_boundaries()
-            
-            # Initialize GPU arrays
-            if self.using_dask:
-                # Create Dask arrays distributed across GPUs
-                state_map_shape = (self.height, self.width, 3)
-                self.state_map_gpu = da.from_array(state_map, chunks=(self.height // self.num_gpus, self.width, 3))
-                self.district_map = da.zeros((self.height, self.width), dtype=np.int32, 
-                                           chunks=(self.height // self.num_gpus, self.width))
-                # Valid mask as dask array
-                self.valid_mask = self.state_map_gpu[:,:,0] > 0
-            else:
-                # Single GPU mode
-                self.state_map_gpu = cp.asarray(state_map)
-                self.district_map = cp.zeros((self.height, self.width), dtype=cp.int32)
-                self.valid_mask = (self.state_map_gpu[:,:,0] > 0)
-        else:
-            print("Using CPU processing")
-            self.num_gpus = 0
-            self.district_map = np.zeros((self.height, self.width), dtype=np.int32)
-            self.valid_mask = (state_map[:,:,0] > 0)
-            
-        # CPU resources
-        self.num_cpus = max(1, os.cpu_count() - 2)  # Reserve just 2 cores for system
+        self.num_cpus = max(1, os.cpu_count() - 4)  # Reserve just 4 cores for system
         print(f"Using {self.num_cpus} CPU cores for parallelization")
+    
+        if self.use_gpu:
+            print("Using GPU acceleration")
+            # Convert arrays to CUDA-compatible format if using GPU
+            self.state_map_gpu = cuda.to_device(self.state_map)
+        # else:
+        #     # print("Using CPU processing")
+
+        
+        # Create a mask of valid (non-zero population) pixels
+        self.valid_mask = (state_map[:,:,0] > 0)
         
         # Initialize the district map randomly using Voronoi tessellation
+        self.district_map = np.zeros((self.height, self.width), dtype=np.int32)
         self.initialize_districts()
         
         # Pre-compute the neighbor map for faster lookup during simulation
@@ -103,35 +60,11 @@ class GerrymanderSimulator:
             'area': np.zeros(num_districts)
         }
         
-        # If GPU is available, create GPU versions of these arrays
-        if self.use_gpu:
-            self.district_stats_gpu = {
-                'population': cp.zeros(num_districts),
-                'red_votes': cp.zeros(num_districts),
-                'blue_votes': cp.zeros(num_districts),
-                'center_x': cp.zeros(num_districts),
-                'center_y': cp.zeros(num_districts),
-                'perimeter': cp.zeros(num_districts),
-                'area': cp.zeros(num_districts)
-            }
-            
-            # For multi-GPU, we need per-device stats that will be merged
-            if self.num_gpus > 1:
-                self.device_stats = [{
-                    'population': cp.zeros(num_districts),
-                    'red_votes': cp.zeros(num_districts),
-                    'blue_votes': cp.zeros(num_districts),
-                    'center_x': cp.zeros(num_districts),
-                    'center_y': cp.zeros(num_districts),
-                    'perimeter': cp.zeros(num_districts),
-                    'area': cp.zeros(num_districts)
-                } for _ in range(self.num_gpus)]
-        
         # Calculate initial stats
         self.calculate_all_district_stats()
         
         # Parameters for the algorithm
-        self.temperature = 1
+        self.temperature = 100000
         self.cooling_rate = 0.9999
         self.phase = 1
         
@@ -146,261 +79,67 @@ class GerrymanderSimulator:
         # Target election results (to be set by user)
         self.target_vote_margins = None
         
-        # Create a pool of workers for parallelization when CPU is needed
+        # Create a pool of workers for parallelization
         self.pool = None  # Will initialize when needed
-    
-    def _calculate_partition_boundaries(self):
-        """Calculate boundaries for partitioning the state map across multiple GPUs"""
-        if self.num_gpus <= 1:
-            return [(0, self.height)]
-            
-        # For simplicity, partition by rows (can be optimized further)
-        rows_per_gpu = self.height // self.num_gpus
-        boundaries = []
-        
-        for i in range(self.num_gpus):
-            start_row = i * rows_per_gpu
-            end_row = start_row + rows_per_gpu if i < self.num_gpus - 1 else self.height
-            boundaries.append((start_row, end_row))
-            
-        return boundaries
     
     def _precompute_neighbor_map(self):
         """Precompute the neighbor map for faster lookup"""
+        # print("Precomputing neighbor map...")
         self.neighbor_map = {}
-        
-        # Decide whether to use GPU or CPU operations
-        if self.use_gpu:
-            if self.using_dask:
-                # For Dask distributed computing, we need to compute the valid mask
-                valid_mask = self.valid_mask.compute()
-            else:
-                # Get valid mask as numpy array for iteration
-                valid_mask = cp.asnumpy(self.valid_mask)
-        else:
-            valid_mask = self.valid_mask
         
         # For each valid cell, store its neighbors
         for i in range(self.height):
             for j in range(self.width):
-                if valid_mask[i, j]:
+                if self.valid_mask[i, j]:
                     self.neighbor_map[(i, j)] = []
                     for ni, nj in [(i+1, j), (i-1, j), (i, j+1), (i, j-1)]:
-                        if 0 <= ni < self.height and 0 <= nj < self.width and valid_mask[ni, nj]:
+                        if 0 <= ni < self.height and 0 <= nj < self.width and self.valid_mask[ni, nj]:
                             self.neighbor_map[(i, j)].append((ni, nj))
     
     def initialize_districts(self):
         """Initialize district map using Voronoi tessellation"""
         # Generate random seed points
-        if self.use_gpu:
-            if self.using_dask:
-                valid_mask_np = self.valid_mask.compute()
-                valid_indices = np.argwhere(valid_mask_np)
-            else:
-                valid_indices = cp.argwhere(self.valid_mask).get()  # Get from GPU to CPU for Voronoi
-        else:
-            valid_indices = np.argwhere(self.valid_mask)
-        
+        valid_indices = np.argwhere(self.valid_mask)
         seed_indices = valid_indices[np.random.choice(len(valid_indices), self.num_districts, replace=False)]
         
         # Create a Voronoi diagram
         vor = Voronoi(seed_indices)
         
-        # Multi-GPU optimized assignment
-        if self.use_gpu and self.num_gpus > 1:
-            # For multi-GPU case, we'll assign each partition to a specific GPU
-            futures = []
-            
-            for gpu_id, (start_row, end_row) in enumerate(self.partition_boundaries):
-                # Submit a task to each GPU
-                futures.append(self.client.submit(
-                    self._initialize_district_partition,
-                    gpu_id, start_row, end_row, self.width, self.valid_mask, seed_indices,
-                    resources={'GPU': 1}  # Ensure task is assigned to a GPU worker
-                ))
-            
-            # Wait for all partitions to complete
-            results = self.client.gather(futures)
-            
-            # Combine results from all GPUs
-            if self.using_dask:
-                # For Dask, we need to update our dask array
-                for gpu_id, partition_map in enumerate(results):
-                    start_row, end_row = self.partition_boundaries[gpu_id]
-                    partition_dask = da.from_array(partition_map, 
-                                                chunks=(end_row-start_row, self.width))
-                    self.district_map[start_row:end_row] = partition_dask
-            else:
-                # For single GPU, just use CuPy arrays
-                self.district_map = cp.asarray(np.vstack([r for r in results]))
+        # Parallelize the assignment of pixels to districts
+        @jit(nopython=True, parallel=True)
+        def assign_pixels(height, width, valid_mask, district_map, seed_indices):
+            for i in prange(height):
+                for j in range(width):
+                    if valid_mask[i, j]:
+                        # Find the closest seed point
+                        min_dist = float('inf')
+                        closest_idx = 0
+                        
+                        for idx, seed in enumerate(seed_indices):
+                            dist = (i - seed[0])**2 + (j - seed[1])**2
+                            if dist < min_dist:
+                                min_dist = dist
+                                closest_idx = idx
+                        
+                        district_map[i, j] = closest_idx
+            return district_map
         
-        elif self.use_gpu:
-            # Single GPU case
-            # Define CUDA kernel for pixel assignment
-            @cuda.jit
-            def assign_pixels_kernel(district_map, valid_mask, seed_indices, height, width):
-                # Get thread position
-                i, j = cuda.grid(2)
-                
-                # Check if in bounds and valid
-                if i < height and j < width and valid_mask[i, j]:
-                    # Find the closest seed point
-                    min_dist = 1e10  # A large value
-                    closest_idx = 0
-                    
-                    for idx in range(len(seed_indices)):
-                        seed_i, seed_j = seed_indices[idx]
-                        dist = (i - seed_i)**2 + (j - seed_j)**2
-                        if dist < min_dist:
-                            min_dist = dist
-                            closest_idx = idx
-                    
-                    district_map[i, j] = closest_idx
-            
-            # Convert seed indices to device array
-            d_seed_indices = cuda.to_device(seed_indices)
-            
-            # Set up grid and block dimensions
-            threads_per_block = (16, 16)
-            blocks_per_grid_x = (self.height + threads_per_block[0] - 1) // threads_per_block[0]
-            blocks_per_grid_y = (self.width + threads_per_block[1] - 1) // threads_per_block[1]
-            blocks_per_grid = (blocks_per_grid_x, blocks_per_grid_y)
-            
-            # Get numpy arrays from cupy for CUDA
-            d_district_map = cuda.to_device(cp.zeros((self.height, self.width), dtype=cp.int32).get())
-            d_valid_mask = cuda.to_device(cp.asnumpy(self.valid_mask))
-            
-            # Launch kernel
-            assign_pixels_kernel[blocks_per_grid, threads_per_block](
-                d_district_map, d_valid_mask, d_seed_indices, self.height, self.width)
-            
-            # Copy result back
-            self.district_map = cp.asarray(d_district_map.copy_to_host())
-        else:
-            # Use the existing CPU implementation with Numba
-            @jit(nopython=True, parallel=True)
-            def assign_pixels(height, width, valid_mask, district_map, seed_indices):
-                for i in prange(height):
-                    for j in range(width):
-                        if valid_mask[i, j]:
-                            # Find the closest seed point
-                            min_dist = float('inf')
-                            closest_idx = 0
-                            
-                            for idx, seed in enumerate(seed_indices):
-                                dist = (i - seed[0])**2 + (j - seed[1])**2
-                                if dist < min_dist:
-                                    min_dist = dist
-                                    closest_idx = idx
-                            
-                            district_map[i, j] = closest_idx
-                return district_map
-            
-            self.district_map = assign_pixels(self.height, self.width, self.valid_mask, 
-                                           self.district_map, seed_indices)
-        
+        self.district_map = assign_pixels(self.height, self.width, self.valid_mask, 
+                                          self.district_map, seed_indices)
         self._fill_holes()
-    
-    @staticmethod
-    def _initialize_district_partition(gpu_id, start_row, end_row, width, valid_mask, seed_indices):
-        """Initialize a partition of the district map on a specific GPU"""
-        # Set the GPU device
-        with cp.cuda.Device(gpu_id):
-            # Extract the partition of valid_mask for this GPU
-            if isinstance(valid_mask, da.Array):
-                # For Dask arrays, compute the slice
-                partition_mask = valid_mask[start_row:end_row].compute()
-            else:
-                # For NumPy arrays
-                partition_mask = valid_mask[start_row:end_row]
-                
-            # Create a new array for this partition
-            partition_height = end_row - start_row
-            partition_map = cp.zeros((partition_height, width), dtype=cp.int32)
-            
-            # Define CUDA kernel for assigning districts
-            @cuda.jit
-            def assign_pixels_kernel(district_map, valid_mask, seed_indices, height, width, start_row):
-                # Get thread position within the partition
-                local_i, j = cuda.grid(2)
-                
-                # Convert to global coordinates
-                i = local_i + start_row
-                
-                # Check if in bounds and valid
-                if local_i < height and j < width and valid_mask[local_i, j]:
-                    # Find the closest seed point
-                    min_dist = 1e10  # A large value
-                    closest_idx = 0
-                    
-                    for idx in range(len(seed_indices)):
-                        seed_i, seed_j = seed_indices[idx]
-                        dist = (i - seed_i)**2 + (j - seed_j)**2
-                        if dist < min_dist:
-                            min_dist = dist
-                            closest_idx = idx
-                    
-                    district_map[local_i, j] = closest_idx
-            
-            # Convert to CUDA
-            d_seed_indices = cuda.to_device(seed_indices)
-            d_district_map = cuda.to_device(cp.asnumpy(partition_map))
-            d_valid_mask = cuda.to_device(cp.asnumpy(partition_mask))
-            
-            # Set up grid and block dimensions
-            threads_per_block = (16, 16)
-            blocks_per_grid_x = (partition_height + threads_per_block[0] - 1) // threads_per_block[0]
-            blocks_per_grid_y = (width + threads_per_block[1] - 1) // threads_per_block[1]
-            blocks_per_grid = (blocks_per_grid_x, blocks_per_grid_y)
-            
-            # Launch kernel
-            assign_pixels_kernel[blocks_per_grid, threads_per_block](
-                d_district_map, d_valid_mask, d_seed_indices, partition_height, width, start_row)
-            
-            # Get results back
-            partition_result = d_district_map.copy_to_host()
-            
-            # Return the partition
-            return partition_result
-    
     def _fill_holes(self):
         """
         Fill in small holes in the district map.
         A hole is defined as a zero-population area completely surrounded by districts.
         """
-        # If using GPU, bring data to CPU for hole filling operations
-        if self.use_gpu:
-            if self.using_dask:
-                district_map_np = self.district_map.compute()
-                valid_mask_np = self.valid_mask.compute()
-                state_map_np = self.state_map_gpu.compute()
-            else:
-                district_map_np = cp.asnumpy(self.district_map)
-                valid_mask_np = cp.asnumpy(self.valid_mask)
-                state_map_np = cp.asnumpy(self.state_map_gpu)
-        else:
-            district_map_np = self.district_map
-            valid_mask_np = self.valid_mask
-            state_map_np = self.state_map
-            
         # Create a mask of areas that have been assigned to districts
-        district_assigned = (district_map_np >= 0) & valid_mask_np
+        district_assigned = (self.district_map >= 0) & self.valid_mask
         
         # Identify potential holes (zero-population areas)
-        potential_holes = (state_map_np[:,:,0] == 0) & ~district_assigned
+        potential_holes = (self.state_map[:,:,0] == 0) & ~district_assigned
         
         # If there are no potential holes, return early
         if not np.any(potential_holes):
-            if self.use_gpu:
-                # Update GPU arrays if needed
-                if self.using_dask:
-                    self.district_map = da.from_array(district_map_np, 
-                                              chunks=(self.height // self.num_gpus, self.width))
-                    self.valid_mask = da.from_array(valid_mask_np,
-                                            chunks=(self.height // self.num_gpus, self.width))
-                else:
-                    self.district_map = cp.asarray(district_map_np)
-                    self.valid_mask = cp.asarray(valid_mask_np)
             return
         
         # Find connected components in the potential holes
@@ -424,8 +163,8 @@ class GerrymanderSimulator:
             neighbors_mask = dilated & ~hole_mask
             
             # Count how many surrounding pixels are assigned to districts
-            surrounding_districts = district_map_np[neighbors_mask]
-            valid_neighbors = np.sum(valid_mask_np[neighbors_mask])
+            surrounding_districts = self.district_map[neighbors_mask]
+            valid_neighbors = np.sum(self.valid_mask[neighbors_mask])
             
             # If most of the surrounding pixels are assigned to districts, this is a hole
             if valid_neighbors > 0 and valid_neighbors / np.sum(neighbors_mask) > 0.5:
@@ -436,8 +175,8 @@ class GerrymanderSimulator:
                 for i, j in np.argwhere(hole_mask):
                     for ni, nj in [(i+1, j), (i-1, j), (i, j+1), (i, j-1)]:
                         if (0 <= ni < self.height and 0 <= nj < self.width and 
-                            valid_mask_np[ni, nj]):
-                            neighbor_districts.append(district_map_np[ni, nj])
+                            self.valid_mask[ni, nj]):
+                            neighbor_districts.append(self.district_map[ni, nj])
                 
                 # Find most common neighboring district
                 if neighbor_districts:
@@ -445,351 +184,274 @@ class GerrymanderSimulator:
                     most_common_district = Counter(neighbor_districts).most_common(1)[0][0]
                     
                     # Fill the hole with this district
-                    district_map_np[hole_mask] = most_common_district
-                    valid_mask_np[hole_mask] = True
+                    self.district_map[hole_mask] = most_common_district
+                    self.valid_mask[hole_mask] = True
         
-        # Update the instance variables with processed data
-        if self.use_gpu:
-            if self.using_dask:
-                self.district_map = da.from_array(district_map_np, 
-                                               chunks=(self.height // self.num_gpus, self.width))
-                self.valid_mask = da.from_array(valid_mask_np,
-                                             chunks=(self.height // self.num_gpus, self.width))
-            else:
-                self.district_map = cp.asarray(district_map_np)
-                self.valid_mask = cp.asarray(valid_mask_np)
-        else:
-            self.district_map = district_map_np
-            self.valid_mask = valid_mask_np
+    @staticmethod
+    def calc_perimeter_chunk(params):
+        """
+        Calculate perimeter for a chunk of pixels
+        
+        Parameters:
+        - params: A tuple containing (pixel_chunk, district_map, district_id, height, width)
+        
+        Returns:
+        - The local perimeter count
+        """
+        pixel_chunk, district_map, district_id, height, width = params
+        local_perimeter = 0
+        for i, j in pixel_chunk:
+            for ni, nj in [(i+1, j), (i-1, j), (i, j+1), (i, j-1)]:
+                if 0 <= ni < height and 0 <= nj < width:
+                    if district_map[ni, nj] != district_id:
+                        local_perimeter += 1
+        return local_perimeter
     
     def calculate_all_district_stats(self):
-        """Calculate all statistics for all districts with multi-GPU support"""
+        """Calculate all statistics for all districts"""
         # Reset stats
         for key in self.district_stats:
             self.district_stats[key] = np.zeros(self.num_districts)
+        
+        # Use numpy operations for faster calculation
+        district_ids = np.unique(self.district_map[self.valid_mask])
+        
+        for district_id in district_ids:
+            mask = (self.district_map == district_id)
             
-        if self.use_gpu:
-            for key in self.district_stats_gpu:
-                self.district_stats_gpu[key] = cp.zeros(self.num_districts)
+            # Count population and votes using vectorized operations
+            self.district_stats['population'][district_id] = np.sum(self.state_map[:,:,0] * mask)
+            self.district_stats['red_votes'][district_id] = np.sum(self.state_map[:,:,1] * mask)
+            self.district_stats['blue_votes'][district_id] = np.sum(self.state_map[:,:,2] * mask)
             
-            if self.num_gpus > 1 and self.using_dask:
-                # Multi-GPU approach using Dask
-                futures = []
+            # Calculate center of population
+            if self.district_stats['population'][district_id] > 0:
+                # Get indices where the mask is True
+                pop_indices = np.argwhere(mask & (self.state_map[:,:,0] > 0))
+                pop_weights = np.array([self.state_map[i, j, 0] for i, j in pop_indices])
                 
-                # Reset per-device stats
-                for d in range(self.num_gpus):
-                    for key in self.device_stats[d]:
-                        with cp.cuda.Device(d):
-                            self.device_stats[d][key] = cp.zeros(self.num_districts)
-                
-                # Submit calculation tasks to each GPU for its partition
-                for gpu_id, (start_row, end_row) in enumerate(self.partition_boundaries):
-                    futures.append(self.client.submit(
-                        self._calculate_partition_stats,
-                        gpu_id, start_row, end_row, self.num_districts,
-                        resources={'GPU': 1}
-                    ))
-                
-                # Gather results
-                device_stats_results = self.client.gather(futures)
-                
-                # Combine stats from all devices
-                for result in device_stats_results:
-                    for key in self.district_stats_gpu:
-                        self.district_stats_gpu[key] += result[key]
-                
-                # Copy results to CPU
-                for key in self.district_stats:
-                    self.district_stats[key] = cp.asnumpy(self.district_stats_gpu[key])
-                
-            elif self.num_gpus > 1:
-                # Multi-GPU without Dask (manual management)
-                # Reset per-device stats
-                for d in range(self.num_gpus):
-                    for key in self.device_stats[d]:
-                        with cp.cuda.Device(d):
-                            self.device_stats[d][key] = cp.zeros(self.num_districts)
-                
-                # Process each partition on its assigned GPU
-                for gpu_id, (start_row, end_row) in enumerate(self.partition_boundaries):
-                    with cp.cuda.Device(gpu_id):
-                        # Extract the partition for this GPU
-                        partition_map = self.district_map[start_row:end_row]
-                        partition_state = self.state_map_gpu[start_row:end_row]
-                        
-                        # Calculate stats for this partition
-                        district_ids = cp.unique(partition_map)
-                        
-                        for district_id in district_ids.get():
-                            mask = (partition_map == district_id)
-                            
-                            # Count population and votes using vectorized operations
-                            self.device_stats[gpu_id]['population'][district_id] += cp.sum(partition_state[:,:,0] * mask)
-                            self.device_stats[gpu_id]['red_votes'][district_id] += cp.sum(partition_state[:,:,1] * mask)
-                            self.device_stats[gpu_id]['blue_votes'][district_id] += cp.sum(partition_state[:,:,2] * mask)
-                            
-                            # Center calculations will be adjusted later
-                            pop_indices = cp.argwhere(mask & (partition_state[:,:,0] > 0))
-                            if len(pop_indices) > 0:
-                                pop_weights = cp.array([partition_state[i, j, 0] for i, j in pop_indices])
-                                # Adjust i coordinate by start_row for global position
-                                adjusted_indices = pop_indices.copy()
-                                adjusted_indices[:, 0] += start_row
-                                
-                                # Accumulate weighted coordinates
-                                self.device_stats[gpu_id]['center_y'][district_id] += cp.sum(adjusted_indices[:, 0] * pop_weights)
-                                self.device_stats[gpu_id]['center_x'][district_id] += cp.sum(adjusted_indices[:, 1] * pop_weights)
-                            
-                            # Area is the number of pixels in this district in this partition
-                            self.device_stats[gpu_id]['area'][district_id] = cp.sum(mask)
-                            
-                            # Calculate perimeter (simplified for now)
-                            self.device_stats[gpu_id]['perimeter'][district_id] = self._calculate_perimeter_gpu(district_id, gpu_id, start_row, end_row)
-                
-                # Combine stats from all devices
-                for key in self.district_stats_gpu:
-                    self.district_stats_gpu[key] = cp.zeros(self.num_districts)
-                    for d in range(self.num_gpus):
-                        with cp.cuda.Device(0):  # Use device 0 for final combination
-                            self.district_stats_gpu[key] += cp.asarray(self.device_stats[d][key].get())
-                
-                # Adjust center calculations
-                for district_id in range(self.num_districts):
-                    if self.district_stats_gpu['population'][district_id] > 0:
-                        self.district_stats_gpu['center_y'][district_id] /= self.district_stats_gpu['population'][district_id]
-                        self.district_stats_gpu['center_x'][district_id] /= self.district_stats_gpu['population'][district_id]
-                
-                # Copy to CPU
-                for key in self.district_stats:
-                    self.district_stats[key] = cp.asnumpy(self.district_stats_gpu[key])
-                
-            else:
-                # Single GPU implementation
-                # Use GPU operations for faster calculation
-                if self.using_dask:
-                    # For Dask arrays, compute to get concrete arrays
-                    district_map_cp = cp.asarray(self.district_map.compute())
-                    valid_mask_cp = cp.asarray(self.valid_mask.compute())
-                    state_map_cp = cp.asarray(self.state_map_gpu.compute())
-                else:
-                    district_map_cp = self.district_map
-                    valid_mask_cp = self.valid_mask
-                    state_map_cp = self.state_map_gpu
-                
-                district_ids = cp.unique(district_map_cp[valid_mask_cp])
-                
-                for district_id in district_ids.get():  # Iterate over NumPy array
-                    mask = (district_map_cp == district_id)
-                    
-                    # Count population and votes using vectorized operations
-                    self.district_stats_gpu['population'][district_id] = cp.sum(state_map_cp[:,:,0] * mask)
-                    self.district_stats_gpu['red_votes'][district_id] = cp.sum(state_map_cp[:,:,1] * mask)
-                    self.district_stats_gpu['blue_votes'][district_id] = cp.sum(state_map_cp[:,:,2] * mask)
-                    
-                    # Calculate center of population
-                    if self.district_stats_gpu['population'][district_id] > 0:
-                        # Get indices where the mask is True
-                        pop_indices = cp.argwhere(mask & (state_map_cp[:,:,0] > 0))
-                        if len(pop_indices) > 0:
-                            pop_weights = cp.array([state_map_cp[i, j, 0] for i, j in pop_indices])
-                            
-                            self.district_stats_gpu['center_y'][district_id] = cp.average(pop_indices[:, 0], weights=pop_weights)
-                            self.district_stats_gpu['center_x'][district_id] = cp.average(pop_indices[:, 1], weights=pop_weights)
-                    
-                    # For perimeter and area, bring data to CPU for calculation
-                    district_pixels = cp.argwhere(mask).get()
-                    self.district_stats_gpu['area'][district_id] = len(district_pixels)
-                    
-                    # Calculate perimeter efficiently using CUDA kernel
-                    perimeter = self._calculate_perimeter_gpu(district_id)
-                    self.district_stats_gpu['perimeter'][district_id] = perimeter
-                
-                # Copy data from GPU to CPU
-                for key in self.district_stats:
-                    self.district_stats[key] = cp.asnumpy(self.district_stats_gpu[key])
-        else:
-            # Use the original CPU implementation
-            district_ids = np.unique(self.district_map[self.valid_mask])
-            
-            for district_id in district_ids:
-                mask = (self.district_map == district_id)
-                
-                # Count population and votes using vectorized operations
-                self.district_stats['population'][district_id] = np.sum(self.state_map[:,:,0] * mask)
-                self.district_stats['red_votes'][district_id] = np.sum(self.state_map[:,:,1] * mask)
-                self.district_stats['blue_votes'][district_id] = np.sum(self.state_map[:,:,2] * mask)
-                
-                # Calculate center of population
-                if self.district_stats['population'][district_id] > 0:
-                    # Get indices where the mask is True
-                    pop_indices = np.argwhere(mask & (self.state_map[:,:,0] > 0))
-                    pop_weights = np.array([self.state_map[i, j, 0] for i, j in pop_indices])
-                                
                 if len(pop_indices) > 0:
                     self.district_stats['center_y'][district_id] = np.average(pop_indices[:, 0], weights=pop_weights)
                     self.district_stats['center_x'][district_id] = np.average(pop_indices[:, 1], weights=pop_weights)
-
-                # Calculate perimeter more efficiently
-                perimeter = 0
-                district_pixels = np.argwhere(mask)
-
-                # Use multiple processes to calculate perimeter if there are many pixels
-                if len(district_pixels) > 10000 and self.num_cpus > 1:
-                    chunk_size = max(1, len(district_pixels) // self.num_cpus)
-                    pixel_chunks = [district_pixels[i:i+chunk_size] for i in range(0, len(district_pixels), chunk_size)]
-                    
-                    # Create parameter tuples for the static method
-                    params = [(chunk, self.district_map, district_id, self.height, self.width) 
-                            for chunk in pixel_chunks]
-                    
-                    with concurrent.futures.ProcessPoolExecutor(max_workers=self.num_cpus) as executor:
-                        results = list(executor.map(GerrymanderSimulator.calc_perimeter_chunk, params))
-                    
-                    perimeter = sum(results)
-                else:
-                    # Call the static method directly with a single chunk
-                    params = (district_pixels, self.district_map, district_id, self.height, self.width)
-                    perimeter = GerrymanderSimulator.calc_perimeter_chunk(params)
-
-                self.district_stats['perimeter'][district_id] = perimeter
-                self.district_stats['area'][district_id] = np.sum(mask)
-
-    def _will_break_district_partition(self, partition_map, local_i, j, district_id):
-        """Check if removing a pixel would break district connectivity in this partition"""
-        # Convert to CPU for numba
-        partition_map_np = cp.asnumpy(partition_map)
-        
-        @jit(nopython=True)
-        def check_connectivity(map_data, i, j, district, height, width):
-            # Get neighbors of the same district
-            neighbors = []
-            for ni, nj in [(i+1, j), (i-1, j), (i, j+1), (i, j-1)]:
-                if 0 <= ni < height and 0 <= nj < width and map_data[ni, nj] == district:
-                    neighbors.append((ni, nj))
             
-            # If 0 or 1 neighbors, removing won't disconnect anything
-            if len(neighbors) <= 1:
-                return False
+            # Calculate perimeter more efficiently
+            perimeter = 0
+            district_pixels = np.argwhere(mask)
             
-            # Pick first neighbor and try to reach others
-            if len(neighbors) > 1:
-                start = neighbors[0]
+            # Use multiple processes to calculate perimeter if there are many pixels
+            if len(district_pixels) > 10000 and self.num_cpus > 1:
+                chunk_size = max(1, len(district_pixels) // self.num_cpus)
+                pixel_chunks = [district_pixels[i:i+chunk_size] for i in range(0, len(district_pixels), chunk_size)]
                 
-                # Use BFS to check connectivity
-                visited = np.zeros((height, width), dtype=np.bool_)
-                queue = [start]
-                visited[start[0], start[1]] = True
+                # Create parameter tuples for the static method
+                params = [(chunk, self.district_map, district_id, self.height, self.width) 
+                          for chunk in pixel_chunks]
                 
-                while queue:
-                    current = queue.pop(0)
-                    # Check neighbors
-                    for ni, nj in [(current[0]+1, current[1]), (current[0]-1, current[1]), 
-                                   (current[0], current[1]+1), (current[0], current[1]-1)]:
-                        if 0 <= ni < height and 0 <= nj < width and not visited[ni, nj] and map_data[ni, nj] == district:
-                            if ni == i and nj == j:
-                                continue  # Skip the pixel we're removing
-                            visited[ni, nj] = True
-                            queue.append((ni, nj))
+                with concurrent.futures.ProcessPoolExecutor(max_workers=self.num_cpus) as executor:
+                    results = list(executor.map(GerrymanderSimulator.calc_perimeter_chunk, params))
                 
-                # Check if all neighbors were reached
-                for neighbor in neighbors[1:]:
-                    if not visited[neighbor[0], neighbor[1]]:
-                        return True  # District would be broken
+                perimeter = sum(results)
+            else:
+                # Call the static method directly with a single chunk
+                params = (district_pixels, self.district_map, district_id, self.height, self.width)
+                perimeter = GerrymanderSimulator.calc_perimeter_chunk(params)
             
-            return False
-        
-        # Use Numba function
-        height, width = partition_map_np.shape
-        return check_connectivity(partition_map_np, local_i, j, district_id, height, width)
+            self.district_stats['perimeter'][district_id] = perimeter
+            self.district_stats['area'][district_id] = np.sum(mask)
     
-    def _update_stats_partition(self, partition_stats, partition_state, local_i, j, old_district, new_district, start_row):
-        """Update district stats when a pixel changes district in a partition"""
-        # Global i coordinate
-        i = local_i + start_row
-        
+    def update_district_stats(self, pixel_i, pixel_j, old_district, new_district):
+        """Update district stats when a pixel changes from old_district to new_district"""
         # Get the data for the pixel
-        pixel_pop = float(partition_state[local_i, j, 0])
-        pixel_red = float(partition_state[local_i, j, 1])
-        pixel_blue = float(partition_state[local_i, j, 2])
+        pixel_pop = self.state_map[pixel_i, pixel_j, 0]
+        pixel_red = self.state_map[pixel_i, pixel_j, 1]
+        pixel_blue = self.state_map[pixel_i, pixel_j, 2]
         
         # Update population and votes
-        partition_stats['population'][old_district] -= pixel_pop
-        partition_stats['population'][new_district] += pixel_pop
+        self.district_stats['population'][old_district] -= pixel_pop
+        self.district_stats['population'][new_district] += pixel_pop
         
-        partition_stats['red_votes'][old_district] -= pixel_red
-        partition_stats['red_votes'][new_district] += pixel_red
+        self.district_stats['red_votes'][old_district] -= pixel_red
+        self.district_stats['red_votes'][new_district] += pixel_red
         
-        partition_stats['blue_votes'][old_district] -= pixel_blue
-        partition_stats['blue_votes'][new_district] += pixel_blue
+        self.district_stats['blue_votes'][old_district] -= pixel_blue
+        self.district_stats['blue_votes'][new_district] += pixel_blue
         
         # Update centers using the formula for adding/removing from weighted average
-        if partition_stats['population'][old_district] > 0:
-            old_total_pop = partition_stats['population'][old_district] + pixel_pop
-            old_center_x = partition_stats['center_x'][old_district]
-            old_center_y = partition_stats['center_y'][old_district]
+        if self.district_stats['population'][old_district] > 0:
+            old_total_pop = self.district_stats['population'][old_district] + pixel_pop
+            old_center_x = self.district_stats['center_x'][old_district]
+            old_center_y = self.district_stats['center_y'][old_district]
             
             # Remove the pixel from old district center calculation
-            # We use global i coordinate for center calculation
-            partition_stats['center_x'][old_district] = (old_center_x * old_total_pop - j * pixel_pop) / partition_stats['population'][old_district]
-            partition_stats['center_y'][old_district] = (old_center_y * old_total_pop - i * pixel_pop) / partition_stats['population'][old_district]
+            self.district_stats['center_x'][old_district] = (old_center_x * old_total_pop - pixel_j * pixel_pop) / self.district_stats['population'][old_district]
+            self.district_stats['center_y'][old_district] = (old_center_y * old_total_pop - pixel_i * pixel_pop) / self.district_stats['population'][old_district]
         
         # Add to new district center calculation
-        new_total_pop = partition_stats['population'][new_district]
+        new_total_pop = self.district_stats['population'][new_district]
         if new_total_pop > 0:
             old_new_pop = new_total_pop - pixel_pop
             if old_new_pop > 0:
-                old_center_x = partition_stats['center_x'][new_district]
-                old_center_y = partition_stats['center_y'][new_district]
+                old_center_x = self.district_stats['center_x'][new_district]
+                old_center_y = self.district_stats['center_y'][new_district]
                 
-                partition_stats['center_x'][new_district] = (old_center_x * old_new_pop + j * pixel_pop) / new_total_pop
-                partition_stats['center_y'][new_district] = (old_center_y * old_new_pop + i * pixel_pop) / new_total_pop
+                self.district_stats['center_x'][new_district] = (old_center_x * old_new_pop + pixel_j * pixel_pop) / new_total_pop
+                self.district_stats['center_y'][new_district] = (old_center_y * old_new_pop + pixel_i * pixel_pop) / new_total_pop
             else:
-                partition_stats['center_x'][new_district] = j
-                partition_stats['center_y'][new_district] = i
+                self.district_stats['center_x'][new_district] = pixel_j
+                self.district_stats['center_y'][new_district] = pixel_i
         
         # Update area
-        partition_stats['area'][old_district] -= 1
-        partition_stats['area'][new_district] += 1
+        self.district_stats['area'][old_district] -= 1
+        self.district_stats['area'][new_district] += 1
         
-        # Simplified perimeter update for multi-GPU
-        # This is approximate but fast for partition-based processing
-        perimeter_old = 0
-        perimeter_new = 0
-        
-        # Check neighborhood
-        for ni, nj in [(local_i+1, j), (local_i-1, j), (local_i, j+1), (local_i, j-1)]:
-            if 0 <= ni < partition_state.shape[0] and 0 <= nj < partition_state.shape[1]:
-                neighbor_district = int(partition_state[ni, nj, 0].item())
-                if neighbor_district == old_district:
-                    perimeter_old += 1
-                elif neighbor_district == new_district:
-                    perimeter_new -= 1
-        
-        partition_stats['perimeter'][old_district] += perimeter_old
-        partition_stats['perimeter'][new_district] += perimeter_new
+        # Update perimeter (more accurate approach)
+        self._update_perimeter(pixel_i, pixel_j, old_district, new_district)
     
-    def _score_partition(self, partition_map, partition_stats, partition_state):
-        """Score a partition based on our metrics"""
+    def _update_perimeter(self, pixel_i, pixel_j, old_district, new_district):
+        """Update perimeter stats when a pixel changes district"""
+        # Get the neighbors of this pixel
+        neighbors = self.neighbor_map.get((pixel_i, pixel_j), [])
+        
+        # Count perimeter changes for old district
+        old_perimeter_change = 0
+        for ni, nj in neighbors:
+            if self.district_map[ni, nj] == old_district:
+                # This was not a perimeter before, but now is
+                old_perimeter_change += 1
+            elif self.district_map[ni, nj] != new_district:
+                # This was a perimeter before, but now isn't
+                old_perimeter_change -= 1
+        
+        # Count perimeter changes for new district
+        new_perimeter_change = 0
+        for ni, nj in neighbors:
+            if self.district_map[ni, nj] == new_district:
+                # This was a perimeter before, but now isn't
+                new_perimeter_change -= 1
+            elif self.district_map[ni, nj] != old_district:
+                # This was not a perimeter before, but now is
+                new_perimeter_change += 1
+        
+        # Update perimeter stats
+        self.district_stats['perimeter'][old_district] += old_perimeter_change
+        self.district_stats['perimeter'][new_district] += new_perimeter_change
+    
+    @staticmethod
+    @jit(nopython=True)
+    def _will_break_district_numba(district_map, pixel_i, pixel_j, district_id, height, width):
+        """Numba-optimized implementation of district connectivity check"""
+        # Get neighbors of the same district
+        neighbors = []
+        for ni, nj in [(pixel_i+1, pixel_j), (pixel_i-1, pixel_j), (pixel_i, pixel_j+1), (pixel_i, pixel_j-1)]:
+            if 0 <= ni < height and 0 <= nj < width and district_map[ni, nj] == district_id:
+                neighbors.append((ni, nj))
+        
+        # If 0 or 1 neighbors, removing won't disconnect anything
+        if len(neighbors) <= 1:
+            return False
+        
+        # Pick first neighbor and try to reach others
+        if len(neighbors) > 1:
+            start = neighbors[0]
+            
+            # Use BFS to check connectivity
+            visited = np.zeros((height, width), dtype=np.bool_)
+            queue = [start]
+            visited[start[0], start[1]] = True
+            
+            while queue:
+                current = queue.pop(0)
+                # Check neighbors
+                for ni, nj in [(current[0]+1, current[1]), (current[0]-1, current[1]), 
+                               (current[0], current[1]+1), (current[0], current[1]-1)]:
+                    if 0 <= ni < height and 0 <= nj < width and not visited[ni, nj] and district_map[ni, nj] == district_id:
+                        if ni == pixel_i and nj == pixel_j:
+                            continue  # Skip the pixel we're removing
+                        visited[ni, nj] = True
+                        queue.append((ni, nj))
+            
+            # Check if all neighbors were reached
+            for neighbor in neighbors[1:]:
+                if not visited[neighbor[0], neighbor[1]]:
+                    return True  # District would be broken
+        
+        return False
+    
+    def will_break_district(self, pixel_i, pixel_j, district_id):
+        """Check if removing this pixel would break the district into disconnected parts"""
+        return self._will_break_district_numba(self.district_map, pixel_i, pixel_j, district_id, 
+                                               self.height, self.width)
+    
+    def get_boundary_pixels(self):
+        """Get all pixels that are on the boundary between districts"""
+        # Use vectorized operations to find pixels with different neighbors
+        boundary_pixels = []
+        
+        # This is a hotspot for performance optimization
+        # Pre-allocate arrays for the four neighbor directions
+        up_shifted = np.pad(self.district_map[:-1, :], ((1, 0), (0, 0)), mode='constant', constant_values=-1)
+        down_shifted = np.pad(self.district_map[1:, :], ((0, 1), (0, 0)), mode='constant', constant_values=-1)
+        left_shifted = np.pad(self.district_map[:, :-1], ((0, 0), (1, 0)), mode='constant', constant_values=-1)
+        right_shifted = np.pad(self.district_map[:, 1:], ((0, 0), (0, 1)), mode='constant', constant_values=-1)
+        
+        # A pixel is on a boundary if any of its neighbors are in a different district
+        is_boundary = ((up_shifted != self.district_map) | 
+                      (down_shifted != self.district_map) | 
+                      (left_shifted != self.district_map) | 
+                      (right_shifted != self.district_map)) & self.valid_mask
+        
+        # Get coordinates of boundary pixels
+        boundary_pixels = np.argwhere(is_boundary)
+        
+        return boundary_pixels
+    
+    def score_map(self):
+        """Score the current map based on our metrics"""
         score = 0
         
-        # Population equality score
-        pop_std = cp.std(partition_stats['population'])
-        pop_mean = cp.mean(partition_stats['population'])
-        if pop_mean > 0:
-            pop_score = (pop_std / pop_mean) ** 4
-            score += self.weights['population_equality'] * pop_score
-        
-        # Compactness score
-        compactness_scores = partition_stats['perimeter'] / cp.sqrt(partition_stats['area'])
-        compactness_score = cp.mean(compactness_scores)
+        # Population equality score - use numpy for vectorized operations
+        pop_std = np.std(self.district_stats['population'])
+        pop_mean = np.mean(self.district_stats['population'])
+        pop_score = (pop_std / pop_mean) ** 4  
+        score += self.weights['population_equality'] * pop_score
+        epsilon = 1e-10  # Small number to prevent division by zero
+        # Compactness score (perimeter to area ratio)
+        compactness_scores = self.district_stats['perimeter'] / np.sqrt(self.district_stats['area'] +epsilon )
+        compactness_score = np.mean(compactness_scores)
         score += self.weights['compactness'] * compactness_score
         
-        # Election results score (simplified for partition)
+        # Center distance score
+        if self.weights['center_distance'] > 0:
+            center_dist_score = 0
+            for district_id in range(self.num_districts):
+                # Use vectorized operations where possible
+                mask = (self.district_map == district_id)
+                if np.sum(mask) == 0:
+                    continue
+                    
+                center_x = self.district_stats['center_x'][district_id]
+                center_y = self.district_stats['center_y'][district_id]
+                
+                # Create meshgrid for vectorized distance calculation
+                y_indices, x_indices = np.mgrid[0:self.height, 0:self.width]
+                dist_grid = np.sqrt((y_indices - center_y)**2 + (x_indices - center_x)**2)
+                
+                # Apply mask and weights
+                weighted_dist = dist_grid * self.state_map[:,:,0] * mask
+                total_pop = np.sum(self.state_map[:,:,0] * mask)
+                
+                if total_pop > 0:
+                    center_dist_score += np.sum(weighted_dist) / total_pop
+            
+            center_dist_score /= self.num_districts
+            score += self.weights['center_distance'] * center_dist_score
+        
+        # Election results score
         if self.weights['election_results'] > 0 and self.target_vote_margins is not None:
             vote_margins = []
             for district_id in range(self.num_districts):
-                red = float(partition_stats['red_votes'][district_id])
-                blue = float(partition_stats['blue_votes'][district_id])
+                red = self.district_stats['red_votes'][district_id]
+                blue = self.district_stats['blue_votes'][district_id]
                 total = red + blue
                 
                 if total > 0:
@@ -804,68 +466,11 @@ class GerrymanderSimulator:
             target_margins = np.array(self.target_vote_margins)
             
             # Calculate mean squared error between actual and target
-            margins_error = cp.mean((cp.array(vote_margins) - cp.array(target_margins)) ** 2)
+            margins_error = np.mean((np.array(vote_margins) - target_margins) ** 2)
             score += self.weights['election_results'] * margins_error
         
         return score
-
-    def update_phase(self, iteration, max_iterations):
-        """Update the phase and adjust weights accordingly with improved phase transitions"""
-        # Define phase transition points
-        phase1_end = int(0.25 * max_iterations)  # 25% - Focus on population equality
-        phase2_end = int(0.40 * max_iterations)  # 40% - Focus on vote distribution
-        phase3_end = int(0.75 * max_iterations)  # 75% - Focus on compactness
-        # Phase 4 - Final refinement (remaining 25%)
-        
-        # Determine current phase based on iteration
-        if iteration == 0:
-            # Phase 1: Focus almost exclusively on population equality
-            self.phase = 1
-            self.weights = {
-                'population_equality': 3,  # Very high weight for population equality
-                'compactness': 0,          # Low weight for compactness
-                'center_distance': 0.5,    # Ignore center distance
-                'election_results': 0      # Ignore election results initially
-            }
-            self.temperature = 1.0         # Start with max temperature to accept almost any change
-            print(f"Iteration {iteration}: Phase 1 - Equalizing population")
-            
-        elif iteration == phase1_end:
-            # Phase 2: Begin focusing on election results/vote distribution
-            self.phase = 2
-            self.weights = {
-                'population_equality': 1,  # Still high but reduced
-                'compactness': 2,          # Still low
-                'center_distance': 2,      # Still ignored
-                'election_results': 5      # Start optimizing for vote distribution
-            }
-            self.temperature = 0.7        # Still accepting many worse solutions
-            print(f"Iteration {iteration}: Phase 2 - Optimizing vote distribution")
-        
-        elif iteration == phase2_end:
-            # Phase 3: Focus on compactness while maintaining population equality and vote distribution
-            self.phase = 3
-            self.weights = {
-                'population_equality': 1,  # Reduced but still important
-                'compactness': 3,          # Increased focus on shape
-                'center_distance': 3,      # Some focus on center distance
-                'election_results': 2      # Decreased but still important
-            }
-            self.temperature = 0.3        # Less willing to accept worse solutions
-            print(f"Iteration {iteration}: Phase 3 - Improving district compactness")
-        
-        elif iteration == phase3_end:
-            # Phase 4: Final refinement
-            self.phase = 4
-            self.weights = {
-                'population_equality': 1,  # Still important
-                'compactness': 1,          # Very high focus on compactness
-                'center_distance': 1,      # Higher focus on center distance
-                'election_results': 2      # Still maintained but reduced
-            }
-            self.temperature = 0.1        # Only accept small increases in score
-            print(f"Iteration {iteration}: Phase 4 - Final refinement")
-
+    
     def set_target_vote_distribution(self, distribution_type, red_proportion=None):
         """
         Set the target vote distribution
@@ -876,13 +481,8 @@ class GerrymanderSimulator:
         """
         if red_proportion is None:
             # Calculate from the current map
-            if self.use_gpu:
-                total_red = float(cp.sum(self.state_map_gpu[:,:,1]))
-                total_blue = float(cp.sum(self.state_map_gpu[:,:,2]))
-            else:
-                total_red = np.sum(self.state_map[:,:,1])
-                total_blue = np.sum(self.state_map[:,:,2])
-                
+            total_red = np.sum(self.state_map[:,:,1])
+            total_blue = np.sum(self.state_map[:,:,2])
             red_proportion = total_red / (total_red + total_blue)
         
         margins = []
@@ -924,28 +524,801 @@ class GerrymanderSimulator:
                     margins.append(0.35)  # Safe blue
         
         self.target_vote_margins = sorted(margins)
+    
+    def run_batch_parallel(self, batch_size=1000, num_batches=10):
+        """Run multiple batches in parallel using multiprocessing"""
+        # Use all available cores with a small reserve
+        if self.num_cpus is None or self.num_cpus <= 0:
+            self.num_cpus = max(1, os.cpu_count() - 4)  # Reserve 4 cores for system
 
+        # Initialize the pool if it doesn't exist
+        if self.pool is None and self.num_cpus > 1:
+            self.pool = mp.Pool(processes=self.num_cpus)
+            print(f"Created process pool with {self.num_cpus} workers")
+        
+        if self.pool:
+            # Prepare arguments for each worker - don't pass self, pass necessary data
+            district_maps = []
+            for _ in range(self.num_cpus):
+                district_maps.append(self.district_map.copy())
+            
+            # Create sub-batch sizes to distribute work evenly
+            sub_batch_size = max(10, batch_size // self.num_cpus)
+            
+            # Create a copy of necessary data
+            state_map_copy = self.state_map.copy()
+            neighbor_map_copy = {}
+            for key, value in self.neighbor_map.items():
+                neighbor_map_copy[key] = value.copy()
+                
+            valid_mask_copy = self.valid_mask.copy()
+            weights_copy = self.weights.copy()
+            target_margins_copy = None if self.target_vote_margins is None else self.target_vote_margins.copy()
+            
+            # Prepare serializable arguments for each worker
+            args_list = []
+            for worker_id in range(self.num_cpus):
+                worker_batch_size = sub_batch_size
+                if worker_id == self.num_cpus - 1:
+                    worker_batch_size = batch_size - (self.num_cpus - 1) * sub_batch_size
+                    
+                if worker_batch_size <= 0:
+                    continue
+                    
+                # Pass all necessary data explicitly, not 'self'
+                args_list.append((
+                    district_maps[worker_id],
+                    worker_batch_size,
+                    self.temperature,
+                    worker_id,
+                    state_map_copy,
+                    neighbor_map_copy,
+                    valid_mask_copy,
+                    {k: v.copy() for k, v in self.district_stats.items()}, # Deep copy of stats
+                    weights_copy,
+                    target_margins_copy,
+                    self.height,
+                    self.width,
+                    self.num_districts
+                ))
+            
+            # Use a static method for processing to avoid passing self
+            results = self.pool.map(GerrymanderSimulator._static_process_batch, args_list)
+            
+            # Find the best result
+            best_score = self.score_map()  # Current score
+            best_map = None
+            best_stats = None
+            total_accepted = 0
+            
+            for district_map, stats, accepted, score, worker_id in results:
+                total_accepted += accepted
+                if score < best_score:
+                    best_score = score
+                    best_map = district_map
+                    best_stats = stats
+            
+            # Update the map if we found a better one
+            if best_map is not None:
+                self.district_map = best_map
+                self.district_stats = best_stats
+            
+            return total_accepted
+        else:
+            # Fall back to single-threaded processing
+            return self._process_batch(batch_size)
+
+    @staticmethod
+    def _static_process_batch(args):
+        """Static worker function for parallel processing that can be pickled"""
+        (district_map, batch_size, temperature, worker_id, 
+        state_map, neighbor_map, valid_mask, district_stats, 
+        weights, target_margins, height, width, num_districts) = args
+        
+        # Make a local copy
+        local_district_map = district_map.copy()
+        local_district_stats = {k: v.copy() for k, v in district_stats.items()}
+        accepted_count = 0
+        
+        # Process each iteration
+        for _ in range(batch_size):
+            # Get boundary pixels
+            boundary_pixels = GerrymanderSimulator._static_get_boundary_pixels(
+                local_district_map, valid_mask, height, width)
+            
+            if len(boundary_pixels) == 0:
+                continue
+            
+            # Randomly select a boundary pixel
+            idx = np.random.randint(0, len(boundary_pixels))
+            pixel_i, pixel_j = boundary_pixels[idx]
+            old_district = local_district_map[pixel_i, pixel_j]
+            
+            # Find a neighboring district
+            neighboring_districts = set()
+            for ni, nj in neighbor_map.get((pixel_i, pixel_j), []):
+                neighboring_districts.add(local_district_map[ni, nj])
+            
+            neighboring_districts.discard(old_district)
+            
+            if not neighboring_districts:
+                continue
+                
+            new_district = random.choice(list(neighboring_districts))
+            
+            # Check if this would break the district
+            if GerrymanderSimulator._static_will_break_district(
+                    local_district_map, pixel_i, pixel_j, old_district, height, width):
+                continue
+            
+            # Score the current map
+            current_score = GerrymanderSimulator._static_score_map(
+                local_district_stats, weights, target_margins, height, width, num_districts)
+            
+            # Make the change and score again
+            local_district_map[pixel_i, pixel_j] = new_district
+            GerrymanderSimulator._static_update_stats(
+                local_district_stats, pixel_i, pixel_j, old_district, new_district, 
+                state_map, neighbor_map, height, width)
+            
+            new_score = GerrymanderSimulator._static_score_map(
+                local_district_stats, weights, target_margins, height, width, num_districts)
+            
+            # Decide whether to accept the change
+            if new_score <= current_score:
+                # Accept the change (it improved the score)
+                accepted_count += 1
+            else:
+                # Decide probabilistically whether to accept a worse score
+                accept_probability = np.exp(-(new_score - current_score) / temperature)
+                
+                if random.random() < accept_probability:
+                    # Accept the change despite being worse
+                    accepted_count += 1
+                else:
+                    # Revert the change
+                    local_district_map[pixel_i, pixel_j] = old_district
+                    GerrymanderSimulator._static_update_stats(
+                        local_district_stats, pixel_i, pixel_j, new_district, old_district, 
+                        state_map, neighbor_map, height, width)
+        
+        # Calculate final score
+        final_score = GerrymanderSimulator._static_score_map(
+            local_district_stats, weights, target_margins, height, width, num_districts)
+        
+        return local_district_map, local_district_stats, accepted_count, final_score, worker_id
+
+    @staticmethod
+    def _static_get_boundary_pixels(district_map, valid_mask, height, width):
+        """Static method to get boundary pixels for a specific district map"""
+        # Pre-allocate arrays for the four neighbor directions
+        up_shifted = np.pad(district_map[:-1, :], ((1, 0), (0, 0)), mode='constant', constant_values=-1)
+        down_shifted = np.pad(district_map[1:, :], ((0, 1), (0, 0)), mode='constant', constant_values=-1)
+        left_shifted = np.pad(district_map[:, :-1], ((0, 0), (1, 0)), mode='constant', constant_values=-1)
+        right_shifted = np.pad(district_map[:, 1:], ((0, 0), (0, 1)), mode='constant', constant_values=-1)
+        
+        # A pixel is on a boundary if any of its neighbors are in a different district
+        is_boundary = ((up_shifted != district_map) | 
+                    (down_shifted != district_map) | 
+                    (left_shifted != district_map) | 
+                    (right_shifted != district_map)) & valid_mask
+        
+        # Get coordinates of boundary pixels
+        boundary_pixels = np.argwhere(is_boundary)
+        
+        return boundary_pixels
+
+    @staticmethod
+    def _static_will_break_district(district_map, pixel_i, pixel_j, district_id, height, width):
+        """Static method to check if removing this pixel would break the district"""
+        # Get neighbors of the same district
+        neighbors = []
+        for ni, nj in [(pixel_i+1, pixel_j), (pixel_i-1, pixel_j), (pixel_i, pixel_j+1), (pixel_i, pixel_j-1)]:
+            if 0 <= ni < height and 0 <= nj < width and district_map[ni, nj] == district_id:
+                neighbors.append((ni, nj))
+        
+        # If 0 or 1 neighbors, removing won't disconnect anything
+        if len(neighbors) <= 1:
+            return False
+        
+        # Pick first neighbor and try to reach others
+        if len(neighbors) > 1:
+            start = neighbors[0]
+            
+            # Use BFS to check connectivity
+            visited = np.zeros((height, width), dtype=np.bool_)
+            queue = [start]
+            visited[start[0], start[1]] = True
+            
+            while queue:
+                current = queue.pop(0)
+                # Check neighbors
+                for ni, nj in [(current[0]+1, current[1]), (current[0]-1, current[1]), 
+                            (current[0], current[1]+1), (current[0], current[1]-1)]:
+                    if 0 <= ni < height and 0 <= nj < width and not visited[ni, nj] and district_map[ni, nj] == district_id:
+                        if ni == pixel_i and nj == pixel_j:
+                            continue  # Skip the pixel we're removing
+                        visited[ni, nj] = True
+                        queue.append((ni, nj))
+            
+            # Check if all neighbors were reached
+            for neighbor in neighbors[1:]:
+                if not visited[neighbor[0], neighbor[1]]:
+                    return True  # District would be broken
+        
+        return False
+
+    @staticmethod
+    def _static_score_map(district_stats, weights, target_margins, height, width, num_districts):
+        """Static method to score the map based on district stats"""
+        score = 0
+        
+        # Population equality score
+        pop_std = np.std(district_stats['population'])
+        pop_mean = np.mean(district_stats['population'])
+        if pop_mean > 0:
+            pop_score = (pop_std / pop_mean) ** 4
+            score += weights['population_equality'] * pop_score
+        epsilon = 1e-10
+        # Compactness score
+        compactness_scores = district_stats['perimeter'] / np.sqrt(district_stats['area']+ epsilon) 
+        compactness_score = np.mean(compactness_scores)
+        score += weights['compactness'] * compactness_score
+        
+        # Center distance score (simplified for static version)
+        if weights['center_distance'] > 0:
+            center_dist_score = np.mean(
+                np.sqrt((district_stats['center_x'] - width/2)**2 + 
+                        (district_stats['center_y'] - height/2)**2)
+            )
+            score += weights['center_distance'] * center_dist_score * 0.01
+        
+        # Election results score
+        if weights['election_results'] > 0 and target_margins is not None:
+            vote_margins = []
+            for district_id in range(num_districts):
+                red = district_stats['red_votes'][district_id]
+                blue = district_stats['blue_votes'][district_id]
+                total = red + blue
+                
+                if total > 0:
+                    margin = red / total
+                else:
+                    margin = 0.5
+                
+                vote_margins.append(margin)
+            
+            # Sort margins and compare to target
+            vote_margins.sort()
+            target_margins_array = np.array(target_margins)
+            
+            # Calculate mean squared error between actual and target
+            margins_error = np.mean((np.array(vote_margins) - target_margins_array) ** 2)
+            score += weights['election_results'] * margins_error
+        
+        return score
+
+    @staticmethod
+    def _static_update_stats(district_stats, pixel_i, pixel_j, old_district, new_district, 
+                            state_map, neighbor_map, height, width):
+        """Static method to update district stats when a pixel changes district"""
+        # Get the data for the pixel
+        pixel_pop = state_map[pixel_i, pixel_j, 0]
+        pixel_red = state_map[pixel_i, pixel_j, 1]
+        pixel_blue = state_map[pixel_i, pixel_j, 2]
+        
+        # Update population and votes
+        district_stats['population'][old_district] -= pixel_pop
+        district_stats['population'][new_district] += pixel_pop
+        
+        district_stats['red_votes'][old_district] -= pixel_red
+        district_stats['red_votes'][new_district] += pixel_red
+        
+        district_stats['blue_votes'][old_district] -= pixel_blue
+        district_stats['blue_votes'][new_district] += pixel_blue
+        
+        # Update centers
+        if district_stats['population'][old_district] > 0:
+            old_total_pop = district_stats['population'][old_district] + pixel_pop
+            old_center_x = district_stats['center_x'][old_district]
+            old_center_y = district_stats['center_y'][old_district]
+            
+            district_stats['center_x'][old_district] = (old_center_x * old_total_pop - pixel_j * pixel_pop) / district_stats['population'][old_district]
+            district_stats['center_y'][old_district] = (old_center_y * old_total_pop - pixel_i * pixel_pop) / district_stats['population'][old_district]
+        
+        # Add to new district center calculation
+        new_total_pop = district_stats['population'][new_district]
+        if new_total_pop > 0:
+            old_new_pop = new_total_pop - pixel_pop
+            if old_new_pop > 0:
+                old_center_x = district_stats['center_x'][new_district]
+                old_center_y = district_stats['center_y'][new_district]
+                
+                district_stats['center_x'][new_district] = (old_center_x * old_new_pop + pixel_j * pixel_pop) / new_total_pop
+                district_stats['center_y'][new_district] = (old_center_y * old_new_pop + pixel_i * pixel_pop) / new_total_pop
+            else:
+                district_stats['center_x'][new_district] = pixel_j
+                district_stats['center_y'][new_district] = pixel_i
+        
+        # Update area
+        district_stats['area'][old_district] -= 1
+        district_stats['area'][new_district] += 1
+        
+        # Simplified perimeter update for parallel processing
+        # This is less accurate but faster for parallel runs
+        neighbors = neighbor_map.get((pixel_i, pixel_j), [])
+        old_perimeter_change = len(neighbors)
+        new_perimeter_change = len(neighbors)
+        
+        district_stats['perimeter'][old_district] += old_perimeter_change
+        district_stats['perimeter'][new_district] += new_perimeter_change
+    
+    def run_iteration(self):
+        """Run a single iteration with improved acceptance criteria and aggressive population balancing"""
+        # Get all boundary pixels
+        boundary_pixels = self.get_boundary_pixels()
+        
+        if len(boundary_pixels) == 0:
+            return False
+        
+        # Calculate mean population per district for targeting
+        mean_population = np.mean(self.district_stats['population'])
+        
+        # Identify districts with population imbalance
+        overpopulated_districts = np.where(self.district_stats['population'] > mean_population * 1.1)[0]
+        underpopulated_districts = np.where(self.district_stats['population'] < mean_population * 0.9)[0]
+        
+        # Phase 1 logic: Population balancing 
+        if self.phase == 1 and (len(overpopulated_districts) > 0 or len(underpopulated_districts) > 0):
+            # In phase 1, direct population balancing by focusing on boundary pixels between
+            # over and under populated districts
+            targeted_boundary_pixels = []
+            
+            for pixel_i, pixel_j in boundary_pixels:
+                old_district = self.district_map[pixel_i, pixel_j]
+                
+                # Check neighboring districts
+                for ni, nj in self.neighbor_map.get((pixel_i, pixel_j), []):
+                    new_district = self.district_map[ni, nj]
+                    
+                    # If this pixel is in an overpopulated district and neighbor is in underpopulated
+                    if (old_district in overpopulated_districts and 
+                        new_district in underpopulated_districts):
+                        targeted_boundary_pixels.append((pixel_i, pixel_j, new_district))
+                        break
+            
+            # If we found targeted pixels, use one of them
+            if targeted_boundary_pixels:
+                # Choose a random targeted pixel
+                pixel_i, pixel_j, new_district = random.choice(targeted_boundary_pixels)
+                old_district = self.district_map[pixel_i, pixel_j]
+                
+                # Check if this would break the district
+                if not self.will_break_district(pixel_i, pixel_j, old_district):
+                    # Make the change regardless of score in phase 1 (aggressive population balancing)
+                    self.district_map[pixel_i, pixel_j] = new_district
+                    self.update_district_stats(pixel_i, pixel_j, old_district, new_district)
+                    return True
+        
+        # Standard approach for other phases or if targeted approach didn't work
+        # Randomly select a boundary pixel
+        idx = np.random.randint(0, len(boundary_pixels))
+        pixel_i, pixel_j = boundary_pixels[idx]
+        old_district = self.district_map[pixel_i, pixel_j]
+        
+        # Find a neighboring district
+        neighboring_districts = set()
+        for ni, nj in self.neighbor_map.get((pixel_i, pixel_j), []):
+            neighboring_districts.add(self.district_map[ni, nj])
+        
+        neighboring_districts.discard(old_district)
+        
+        if not neighboring_districts:
+            return False
+        
+        # In phase 1 and 2, prioritize moves that balance population
+        if self.phase <= 1 and overpopulated_districts.size > 0 and underpopulated_districts.size > 0:
+            preferred_districts = []
+            
+            # If we're in overpopulated district, prefer moving to underpopulated
+            if old_district in overpopulated_districts:
+                preferred_districts = [d for d in neighboring_districts if d in underpopulated_districts]
+            
+            # If we're in underpopulated, don't move to overpopulated
+            elif old_district in underpopulated_districts:
+                preferred_districts = [d for d in neighboring_districts if d not in overpopulated_districts]
+            
+            # Use preferred districts if available
+            if preferred_districts:
+                new_district = random.choice(preferred_districts)
+            else:
+                new_district = random.choice(list(neighboring_districts))
+        else:
+            new_district = random.choice(list(neighboring_districts))
+        
+        # Check if this would break the district
+        if self.will_break_district(pixel_i, pixel_j, old_district):
+            return False
+        
+        # Score the current map
+        current_score = self.score_map()
+        
+        # Make the change and score again
+        self.district_map[pixel_i, pixel_j] = new_district
+        self.update_district_stats(pixel_i, pixel_j, old_district, new_district)
+        new_score = self.score_map()
+        
+        # Decide whether to accept the change
+        if new_score <= current_score:
+            # Always accept improvements
+            return True
+        else:
+            # For population balancing in phase 1, be more lenient
+            if self.phase == 1 and old_district in overpopulated_districts and new_district in underpopulated_districts:
+                # Accept with higher probability for population balancing
+                accept_probability = 0.9
+            else:
+                # Score difference normalized by current score
+                relative_diff = (new_score - current_score) / (current_score + 1e-10)
+                accept_probability = np.exp(-relative_diff / max(self.temperature, 0.001))
+            
+            if random.random() < accept_probability:
+                # Accept the change despite being worse
+                return True
+            else:
+                # Revert the change
+                self.district_map[pixel_i, pixel_j] = old_district
+                self.update_district_stats(pixel_i, pixel_j, new_district, old_district)
+                return False
+    def update_phase(self, iteration, max_iterations):
+        """Update the phase and adjust weights accordingly with improved phase transitions"""
+        # Define phase transition points
+        phase1_end = int(0.20 * max_iterations)  
+        phase2_end = int(0.40 * max_iterations)  
+        phase3_end = int(0.75 * max_iterations)  
+        # Phase 4 - Final refinement (remaining 25%)
+        
+        # Determine current phase based on iteration
+        if iteration == 0:
+            # Phase 1: Focus almost exclusively on population equality
+            self.phase = 1
+            self.weights = {
+                'population_equality': 3,  # Very high weight for population equality
+                'compactness': 0,               # Low weight for compactness
+                'center_distance': 1,           # Ignore center distance
+                'election_results': 0           # Ignore election results initially
+            }
+            self.temperature = 0.7              # Start with max temperature to accept almost any change
+            print(f"Iteration {iteration}: Phase 1 - Equalizing population")
+            
+        elif iteration == phase1_end:
+            # Phase 2: Begin focusing on election results/vote distribution
+            self.phase = 2
+            self.weights = {
+                'population_equality': 1,   # Still high but reduced
+                'compactness': 2,               # Still low
+                'center_distance': 2,           # Still ignored
+                'election_results': 5        # Start optimizing for vote distribution
+            }
+            self.temperature = 0.6             # Still accepting many worse solutions
+            print(f"Iteration {iteration}: Phase 2 - Optimizing vote distribution")
+        
+        elif iteration == phase2_end:
+            # Phase 3: Focus on compactness while maintaining population equality and vote distribution
+            self.phase = 3
+            self.weights = {
+                'population_equality': 1,    # Reduced but still important
+                'compactness': 3,              # Increased focus on shape
+                'center_distance': 3,          # Some focus on center distance
+                'election_results': 2        # Decreased but still important
+            }
+            self.temperature = 0.3              # Less willing to accept worse solutions
+            print(f"Iteration {iteration}: Phase 3 - Improving district compactness")
+        
+        elif iteration == phase3_end:
+            # Phase 4: Final refinement
+            self.phase = 4
+            self.weights = {
+                'population_equality': 1,    # Still important
+                'compactness': 1,             # Very high focus on compactness
+                'center_distance': 1,          # Higher focus on center distance
+                'election_results': 2         # Still maintained but reduced
+            }
+            self.temperature = 0.1              # Only accept small increases in score
+            print(f"Iteration {iteration}: Phase 4 - Final refinement")
+    
+    
+    def _process_batch_multi(self, batch_size=100, pixels_per_move=20):
+        """
+        Process a batch of iterations with multiple pixels changed in each move
+        
+        Parameters:
+        - batch_size: Number of moves to attempt
+        - pixels_per_move: Number of pixels to change in each move
+        
+        Returns:
+        - Number of accepted moves
+        """
+        accepted_count = 0
+        
+        # Get all boundary pixels - this is computationally expensive, so do it once per batch
+        boundary_pixels = self.get_boundary_pixels()
+        
+        if len(boundary_pixels) == 0:
+            return 0
+        
+        # Calculate mean population per district for targeting
+        mean_population = np.mean(self.district_stats['population'])
+        
+        # Identify districts with population imbalance
+        overpopulated_districts = np.where(self.district_stats['population'] > mean_population * 1.1)[0]
+        underpopulated_districts = np.where(self.district_stats['population'] < mean_population * 0.9)[0]
+        
+        for _ in range(batch_size):
+            # Phase 1: Population balancing - focus on problematic districts
+            if self.phase == 1 and (len(overpopulated_districts) > 0 and len(underpopulated_districts) > 0):
+                # In phase 1, direct population balancing by focusing on boundary pixels between
+                # over and under populated districts
+                targeted_boundary_pixels = []
+                
+                for pixel_i, pixel_j in boundary_pixels:
+                    old_district = self.district_map[pixel_i, pixel_j]
+                    
+                    # Only consider pixels in overpopulated districts
+                    if old_district not in overpopulated_districts:
+                        continue
+                        
+                    # Check neighboring districts
+                    for ni, nj in self.neighbor_map.get((pixel_i, pixel_j), []):
+                        new_district = self.district_map[ni, nj]
+                        
+                        # If neighbor is in underpopulated district
+                        if new_district in underpopulated_districts:
+                            # Check if moving would break the district
+                            if not self.will_break_district(pixel_i, pixel_j, old_district):
+                                targeted_boundary_pixels.append((pixel_i, pixel_j, old_district, new_district))
+                
+                # If we found targeted pixels, use them
+                if len(targeted_boundary_pixels) > 0:
+                    # Pick up to pixels_per_move pixels, or as many as we found
+                    num_to_change = min(pixels_per_move, len(targeted_boundary_pixels))
+                    selected_moves = random.sample(targeted_boundary_pixels, num_to_change)
+                    
+                    # Make all changes at once
+                    for pixel_i, pixel_j, old_district, new_district in selected_moves:
+                        self.district_map[pixel_i, pixel_j] = new_district
+                        self.update_district_stats(pixel_i, pixel_j, old_district, new_district)
+                    
+                    accepted_count += 1
+                    continue
+            
+            # For other phases or if targeted approach didn't work
+            # Try random boundary pixels with standard evaluation
+            
+            # First check if we have enough boundary pixels
+            if len(boundary_pixels) < pixels_per_move:
+                # Not enough pixels, use what we have
+                num_to_try = len(boundary_pixels)
+            else:
+                num_to_try = pixels_per_move
+            
+            # Choose random boundary pixels
+            random_indices = np.random.choice(len(boundary_pixels), num_to_try, replace=False)
+            
+            # Prepare the moves
+            proposed_moves = []
+            
+            for idx in random_indices:
+                pixel_i, pixel_j = boundary_pixels[idx]
+                old_district = self.district_map[pixel_i, pixel_j]
+                
+                # Find a neighboring district
+                neighboring_districts = set()
+                for ni, nj in self.neighbor_map.get((pixel_i, pixel_j), []):
+                    neighboring_districts.add(self.district_map[ni, nj])
+                
+                neighboring_districts.discard(old_district)
+                
+                if not neighboring_districts:
+                    continue
+                
+                # In phase 1 and 2, prioritize moves that balance population
+                if self.phase <= 2 and overpopulated_districts.size > 0 and underpopulated_districts.size > 0:
+                    preferred_districts = []
+                    
+                    # If we're in overpopulated district, prefer moving to underpopulated
+                    if old_district in overpopulated_districts:
+                        preferred_districts = [d for d in neighboring_districts if d in underpopulated_districts]
+                    
+                    # If we're in underpopulated, don't move to overpopulated
+                    elif old_district in underpopulated_districts:
+                        preferred_districts = [d for d in neighboring_districts if d not in overpopulated_districts]
+                    
+                    # Use preferred districts if available
+                    if preferred_districts:
+                        new_district = random.choice(preferred_districts)
+                    else:
+                        new_district = random.choice(list(neighboring_districts))
+                else:
+                    new_district = random.choice(list(neighboring_districts))
+                
+                # Check if this would break the district
+                if not self.will_break_district(pixel_i, pixel_j, old_district):
+                    proposed_moves.append((pixel_i, pixel_j, old_district, new_district))
+            
+            # If no valid moves, continue to next iteration
+            if not proposed_moves:
+                continue
+            
+            # Score the current map
+            current_score = self.score_map()
+            
+            # Make all the changes at once
+            for pixel_i, pixel_j, old_district, new_district in proposed_moves:
+                self.district_map[pixel_i, pixel_j] = new_district
+                self.update_district_stats(pixel_i, pixel_j, old_district, new_district)
+            
+            # Score the new map
+            new_score = self.score_map()
+            
+            # Decide whether to accept all changes
+            if new_score <= current_score:
+                # Accept all changes (they improved the score)
+                accepted_count += 1
+            else:
+                # For population balancing in phase 1, be more lenient
+                if self.phase == 1 and any(old_district in overpopulated_districts and new_district in underpopulated_districts 
+                                        for _, _, old_district, new_district in proposed_moves):
+                    # Accept with higher probability for population balancing
+                    accept_probability = 0.9
+                else:
+                    # Use relative score difference
+                    relative_diff = (new_score - current_score) / (current_score + 1e-10)
+                    accept_probability = np.exp(-relative_diff / max(self.temperature, 0.001))
+                
+                if random.random() < accept_probability:
+                    # Accept all changes despite being worse
+                    accepted_count += 1
+                else:
+                    # Revert all changes
+                    for pixel_i, pixel_j, old_district, new_district in proposed_moves:
+                        self.district_map[pixel_i, pixel_j] = old_district
+                        self.update_district_stats(pixel_i, pixel_j, new_district, old_district)
+        
+        return accepted_count
+
+    def run_simulation(self, num_iterations=100000, batch_size=1000, use_parallel=True, pixels_per_move=20):
+        """
+        Run the simulation with multiple pixels changed per move
+        
+        Parameters:
+        - num_iterations: Total number of iterations (moves) to run
+        - batch_size: Number of moves per batch for parallel processing
+        - use_parallel: Whether to use parallel processing
+        - pixels_per_move: Number of pixels to change in each move
+        """
+        # Initialize the phase for iteration 0
+        self.update_phase(0, num_iterations)
+        
+        if use_parallel and self.num_cpus > 1:
+            print(f"Running simulation using {self.num_cpus} CPU cores in parallel with {pixels_per_move} pixels per move")
+            iterations_completed = 0
+            progress_bar = tqdm(total=num_iterations)
+            
+            while iterations_completed < num_iterations:
+                # Determine current batch size
+                current_batch_size = min(batch_size, num_iterations - iterations_completed)
+                
+                # Run batch with multiple pixels per move for early phases
+                if self.phase <= 2:
+                    accepted = self._process_batch_multi(batch_size=current_batch_size, pixels_per_move=pixels_per_move)
+                else:
+                    # For later phases focusing on compactness, use parallel processing with single pixel moves
+                    accepted = self.run_batch_parallel(batch_size=current_batch_size)
+                
+                # Update iteration count
+                iterations_completed += current_batch_size
+                
+                # Update phase
+                self.update_phase(iterations_completed, num_iterations)
+                
+                # Update progress bar
+                progress_bar.update(current_batch_size)
+                
+                # Report progress more frequently
+                if iterations_completed % 1000 == 0:
+                    # Calculate statistics
+                    self.calculate_all_district_stats()
+                    
+                    # Get population information
+                    pop_mean = np.mean(self.district_stats['population'])
+                    pop_max = np.max(self.district_stats['population'])
+                    pop_min = np.min(self.district_stats['population'])
+                    pop_imbalance = (pop_max - pop_min) / pop_mean
+                    
+                    # Get district counts
+                    red_districts = sum(1 for d in range(self.num_districts) 
+                                if self.district_stats['red_votes'][d] > 
+                                    self.district_stats['blue_votes'][d])
+                    blue_districts = self.num_districts - red_districts
+                    
+                    # Output status
+                    current_score = self.score_map()
+                    print(f"\nIteration {iterations_completed}/{num_iterations}, Score: {current_score:.2f}")
+                    print(f"Population imbalance: {pop_imbalance:.2%}, Min: {pop_min:.0f}, Max: {pop_max:.0f}")
+                    print(f"Districts: {red_districts} Red, {blue_districts} Blue")
+                    print(f"Temperature: {self.temperature:.4f}, Phase: {self.phase}")
+            
+            progress_bar.close()
+            
+            # Clean up
+            if self.pool:
+                self.pool.close()
+                self.pool.join()
+                self.pool = None
+        else:
+            # Implement single-threaded version with multi-pixel moves
+            print(f"Running simulation in single-threaded mode with {pixels_per_move} pixels per move")
+            progress_bar = tqdm(total=num_iterations)
+            
+            for i in range(0, num_iterations, pixels_per_move):
+                # For early phases focusing on population balancing, use multi-pixel moves
+                if self.phase <= 2:
+                    self._process_batch_multi(batch_size=1, pixels_per_move=pixels_per_move)
+                else:
+                    # For later phases, use single pixel moves
+                    for _ in range(pixels_per_move):
+                        self.run_iteration()
+                
+                # Update iteration count
+                current_iteration = min(i + pixels_per_move, num_iterations)
+                
+                # Update phase
+                self.update_phase(current_iteration, num_iterations)
+                
+                # Update progress every 1000 iterations
+                if current_iteration % 1000 < pixels_per_move:
+                    progress_bar.update(min(1000, current_iteration - progress_bar.n))
+                    
+                    # Report detailed status every 5000 iterations
+                    if current_iteration % 5000 < pixels_per_move or current_iteration == num_iterations:
+                        # Calculate statistics
+                        self.calculate_all_district_stats()
+                        
+                        # Get population information
+                        pop_mean = np.mean(self.district_stats['population'])
+                        pop_max = np.max(self.district_stats['population'])
+                        pop_min = np.min(self.district_stats['population'])
+                        pop_imbalance = (pop_max - pop_min) / pop_mean
+                        
+                        # Get district counts
+                        red_districts = sum(1 for d in range(self.num_districts) 
+                                    if self.district_stats['red_votes'][d] > 
+                                        self.district_stats['blue_votes'][d])
+                        blue_districts = self.num_districts - red_districts
+                        
+                        # Output status
+                        current_score = self.score_map()
+                        print(f"\nIteration {current_iteration}/{num_iterations}, Score: {current_score:.2f}")
+                        print(f"Population imbalance: {pop_imbalance:.2%}, Min: {pop_min:.0f}, Max: {pop_max:.0f}")
+                        print(f"Districts: {red_districts} Red, {blue_districts} Blue")
+                        print(f"Temperature: {self.temperature:.4f}, Phase: {self.phase}")
+            
+            progress_bar.close()
+        
+        # Calculate final statistics
+        self.calculate_all_district_stats()
+        print("Simulation complete!")
+    
     def plot_districts(self, ax=None, show_stats=True):
         """Plot the current district map with a distinct background color"""
-        # If using GPU, bring data to CPU for plotting
-        if self.use_gpu:
-            if self.using_dask:
-                district_map_np = self.district_map.compute()
-                valid_mask_np = self.valid_mask.compute()
-            else:
-                district_map_np = cp.asnumpy(self.district_map)
-                valid_mask_np = cp.asnumpy(self.valid_mask)
-        else:
-            district_map_np = self.district_map
-            valid_mask_np = self.valid_mask
-            
         if ax is None:
             fig, ax = plt.subplots(figsize=(10, 8))
         
         # Create a masked array where invalid areas are masked
         masked_district_map = np.ma.masked_array(
-            district_map_np, 
-            mask=~valid_mask_np
+            self.district_map, 
+            mask=~self.valid_mask
         )
         
         # Create a colormap for the districts with a distinct background
@@ -982,18 +1355,8 @@ class GerrymanderSimulator:
             red_seats = district_winners.count('Red')
             blue_seats = district_winners.count('Blue')
             
-            # Calculate total votes
-            if self.use_gpu:
-                if self.using_dask:
-                    total_red = float(self.state_map_gpu[:,:,1].sum().compute())
-                    total_blue = float(self.state_map_gpu[:,:,2].sum().compute())
-                else:
-                    total_red = float(cp.sum(self.state_map_gpu[:,:,1]))
-                    total_blue = float(cp.sum(self.state_map_gpu[:,:,2]))
-            else:
-                total_red = np.sum(self.state_map[:,:,1])
-                total_blue = np.sum(self.state_map[:,:,2])
-                
+            total_red = np.sum(self.state_map[:,:,1])
+            total_blue = np.sum(self.state_map[:,:,2])
             red_vote_pct = total_red / (total_red + total_blue) * 100
             
             # Show the results on the plot
@@ -1079,13 +1442,7 @@ class GerrymanderSimulator:
     
     def save_district_map(self, output_file="district_map.npy"):
         """Save the district map to a file"""
-        if self.use_gpu:
-            if self.using_dask:
-                np.save(output_file, self.district_map.compute())
-            else:
-                np.save(output_file, cp.asnumpy(self.district_map))
-        else:
-            np.save(output_file, self.district_map)
+        np.save(output_file, self.district_map)
         print(f"District map saved to {output_file}")
     
     def export_district_stats(self, output_file="district_stats.csv"):
@@ -1109,586 +1466,4 @@ class GerrymanderSimulator:
         # Save to CSV
         stats_df.to_csv(output_file, index=False)
         print(f"District statistics saved to {output_file}")
-    
-    def cleanup(self):
-        """Clean up resources when simulator is no longer needed"""
-        # Close multiprocessing pool if used
-        if self.pool:
-            self.pool.close()
-            self.pool.join()
-            self.pool = None
         
-        # Close Dask client and cluster if used
-        if self.use_gpu and self.num_gpus > 1 and self.using_dask:
-            if hasattr(self, 'client') and self.client:
-                self.client.close()
-            if hasattr(self, 'cluster') and self.cluster:
-                self.cluster.close()
-            
-        # Release CUDA contexts if used
-        if self.use_gpu:
-            for device in self.devices:
-                device.use()
-                cp.get_default_memory_pool().free_all_blocks()
-                cp.get_default_pinned_memory_pool().free_all_blocks()
-
-                    
-    def _process_single_pixel_move_partition(self, partition_map, partition_state, partition_mask, 
-                                          partition_stats, temperature, phase, start_row, end_row):
-        """Process a single pixel move on a partition"""
-        # Get boundary pixels for this partition
-        boundary_pixels = self._get_boundary_pixels_partition(partition_map, partition_mask)
-        
-        if len(boundary_pixels) == 0:
-            return False
-            
-        # Randomly select a boundary pixel
-        idx = np.random.randint(0, len(boundary_pixels))
-        local_i, j = boundary_pixels[idx]
-        # Convert to global coordinates for district tracking
-        i = local_i + start_row
-        
-        old_district = int(partition_map[local_i, j].item())
-        
-        # Find neighboring districts within this partition
-        neighboring_districts = set()
-        
-        for ni, nj in [(local_i+1, j), (local_i-1, j), (local_i, j+1), (local_i, j-1)]:
-            if 0 <= ni < partition_map.shape[0] and 0 <= nj < partition_map.shape[1]:
-                if partition_mask[ni, nj]:
-                    neighboring_districts.add(int(partition_map[ni, nj].item()))
-        
-        neighboring_districts.discard(old_district)
-        
-        if not neighboring_districts:
-            return False
-            
-        new_district = random.choice(list(neighboring_districts))
-        
-        # Check if this would break connectivity - simplified check for partition
-        if self._will_break_district_partition(partition_map, local_i, j, old_district):
-            return False
-            
-        # Score before change
-        current_score = self._score_partition(partition_map, partition_stats, partition_state)
-        
-        # Make the change
-        partition_map[local_i, j] = new_district
-        self._update_stats_partition(partition_stats, partition_state, 
-                                   local_i, j, old_district, new_district, start_row)
-        
-        # Score after change
-        new_score = self._score_partition(partition_map, partition_stats, partition_state)
-        
-        # Decide whether to accept
-        if new_score <= current_score:
-            return True
-        else:
-            # Probabilistic acceptance based on temperature
-            relative_diff = (new_score - current_score) / (current_score + 1e-10)
-            accept_probability = cp.exp(-relative_diff / max(temperature, 0.001))
-            
-            if cp.random.random() < accept_probability:
-                return True
-            else:
-                # Revert
-                partition_map[local_i, j] = old_district
-                self._update_stats_partition(partition_stats, partition_state,
-                                          local_i, j, new_district, old_district, start_row)
-                return False
-    
-    def _process_multi_pixel_move_partition(self, partition_map, partition_state, partition_mask, 
-                                          partition_stats, temperature, phase, pixels_per_move,
-                                          start_row, end_row):
-        """Process multiple pixel moves at once on a partition"""
-        # Get boundary pixels
-        boundary_pixels = self._get_boundary_pixels_partition(partition_map, partition_mask)
-        
-        if len(boundary_pixels) == 0:
-            return False
-            
-        # Choose random subset of boundary pixels
-        if len(boundary_pixels) <= pixels_per_move:
-            selected_pixels = boundary_pixels
-        else:
-            indices = np.random.choice(len(boundary_pixels), pixels_per_move, replace=False)
-            selected_pixels = [boundary_pixels[i] for i in indices]
-        
-        # For each pixel, find potential moves
-        moves = []
-        
-        for local_i, j in selected_pixels:
-            # Convert to global coordinates
-            i = local_i + start_row
-            
-            old_district = int(partition_map[local_i, j].item())
-            
-            # Find neighboring districts
-            neighboring_districts = set()
-            for ni, nj in [(local_i+1, j), (local_i-1, j), (local_i, j+1), (local_i, j-1)]:
-                if 0 <= ni < partition_map.shape[0] and 0 <= nj < partition_map.shape[1]:
-                    if partition_mask[ni, nj]:
-                        neighboring_districts.add(int(partition_map[ni, nj].item()))
-            
-            neighboring_districts.discard(old_district)
-            
-            if neighboring_districts and not self._will_break_district_partition(
-                    partition_map, local_i, j, old_district):
-                new_district = random.choice(list(neighboring_districts))
-                moves.append((local_i, j, old_district, new_district))
-        
-        if not moves:
-            return False
-            
-        # Score before changes
-        current_score = self._score_partition(partition_map, partition_stats, partition_state)
-        
-        # Make a backup of the current state
-        original_map = cp.copy(partition_map)
-        original_stats = {k: cp.copy(v) for k, v in partition_stats.items()}
-        
-        # Apply all moves
-        for local_i, j, old_district, new_district in moves:
-            partition_map[local_i, j] = new_district
-            self._update_stats_partition(partition_stats, partition_state,
-                                       local_i, j, old_district, new_district, start_row)
-        
-        # Score after changes
-        new_score = self._score_partition(partition_map, partition_stats, partition_state)
-        
-        # Decide whether to accept all changes
-        if new_score <= current_score:
-            return True
-        else:
-            # For early phases, be more lenient
-            if phase == 1:
-                accept_probability = 0.8
-            else:
-                # Use temperature
-                relative_diff = (new_score - current_score) / (current_score + 1e-10)
-                accept_probability = cp.exp(-relative_diff / max(temperature, 0.001))
-            
-            if cp.random.random() < accept_probability:
-                return True
-            else:
-                # Revert all changes
-                partition_map[:] = original_map
-                for k in partition_stats:
-                    partition_stats[k][:] = original_stats[k]
-                return False
-    
-    def _get_boundary_pixels_partition(self, partition_map, partition_mask):
-        """Get boundary pixels within a partition"""
-        # Pre-allocate arrays for the four neighbor directions
-        up_shifted = cp.pad(partition_map[:-1, :], ((1, 0), (0, 0)), mode='constant', constant_values=-1)
-        down_shifted = cp.pad(partition_map[1:, :], ((0, 1), (0, 0)), mode='constant', constant_values=-1)
-        left_shifted = cp.pad(partition_map[:, :-1], ((0, 0), (1, 0)), mode='constant', constant_values=-1)
-        right_shifted = cp.pad(partition_map[:, 1:], ((0, 0), (0, 1)), mode='constant', constant_values=-1)
-        
-        # A pixel is on a boundary if any of its neighbors are in a different district
-        is_boundary = ((up_shifted != partition_map) | 
-                     (down_shifted != partition_map) | 
-                     (left_shifted != partition_map) | 
-                     (right_shifted != partition_map)) & partition_mask
-        
-        # Get coordinates of boundary pixels
-        boundary_pixels = cp.argwhere(is_boundary).get()
-        
-        return boundary_pixels
-    
-    def run_simulation_multi_gpu(self, num_iterations=100000, batch_size=1000, pixels_per_move=30):
-        """
-        Run simulation optimized for multiple GPUs using partition-based processing
-        
-        Parameters:
-        - num_iterations: Total number of iterations to run
-        - batch_size: Number of iterations per batch
-        - pixels_per_move: Number of pixels to change in each move (for multi-pixel moves)
-        """
-        if not self.use_gpu or self.num_gpus <= 1:
-            print("Multi-GPU simulation requires multiple GPUs. Falling back to single GPU/CPU mode.")
-            return self.run_simulation(num_iterations, batch_size, True, pixels_per_move)
-        
-        print(f"Running multi-GPU simulation on {self.num_gpus} GPUs")
-        
-        # Initialize the phase
-        self.update_phase(0, num_iterations)
-        
-        iterations_completed = 0
-        progress_bar = tqdm(total=num_iterations)
-        
-        while iterations_completed < num_iterations:
-            # Calculate iterations for this batch
-            current_batch_size = min(batch_size, num_iterations - iterations_completed)
-            
-            # Distribute work across GPUs
-            iterations_per_gpu = max(1, current_batch_size // self.num_gpus)
-            
-            if self.using_dask:
-                # Use Dask for distributed processing
-                futures = []
-                
-                for gpu_id in range(self.num_gpus):
-                    # Calculate this GPU's workload
-                    gpu_iterations = iterations_per_gpu
-                    if gpu_id == self.num_gpus - 1:
-                        # Last GPU gets any remainder
-                        gpu_iterations += current_batch_size % self.num_gpus
-                    
-                    # Skip if no work
-                    if gpu_iterations <= 0:
-                        continue
-                    
-                    # Determine region for this GPU
-                    start_row, end_row = self.partition_boundaries[gpu_id]
-                    
-                    # Submit task to GPU
-                    futures.append(self.client.submit(
-                        self._process_batch_gpu_partition,
-                        gpu_id, gpu_iterations, self.phase, self.temperature,
-                        pixels_per_move if self.phase <= 2 else 1,
-                        start_row, end_row,
-                        resources={'GPU': 1}
-                    ))
-                
-                # Wait for all tasks to complete
-                results = self.client.gather(futures)
-                
-                # Process results
-                district_maps = []
-                total_accepted = 0
-                best_score = float('inf')
-                best_idx = -1
-                
-                for i, (partition_map, accepted, score) in enumerate(results):
-                    total_accepted += accepted
-                    if score < best_score:
-                        best_score = score
-                        best_idx = i
-                
-                # If we found a better partition, update the full map
-                if best_idx >= 0:
-                    start_row, end_row = self.partition_boundaries[best_idx]
-                    best_partition = results[best_idx][0]
-                    
-                    # Convert to dask array and update
-                    partition_dask = da.from_array(best_partition, 
-                                                chunks=(end_row-start_row, self.width))
-                    self.district_map[start_row:end_row] = partition_dask
-            else:
-                # Manual multi-GPU management
-                # Process each partition on its GPU
-                results = []
-                for gpu_id in range(self.num_gpus):
-                    # Calculate this GPU's workload
-                    gpu_iterations = iterations_per_gpu
-                    if gpu_id == self.num_gpus - 1:
-                        # Last GPU gets any remainder
-                        gpu_iterations += current_batch_size % self.num_gpus
-                    
-                    # Skip if no work
-                    if gpu_iterations <= 0:
-                        continue
-                    
-                    # Determine region for this GPU
-                    start_row, end_row = self.partition_boundaries[gpu_id]
-                    
-                    # Process partition
-                    with cp.cuda.Device(gpu_id):
-                        result = self._process_batch_gpu_partition(
-                            gpu_id, gpu_iterations, self.phase, self.temperature,
-                            pixels_per_move if self.phase <= 2 else 1,
-                            start_row, end_row)
-                        results.append(result)
-                
-                # Process results
-                total_accepted = 0
-                best_score = float('inf')
-                best_idx = -1
-                
-                for i, (partition_map, accepted, score) in enumerate(results):
-                    total_accepted += accepted
-                    if score < best_score:
-                        best_score = score
-                        best_idx = i
-                
-                # If we found a better partition, update the full map
-                if best_idx >= 0:
-                    start_row, end_row = self.partition_boundaries[best_idx]
-                    best_partition = results[best_idx][0]
-                    
-                    # Update the district map
-                    with cp.cuda.Device(0):  # Use device 0 for updates
-                        self.district_map[start_row:end_row] = cp.asarray(best_partition)
-            
-            # Update iteration count
-            iterations_completed += current_batch_size
-            
-            # Update phase and temperature
-            self.update_phase(iterations_completed, num_iterations)
-            self.temperature *= self.cooling_rate
-            
-            # Update progress bar
-            progress_bar.update(current_batch_size)
-            
-            # Recalculate statistics periodically
-            if iterations_completed % 1000 == 0:
-                self.calculate_all_district_stats()
-                
-                # Display progress info
-                pop_mean = float(cp.mean(self.district_stats_gpu['population']))
-                pop_max = float(cp.max(self.district_stats_gpu['population']))
-                pop_min = float(cp.min(self.district_stats_gpu['population']))
-                pop_imbalance = (pop_max - pop_min) / pop_mean
-                
-                # Get district counts
-                red_districts = sum(1 for d in range(self.num_districts) 
-                            if self.district_stats['red_votes'][d] > 
-                                self.district_stats['blue_votes'][d])
-                blue_districts = self.num_districts - red_districts
-                
-                # Output status
-                current_score = self.score_map()
-                print(f"\nIteration {iterations_completed}/{num_iterations}, Score: {current_score:.2f}")
-                print(f"Population imbalance: {pop_imbalance:.2%}, Min: {pop_min:.0f}, Max: {pop_max:.0f}")
-                print(f"Districts: {red_districts} Red, {blue_districts} Blue")
-                print(f"Temperature: {self.temperature:.4f}, Phase: {self.phase}")
-        
-        progress_bar.close()
-        print("Multi-GPU simulation complete!")
-        
-        # Calculate final statistics
-        self.calculate_all_district_stats()
-    
-    def _process_batch_gpu_partition(self, gpu_id, batch_size, phase, temperature, pixels_per_move, start_row, end_row):
-        """
-        Process a batch of iterations on a specific GPU partition
-        
-        Returns:
-        - Tuple of (updated partition map, accepted count, best score)
-        """
-        with cp.cuda.Device(gpu_id):
-            # Get the partition for this GPU
-            if self.using_dask:
-                partition_map = cp.asarray(self.district_map[start_row:end_row].compute())
-                partition_state = cp.asarray(self.state_map_gpu[start_row:end_row].compute())
-                partition_mask = cp.asarray(self.valid_mask[start_row:end_row].compute())
-            else:
-                partition_map = cp.asarray(self.district_map[start_row:end_row].get())
-                partition_state = cp.asarray(self.state_map_gpu[start_row:end_row].get())
-                partition_mask = cp.asarray(self.valid_mask[start_row:end_row].get())
-            
-            # Copy district stats for this partition
-            partition_stats = {k: cp.copy(v) for k, v in self.district_stats_gpu.items()}
-            
-            # Track best score and corresponding map
-            best_score = float('inf')
-            best_map = cp.copy(partition_map)
-            accepted_count = 0
-            
-            # Process the batch
-            for _ in range(batch_size):
-                if phase <= 2 and pixels_per_move > 1:
-                    # Multi-pixel mode for early phases
-                    accepted = self._process_multi_pixel_move_partition(
-                        partition_map, partition_state, partition_mask, 
-                        partition_stats, temperature, phase, pixels_per_move,
-                        start_row, end_row)
-                    if accepted:
-                        accepted_count += 1
-                else:
-                    # Single pixel mode
-                    accepted = self._process_single_pixel_move_partition(
-                        partition_map, partition_state, partition_mask,
-                        partition_stats, temperature, phase,
-                        start_row, end_row)
-                    if accepted:
-                        accepted_count += 1
-                
-                # Check if this is the best map so far
-                current_score = self._score_partition(partition_map, partition_stats, partition_state)
-                if current_score < best_score:
-                    best_score = current_score
-                    best_map = cp.copy(partition_map)
-            
-            # Return the results
-            return best_map.get(), accepted_count, float(best_score)   
-    def _calculate_perimeter_partition_gpu(self, partition_map, district_id):
-        """Calculate perimeter of a district in a partition using GPU"""
-        # Define CUDA kernel for perimeter calculation
-        @cuda.jit
-        def perimeter_kernel(district_map, district_id, height, width, result):
-            # Get thread position
-            i, j = cuda.grid(2)
-            
-            # Check if in bounds and in the district
-            if i < height and j < width and district_map[i, j] == district_id:
-                perimeter_count = 0
-                
-                # Check neighbors
-                for ni, nj in [(i+1, j), (i-1, j), (i, j+1), (i, j-1)]:
-                    if (0 <= ni < height and 0 <= nj < width):
-                        if district_map[ni, nj] != district_id:
-                            perimeter_count += 1
-                    else:
-                        # Edge of the partition - we count this as potential boundary
-                        perimeter_count += 1
-                
-                # Use atomic add to avoid race conditions
-                cuda.atomic.add(result, 0, perimeter_count)
-        
-        # Setup for CUDA kernel
-        height, width = partition_map.shape
-        
-        # Set up grid and block dimensions
-        threads_per_block = (16, 16)
-        blocks_per_grid_x = (height + threads_per_block[0] - 1) // threads_per_block[0]
-        blocks_per_grid_y = (width + threads_per_block[1] - 1) // threads_per_block[1]
-        blocks_per_grid = (blocks_per_grid_x, blocks_per_grid_y)
-        
-        # Prepare arrays for CUDA
-        d_district_map = cuda.to_device(cp.asnumpy(partition_map))
-        d_result = cuda.to_device(np.zeros(1, dtype=np.int32))
-        
-        # Launch kernel
-        perimeter_kernel[blocks_per_grid, threads_per_block](
-            d_district_map, district_id, height, width, d_result)
-        
-        # Get result
-        result = d_result.copy_to_host()
-        return result[0]
-    
-    def _calculate_perimeter_gpu(self, district_id, gpu_id=0, start_row=0, end_row=None):
-        """Calculate perimeter of a district using GPU"""
-        end_row = end_row or self.height
-        
-        # Define CUDA kernel for perimeter calculation
-        @cuda.jit
-        def perimeter_kernel(district_map, district_id, height, width, result):
-            # Get thread position
-            i, j = cuda.grid(2)
-            
-            # Check if in bounds and in the district
-            if i < height and j < width and district_map[i, j] == district_id:
-                perimeter_count = 0
-                
-                # Check neighbors
-                for ni, nj in [(i+1, j), (i-1, j), (i, j+1), (i, j-1)]:
-                    if (0 <= ni < height and 0 <= nj < width):
-                        if district_map[ni, nj] != district_id:
-                            perimeter_count += 1
-                    else:
-                        # Edge of the grid
-                        perimeter_count += 1
-                
-                # Use atomic add to avoid race conditions
-                cuda.atomic.add(result, 0, perimeter_count)
-        
-        # Context manager for GPU device
-        with cp.cuda.Device(gpu_id):
-            # Get the right partition
-            if self.num_gpus > 1:
-                if self.using_dask:
-                    district_map_np = cp.asnumpy(self.district_map[start_row:end_row].compute())
-                else:
-                    district_map_np = cp.asnumpy(self.district_map[start_row:end_row])
-            else:
-                district_map_np = cp.asnumpy(self.district_map)
-            
-            # Set up grid and block dimensions
-            height, width = district_map_np.shape
-            threads_per_block = (16, 16)
-            blocks_per_grid_x = (height + threads_per_block[0] - 1) // threads_per_block[0]
-            blocks_per_grid_y = (width + threads_per_block[1] - 1) // threads_per_block[1]
-            blocks_per_grid = (blocks_per_grid_x, blocks_per_grid_y)
-            
-            # Prepare arrays for CUDA
-            d_district_map = cuda.to_device(district_map_np)
-            d_result = cuda.to_device(np.zeros(1, dtype=np.int32))
-            
-            # Launch kernel
-            perimeter_kernel[blocks_per_grid, threads_per_block](
-                d_district_map, district_id, height, width, d_result)
-            
-            # Get result
-            result = d_result.copy_to_host()
-            return result[0]
-    
-    @staticmethod
-    def calc_perimeter_chunk(params):
-        """
-        Calculate perimeter for a chunk of pixels - used for CPU processing
-        
-        Parameters:
-        - params: A tuple containing (pixel_chunk, district_map, district_id, height, width)
-        
-        Returns:
-        - The local perimeter count
-        """
-        pixel_chunk, district_map, district_id, height, width = params
-        local_perimeter = 0
-        for i, j in pixel_chunk:
-            for ni, nj in [(i+1, j), (i-1, j), (i, j+1), (i, j-1)]:
-                if 0 <= ni < height and 0 <= nj < width:
-                    if district_map[ni, nj] != district_id:
-                        local_perimeter += 1
-        return local_perimeter    
-    def _calculate_partition_stats(self, gpu_id, start_row, end_row, num_districts):
-        """Calculate statistics for a partition of the map on a specific GPU"""
-        # Set device context
-        with cp.cuda.Device(gpu_id):
-            # Get the partition for this GPU
-            if self.using_dask:
-                partition_map = cp.asarray(self.district_map[start_row:end_row].compute())
-                partition_state = cp.asarray(self.state_map_gpu[start_row:end_row].compute())
-                valid_partition = cp.asarray(self.valid_mask[start_row:end_row].compute())
-            else:
-                partition_map = self.district_map[start_row:end_row]
-                partition_state = self.state_map_gpu[start_row:end_row]
-                valid_partition = self.valid_mask[start_row:end_row]
-            
-            # Initialize stats for this partition
-            stats = {
-                'population': cp.zeros(num_districts),
-                'red_votes': cp.zeros(num_districts),
-                'blue_votes': cp.zeros(num_districts),
-                'center_x': cp.zeros(num_districts),
-                'center_y': cp.zeros(num_districts),
-                'perimeter': cp.zeros(num_districts),
-                'area': cp.zeros(num_districts)
-            }
-            
-            # Find unique districts in this partition
-            district_ids = cp.unique(partition_map[valid_partition])
-            
-            for district_id in district_ids.get():
-                mask = (partition_map == district_id)
-                
-                # Count population and votes using vectorized operations
-                stats['population'][district_id] = cp.sum(partition_state[:,:,0] * mask)
-                stats['red_votes'][district_id] = cp.sum(partition_state[:,:,1] * mask)
-                stats['blue_votes'][district_id] = cp.sum(partition_state[:,:,2] * mask)
-                
-                # Calculate center of population
-                if stats['population'][district_id] > 0:
-                    pop_indices = cp.argwhere(mask & (partition_state[:,:,0] > 0))
-                    if len(pop_indices) > 0:
-                        pop_weights = cp.array([partition_state[i, j, 0] for i, j in pop_indices])
-                        
-                        # Adjust row indices to global coordinates
-                        global_indices = pop_indices.copy()
-                        global_indices[:, 0] += start_row
-                        
-                        # Store weighted sum for later normalization
-                        stats['center_y'][district_id] = cp.sum(global_indices[:, 0] * pop_weights)
-                        stats['center_x'][district_id] = cp.sum(global_indices[:, 1] * pop_weights)
-                
-                # Area is simple
-                stats['area'][district_id] = cp.sum(mask)
-                
-                # Calculate perimeter using GPU kernel
-                perimeter = self._calculate_perimeter_partition_gpu(partition_map, district_id)
-                stats['perimeter'][district_id] = perimeter
-            
-            # Return the stats dictionary for this partition
-            return {k: v.get() for k, v in stats.items()}

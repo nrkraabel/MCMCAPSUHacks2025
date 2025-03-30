@@ -1,0 +1,64 @@
+{
+    "scenarios": [
+      {
+        "name": "fair_redistricting",
+        "state_map_path": "/storage/home/nrk5343/work/MCMCAPSUHacks2025/pa_election_data.npy",
+        "flip_map": true,
+        "num_districts": 17,
+        "distribution_type": "fair",
+        "num_iterations": 250000,
+        "batch_size": 1000,
+        "use_parallel": true,
+        "pixels_per_move": 15,
+        "animation_frames": 150,
+        "animation_interval": 200,
+        "generate_heatmap": false,
+        "track_stats_evolution": true
+      },
+      {
+        "name": "red_gerrymander",
+        "state_map_path": "/storage/home/nrk5343/work/MCMCAPSUHacks2025/pa_election_data.npy",
+        "flip_map": true,
+        "num_districts": 17,
+        "distribution_type": "red_gerrymander",
+        "num_iterations": 250000,
+        "batch_size": 1000,
+        "use_parallel": true,
+        "pixels_per_move": 15,
+        "animation_frames": 150,
+        "animation_interval": 200,
+        "generate_heatmap":  false,
+        "track_stats_evolution": true
+      },
+      {
+        "name": "blue_gerrymander",
+        "state_map_path": "/storage/home/nrk5343/work/MCMCAPSUHacks2025/pa_election_data.npy",
+        "flip_map": true,
+        "num_districts": 17,
+        "distribution_type": "blue_gerrymander",
+        "num_iterations": 250000,
+        "batch_size": 1000,
+        "use_parallel": true,
+        "pixels_per_move": 15,
+        "animation_frames": 150,
+        "animation_interval": 200,
+        "generate_heatmap":  false,
+        "track_stats_evolution": true
+      },
+      {
+        "name": "incumbent_protection",
+        "state_map_path": "/storage/home/nrk5343/work/MCMCAPSUHacks2025/pa_election_data.npy",
+        "flip_map": true,
+        "num_districts": 17,
+        "distribution_type": "incumbent",
+        "num_iterations": 250000,
+        "batch_size": 1000,
+        "use_parallel": true,
+        "pixels_per_move": 15,
+        "animation_frames": 150,
+        "animation_interval": 200,
+        "generate_heatmap":  false,
+        "track_stats_evolution": true
+      }
+    ]
+  }
