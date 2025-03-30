@@ -11,6 +11,7 @@ Markov Chain Annealing in its simplest form is a stochastic guess and check meth
 2. If the guess satisfies given optimization constraints, accept the change. In the case of rejection, this algorithm includes a random chance for acceptance based on a defined probability (governed by a "temperature" variable). This temperature is reduced each iteration by a scheduler, reducing the probability to accept rejected changes. By enabling random chance for acceptance, MCMC annealing enables escape from local minima in the optimization.
 
 ![Alt text](Figs/mcmc_animation.gif)
+![Alt text](Figs/mcmc_animation.gif)
 
 We include two examples applying this tool: Optimal streamflow gage placement in Pennsylvania's Juniata river basin (JRB), and political redistricting for reducing gerrymander bias in Pennsylvania.
 
