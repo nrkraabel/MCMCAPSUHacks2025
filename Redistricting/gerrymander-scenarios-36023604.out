@@ -1,0 +1,12 @@
+Job started at Sun Mar 30 03:15:42 EDT 2025
+Running on node: p-mc-3476
+Available CPU cores: 40
+Memory:               total        used        free      shared  buff/cache   available
+Mem:          754Gi       4.5Gi       732Gi       6.3Gi        17Gi       739Gi
+Swap:            0B          0B          0B
+Submitted batch job 36024494
+Submitted batch job 36024495
+Submitted batch job 36024496
+Submitted batch job 36024497
+All scenario jobs submitted at Sun Mar 30 03:15:42 EDT 2025
+Check individual job logs for progress

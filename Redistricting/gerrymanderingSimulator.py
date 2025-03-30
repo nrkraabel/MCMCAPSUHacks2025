@@ -64,7 +64,7 @@ class GerrymanderSimulator:
         self.calculate_all_district_stats()
         
         # Parameters for the algorithm
-        self.temperature = 1
+        self.temperature = 100000
         self.cooling_rate = 0.9999
         self.phase = 1
         
@@ -336,8 +336,9 @@ class GerrymanderSimulator:
         self.district_stats['perimeter'][old_district] += old_perimeter_change
         self.district_stats['perimeter'][new_district] += new_perimeter_change
     
+    @staticmethod
     @jit(nopython=True)
-    def _will_break_district_numba(self, district_map, pixel_i, pixel_j, district_id, height, width):
+    def _will_break_district_numba(district_map, pixel_i, pixel_j, district_id, height, width):
         """Numba-optimized implementation of district connectivity check"""
         # Get neighbors of the same district
         neighbors = []
@@ -413,9 +414,9 @@ class GerrymanderSimulator:
         pop_mean = np.mean(self.district_stats['population'])
         pop_score = (pop_std / pop_mean) ** 4  
         score += self.weights['population_equality'] * pop_score
-        
+        epsilon = 1e-10  # Small number to prevent division by zero
         # Compactness score (perimeter to area ratio)
-        compactness_scores = self.district_stats['perimeter'] / np.sqrt(self.district_stats['area'])
+        compactness_scores = self.district_stats['perimeter'] / np.sqrt(self.district_stats['area'] +epsilon )
         compactness_score = np.mean(compactness_scores)
         score += self.weights['compactness'] * compactness_score
         
@@ -758,9 +759,9 @@ class GerrymanderSimulator:
         if pop_mean > 0:
             pop_score = (pop_std / pop_mean) ** 4
             score += weights['population_equality'] * pop_score
-        
+        epsilon = 1e-10
         # Compactness score
-        compactness_scores = district_stats['perimeter'] / np.sqrt(district_stats['area'])
+        compactness_scores = district_stats['perimeter'] / np.sqrt(district_stats['area']+ epsilon) 
         compactness_score = np.mean(compactness_scores)
         score += weights['compactness'] * compactness_score
         
@@ -916,7 +917,7 @@ class GerrymanderSimulator:
             return False
         
         # In phase 1 and 2, prioritize moves that balance population
-        if self.phase <= 2 and overpopulated_districts.size > 0 and underpopulated_districts.size > 0:
+        if self.phase <= 1 and overpopulated_districts.size > 0 and underpopulated_districts.size > 0:
             preferred_districts = []
             
             # If we're in overpopulated district, prefer moving to underpopulated
@@ -972,9 +973,9 @@ class GerrymanderSimulator:
     def update_phase(self, iteration, max_iterations):
         """Update the phase and adjust weights accordingly with improved phase transitions"""
         # Define phase transition points
-        phase1_end = int(0.25 * max_iterations)  # 15% - Focus on population equality
-        phase2_end = int(0.40 * max_iterations)  # 40% - Focus on vote distribution
-        phase3_end = int(0.75 * max_iterations)  # 75% - Focus on compactness
+        phase1_end = int(0.20 * max_iterations)  
+        phase2_end = int(0.40 * max_iterations)  
+        phase3_end = int(0.75 * max_iterations)  
         # Phase 4 - Final refinement (remaining 25%)
         
         # Determine current phase based on iteration
@@ -984,10 +985,10 @@ class GerrymanderSimulator:
             self.weights = {
                 'population_equality': 3,  # Very high weight for population equality
                 'compactness': 0,               # Low weight for compactness
-                'center_distance': 0.5,           # Ignore center distance
+                'center_distance': 1,           # Ignore center distance
                 'election_results': 0           # Ignore election results initially
             }
-            self.temperature = 1.0              # Start with max temperature to accept almost any change
+            self.temperature = 0.7              # Start with max temperature to accept almost any change
             print(f"Iteration {iteration}: Phase 1 - Equalizing population")
             
         elif iteration == phase1_end:
@@ -999,7 +1000,7 @@ class GerrymanderSimulator:
                 'center_distance': 2,           # Still ignored
                 'election_results': 5        # Start optimizing for vote distribution
             }
-            self.temperature = 0.7              # Still accepting many worse solutions
+            self.temperature = 0.6             # Still accepting many worse solutions
             print(f"Iteration {iteration}: Phase 2 - Optimizing vote distribution")
         
         elif iteration == phase2_end:
@@ -1026,41 +1027,21 @@ class GerrymanderSimulator:
             self.temperature = 0.1              # Only accept small increases in score
             print(f"Iteration {iteration}: Phase 4 - Final refinement")
     
-    # Add this function to the GerrymanderSimulator class
-    @staticmethod
-    @jit(nopython=True)
-    def _apply_pixel_changes_numba(district_map, pixels_i, pixels_j, new_districts):
-        """
-        Apply multiple pixel changes to the district map using Numba
-        
-        Parameters:
-        - district_map: The current district map
-        - pixels_i: Array of i-coordinates
-        - pixels_j: Array of j-coordinates
-        - new_districts: Array of target districts
-        
-        Returns:
-        - Updated district map
-        """
-        result_map = district_map.copy()
-        
-        for idx in range(len(pixels_i)):
-            i = pixels_i[idx]
-            j = pixels_j[idx]
-            new_district = new_districts[idx]
-            result_map[i, j] = new_district
-            
-        return result_map
-
-    # Modified _process_batch_multi method
+    
     def _process_batch_multi(self, batch_size=100, pixels_per_move=20):
         """
-        Process a batch of iterations with multiple pixels changed in each move.
-        Modified to be Numba-compatible for the critical operations.
+        Process a batch of iterations with multiple pixels changed in each move
+        
+        Parameters:
+        - batch_size: Number of moves to attempt
+        - pixels_per_move: Number of pixels to change in each move
+        
+        Returns:
+        - Number of accepted moves
         """
         accepted_count = 0
         
-        # Get all boundary pixels
+        # Get all boundary pixels - this is computationally expensive, so do it once per batch
         boundary_pixels = self.get_boundary_pixels()
         
         if len(boundary_pixels) == 0:
@@ -1075,10 +1056,10 @@ class GerrymanderSimulator:
         
         for _ in range(batch_size):
             # Phase 1: Population balancing - focus on problematic districts
-            if (self.phase == 1 and len(overpopulated_districts) > 0 
-                    and len(underpopulated_districts) > 0):
-                # Find boundary pixels between over and under populated districts
-                targeted_moves = []
+            if self.phase == 1 and (len(overpopulated_districts) > 0 and len(underpopulated_districts) > 0):
+                # In phase 1, direct population balancing by focusing on boundary pixels between
+                # over and under populated districts
+                targeted_boundary_pixels = []
                 
                 for pixel_i, pixel_j in boundary_pixels:
                     old_district = self.district_map[pixel_i, pixel_j]
@@ -1093,78 +1074,120 @@ class GerrymanderSimulator:
                         
                         # If neighbor is in underpopulated district
                         if new_district in underpopulated_districts:
-                            # Check if this would break the district
+                            # Check if moving would break the district
                             if not self.will_break_district(pixel_i, pixel_j, old_district):
-                                targeted_moves.append((pixel_i, pixel_j, old_district, new_district))
-                                break
+                                targeted_boundary_pixels.append((pixel_i, pixel_j, old_district, new_district))
                 
-                # If we found valid moves, apply them in batches
-                if targeted_moves:
-                    # Choose up to pixels_per_move moves
-                    num_to_change = min(pixels_per_move, len(targeted_moves))
-                    selected_moves = random.sample(targeted_moves, num_to_change)
+                # If we found targeted pixels, use them
+                if len(targeted_boundary_pixels) > 0:
+                    # Pick up to pixels_per_move pixels, or as many as we found
+                    num_to_change = min(pixels_per_move, len(targeted_boundary_pixels))
+                    selected_moves = random.sample(targeted_boundary_pixels, num_to_change)
                     
-                    # Extract pixel data for Numba function
-                    pixels_i = np.array([move[0] for move in selected_moves])
-                    pixels_j = np.array([move[1] for move in selected_moves])
-                    old_districts = np.array([move[2] for move in selected_moves])
-                    new_districts = np.array([move[3] for move in selected_moves])
+                    # Make all changes at once
+                    for pixel_i, pixel_j, old_district, new_district in selected_moves:
+                        self.district_map[pixel_i, pixel_j] = new_district
+                        self.update_district_stats(pixel_i, pixel_j, old_district, new_district)
                     
-                    # Score before
-                    current_score = self.score_map()
-                    
-                    # Make a copy of the current state
-                    original_map = self.district_map.copy()
-                    original_stats = {k: v.copy() for k, v in self.district_stats.items()}
-                    
-                    # Apply changes using Numba-optimized function
-                    self.district_map = self._apply_pixel_changes_numba(
-                        self.district_map, pixels_i, pixels_j, new_districts)
-                    
-                    # Update stats manually (can't be Numba-optimized due to dictionary)
-                    for i in range(len(pixels_i)):
-                        self.update_district_stats(
-                            pixels_i[i], pixels_j[i], old_districts[i], new_districts[i])
-                    
-                    # Score after
-                    new_score = self.score_map()
-                    
-                    # Accept or reject based on phase and score
-                    accept = False
-                    if self.phase == 1:
-                        # Always accept in phase 1 for population balancing
-                        accept = True
-                    elif new_score <= current_score:
-                        # Accept if score improved
-                        accept = True
-                    else:
-                        # Decide based on temperature
-                        relative_diff = (new_score - current_score) / (current_score + 1e-10)
-                        accept_probability = np.exp(-relative_diff / max(self.temperature, 0.001))
-                        accept = random.random() < accept_probability
-                    
-                    if accept:
-                        accepted_count += 1
-                    else:
-                        # Revert changes
-                        self.district_map = original_map
-                        self.district_stats = original_stats
-                    
+                    accepted_count += 1
                     continue
             
-            # For other phases or if targeted approach didn't work,
-            # run multiple standard iterations one at a time
-            pixels_moved = 0
-            for _ in range(pixels_per_move):
-                if self.run_iteration():
-                    pixels_moved += 1
+            # For other phases or if targeted approach didn't work
+            # Try random boundary pixels with standard evaluation
+            
+            # First check if we have enough boundary pixels
+            if len(boundary_pixels) < pixels_per_move:
+                # Not enough pixels, use what we have
+                num_to_try = len(boundary_pixels)
+            else:
+                num_to_try = pixels_per_move
+            
+            # Choose random boundary pixels
+            random_indices = np.random.choice(len(boundary_pixels), num_to_try, replace=False)
+            
+            # Prepare the moves
+            proposed_moves = []
+            
+            for idx in random_indices:
+                pixel_i, pixel_j = boundary_pixels[idx]
+                old_district = self.district_map[pixel_i, pixel_j]
+                
+                # Find a neighboring district
+                neighboring_districts = set()
+                for ni, nj in self.neighbor_map.get((pixel_i, pixel_j), []):
+                    neighboring_districts.add(self.district_map[ni, nj])
+                
+                neighboring_districts.discard(old_district)
+                
+                if not neighboring_districts:
+                    continue
+                
+                # In phase 1 and 2, prioritize moves that balance population
+                if self.phase <= 2 and overpopulated_districts.size > 0 and underpopulated_districts.size > 0:
+                    preferred_districts = []
                     
-            if pixels_moved > 0:
+                    # If we're in overpopulated district, prefer moving to underpopulated
+                    if old_district in overpopulated_districts:
+                        preferred_districts = [d for d in neighboring_districts if d in underpopulated_districts]
+                    
+                    # If we're in underpopulated, don't move to overpopulated
+                    elif old_district in underpopulated_districts:
+                        preferred_districts = [d for d in neighboring_districts if d not in overpopulated_districts]
+                    
+                    # Use preferred districts if available
+                    if preferred_districts:
+                        new_district = random.choice(preferred_districts)
+                    else:
+                        new_district = random.choice(list(neighboring_districts))
+                else:
+                    new_district = random.choice(list(neighboring_districts))
+                
+                # Check if this would break the district
+                if not self.will_break_district(pixel_i, pixel_j, old_district):
+                    proposed_moves.append((pixel_i, pixel_j, old_district, new_district))
+            
+            # If no valid moves, continue to next iteration
+            if not proposed_moves:
+                continue
+            
+            # Score the current map
+            current_score = self.score_map()
+            
+            # Make all the changes at once
+            for pixel_i, pixel_j, old_district, new_district in proposed_moves:
+                self.district_map[pixel_i, pixel_j] = new_district
+                self.update_district_stats(pixel_i, pixel_j, old_district, new_district)
+            
+            # Score the new map
+            new_score = self.score_map()
+            
+            # Decide whether to accept all changes
+            if new_score <= current_score:
+                # Accept all changes (they improved the score)
                 accepted_count += 1
+            else:
+                # For population balancing in phase 1, be more lenient
+                if self.phase == 1 and any(old_district in overpopulated_districts and new_district in underpopulated_districts 
+                                        for _, _, old_district, new_district in proposed_moves):
+                    # Accept with higher probability for population balancing
+                    accept_probability = 0.9
+                else:
+                    # Use relative score difference
+                    relative_diff = (new_score - current_score) / (current_score + 1e-10)
+                    accept_probability = np.exp(-relative_diff / max(self.temperature, 0.001))
+                
+                if random.random() < accept_probability:
+                    # Accept all changes despite being worse
+                    accepted_count += 1
+                else:
+                    # Revert all changes
+                    for pixel_i, pixel_j, old_district, new_district in proposed_moves:
+                        self.district_map[pixel_i, pixel_j] = old_district
+                        self.update_district_stats(pixel_i, pixel_j, new_district, old_district)
         
         return accepted_count
 
-    def run_simulation(self, num_iterations=100000, batch_size=1000, use_parallel=True, pixels_per_move=30):
+    def run_simulation(self, num_iterations=100000, batch_size=1000, use_parallel=True, pixels_per_move=20):
         """
         Run the simulation with multiple pixels changed per move
         
@@ -1203,7 +1226,7 @@ class GerrymanderSimulator:
                 progress_bar.update(current_batch_size)
                 
                 # Report progress more frequently
-                if iterations_completed % 500 == 0:
+                if iterations_completed % 1000 == 0:
                     # Calculate statistics
                     self.calculate_all_district_stats()
                     
@@ -1286,7 +1309,7 @@ class GerrymanderSimulator:
         # Calculate final statistics
         self.calculate_all_district_stats()
         print("Simulation complete!")
-        
+    
     def plot_districts(self, ax=None, show_stats=True):
         """Plot the current district map with a distinct background color"""
         if ax is None:

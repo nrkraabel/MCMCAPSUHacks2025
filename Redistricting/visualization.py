@@ -249,18 +249,23 @@ def track_district_stats_over_time(self, num_iterations=10000, batch_size=1000,
     
     return output_file, stats_df
 
-def plot_metrics_evolution(stats_df, simulator, output_file="metrics_evolution.png"):
+# FIXED FUNCTION SIGNATURE - Changed to match how it's called in run_batch_scenarios.py
+def plot_metrics_evolution(self, stats_df, simulator=None, output_file="metrics_evolution.png"):
     """
     Plot the evolution of key metrics from the stats
     
     Parameters:
     - stats_df: DataFrame with stats history
-    - simulator: GerrymanderSimulator instance
+    - simulator: Simulator instance (optional, if not provided, self will be used)
     - output_file: Output filename for the plot
     
     Returns:
     - The output filename
     """
+    # If simulator is not provided, use self
+    if simulator is None:
+        simulator = self
+        
     plt.figure(figsize=(15, 10))
     
     plt.subplot(2, 2, 1)
@@ -302,13 +307,12 @@ def plot_metrics_evolution(stats_df, simulator, output_file="metrics_evolution.p
     
     return output_file
 
-def compare_scenarios_metrics(all_stats, num_districts, output_file="metrics_comparison.png"):
+def compare_scenarios_metrics(self, all_stats, output_file="metrics_comparison.png"):
     """
     Create a comparison of key metrics across different scenarios
     
     Parameters:
     - all_stats: Dictionary of DataFrames with stats for each scenario
-    - num_districts: Number of districts in the simulation
     - output_file: Output filename for the plot
     
     Returns:
@@ -328,7 +332,7 @@ def compare_scenarios_metrics(all_stats, num_districts, output_file="metrics_com
     plt.subplot(2, 2, 2)
     for scenario, df in all_stats.items():
         # Calculate seat proportion vs vote proportion
-        red_seat_prop = df['red_districts'] / num_districts
+        red_seat_prop = df['red_districts'] / self.num_districts
         red_vote_prop = df['overall_red_vote_share']
         plt.plot(df['iteration'], red_seat_prop - red_vote_prop, label=scenario)
     
@@ -368,7 +372,7 @@ def compare_scenarios_metrics(all_stats, num_districts, output_file="metrics_com
     
     return output_file
 
-def create_comparison_visualization(scenario_results, output_file="scenario_comparison.png"):
+def create_comparison_visualization(self, scenario_results, output_file="scenario_comparison.png"):
     """
     Create a visual comparison of different scenarios
     
@@ -406,14 +410,157 @@ def create_comparison_visualization(scenario_results, output_file="scenario_comp
     
     return output_file
 
-def add_visualization_methods(GerrymanderSimulator):
+def generate_vote_distribution_chart(self, output_file="vote_distribution.png"):
     """
-    Add visualization methods to the GerrymanderSimulator class
+    Generate a chart showing the vote distribution across districts
     
-    Returns the enhanced simulator class
+    Parameters:
+    - output_file: Output filename for the plot
+    
+    Returns:
+    - The output filename
+    """
+    # Calculate vote margins for each district
+    margins = []
+    populations = []
+    
+    for district_id in range(self.num_districts):
+        red = self.district_stats['red_votes'][district_id]
+        blue = self.district_stats['blue_votes'][district_id]
+        total = red + blue
+        
+        if total > 0:
+            margin = red / total
+        else:
+            margin = 0.5
+        
+        margins.append(margin)
+        populations.append(self.district_stats['population'][district_id])
+    
+    # Sort districts by margin
+    sorted_indices = np.argsort(margins)
+    sorted_margins = [margins[i] for i in sorted_indices]
+    sorted_pops = [populations[i] for i in sorted_indices]
+    
+    # Normalize populations for bubble size
+    if max(sorted_pops) > 0:
+        normalized_pops = [pop / max(sorted_pops) * 500 for pop in sorted_pops]
+    else:
+        normalized_pops = [100] * len(sorted_pops)
+    
+    # Set up plot
+    plt.figure(figsize=(12, 8))
+    
+    # Create x-axis positions
+    x_pos = list(range(1, self.num_districts + 1))
+    
+    # Create colors based on whether a district is red or blue
+    colors = ['red' if m > 0.5 else 'blue' for m in sorted_margins]
+    
+    # Plot the bubble chart
+    plt.scatter(x_pos, sorted_margins, s=normalized_pops, c=colors, alpha=0.6)
+    
+    # Add a reference line at 50%
+    plt.axhline(y=0.5, color='gray', linestyle='--', alpha=0.7)
+    
+    # Calculate the overall vote share
+    total_red = sum(self.district_stats['red_votes'])
+    total_blue = sum(self.district_stats['blue_votes'])
+    total_votes = total_red + total_blue
+    
+    if total_votes > 0:
+        overall_red_share = total_red / total_votes
+    else:
+        overall_red_share = 0.5
+    
+    # Add overall vote share reference line
+    plt.axhline(y=overall_red_share, color='purple', linestyle='-', alpha=0.7, 
+               label=f'Overall Red Vote Share: {overall_red_share:.1%}')
+    
+    # Add labels and title
+    plt.xlabel('Districts (Sorted by Republican Vote Share)')
+    plt.ylabel('Republican Vote Share')
+    plt.title('Vote Distribution Across Districts')
+    plt.ylim(0, 1)
+    plt.grid(alpha=0.3)
+    
+    # Add a legend
+    plt.legend()
+    
+    # Save the plot
+    plt.tight_layout()
+    plt.savefig(output_file, dpi=300)
+    plt.close()
+    
+    return output_file
+
+def visualize_district_populations(self, output_file="district_populations.png"):
+    """
+    Generate a visualization of district populations
+    
+    Parameters:
+    - output_file: Output filename for the plot
+    
+    Returns:
+    - The output filename
+    """
+    # Extract populations and calculate statistics
+    populations = self.district_stats['population']
+    mean_pop = np.mean(populations)
+    max_pop = np.max(populations)
+    min_pop = np.min(populations)
+    pop_deviation = (max_pop - min_pop) / mean_pop
+    
+    # Create a bar chart
+    plt.figure(figsize=(12, 8))
+    
+    # Create bars
+    district_ids = range(1, self.num_districts + 1)
+    bars = plt.bar(district_ids, populations)
+    
+    # Add a reference line for the mean population
+    plt.axhline(y=mean_pop, color='red', linestyle='-', label=f'Mean: {mean_pop:.0f}')
+    
+    # Color the bars based on whether they are above or below mean
+    for i, bar in enumerate(bars):
+        if populations[i] > mean_pop:
+            bar.set_color('darkred')
+        else:
+            bar.set_color('darkblue')
+    
+    # Add labels and title
+    plt.xlabel('District ID')
+    plt.ylabel('Population')
+    plt.title(f'District Populations (Deviation: {pop_deviation:.2%})')
+    plt.grid(axis='y', alpha=0.3)
+    
+    # Add a legend
+    plt.legend()
+    
+    # Save the plot
+    plt.tight_layout()
+    plt.savefig(output_file, dpi=300)
+    plt.close()
+    
+    return output_file
+
+def add_visualization_methods(simulator_class):
+    """
+    Add all visualization methods to the GerrymanderSimulator class
+    
+    Parameters:
+    - simulator_class: The original GerrymanderSimulator class
+    
+    Returns:
+    - Enhanced simulator class with visualization methods
     """
     # Add methods to the class
-    GerrymanderSimulator.create_district_change_heatmap = create_district_change_heatmap
-    GerrymanderSimulator.track_district_stats_over_time = track_district_stats_over_time
+    simulator_class.create_district_change_heatmap = create_district_change_heatmap
+    simulator_class.track_district_stats_over_time = track_district_stats_over_time
+    simulator_class.plot_metrics_evolution = plot_metrics_evolution
+    simulator_class.compare_scenarios_metrics = compare_scenarios_metrics
+    simulator_class.create_comparison_visualization = create_comparison_visualization
+    simulator_class.generate_vote_distribution_chart = generate_vote_distribution_chart
+    simulator_class.visualize_district_populations = visualize_district_populations
     
-    return GerrymanderSimulator
+    return simulator_class
