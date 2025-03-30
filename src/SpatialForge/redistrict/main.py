@@ -1,8 +1,9 @@
 import numpy as np
 from SpatialForgeHack2025.src.SpatialForge.redistrict.gerrymandering_simulator import GerrymanderSimulator
 from SpatialForgeHack2025.src.SpatialForge.redistrict.animation_capabilities import add_animation_methods
-from MCMCAPSUHacks2025.Redistricting.visualization import add_visualization_methods
+from MCMCAPSUHacks2025.core.post import add_visualization_methods
 import os
+
 
 # Load your state map
 state_map = np.load('pa_election_data.npy')

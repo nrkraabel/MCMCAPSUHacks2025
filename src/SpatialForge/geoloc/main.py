@@ -1,5 +1,5 @@
 import geopandas as gpd
-from MCMCAPSUHacks2025.src.core.post import plot_flowpaths, live_plot
+from MCMCAPSUHacks2025.core.post import plot_flowpaths, live_plot
 import numpy as np
 import random
 import logging

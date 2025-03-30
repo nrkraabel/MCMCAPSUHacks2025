@@ -97,7 +97,7 @@ class GeoLocMarkovAnneal:
         uniqueness = objective_uniqueness(
             points,
             self.point_distances,
-            [geom for geom in flowpaths.geometry if geom.geom_type in ['LineString', 'MultiLineString']],
+            [geom for geom in self.network.geometry if geom.geom_type in ['LineString', 'MultiLineString']],
             spatial_index=self.spatial_index,
         )
 
