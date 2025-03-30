@@ -65,4 +65,4 @@ Our optimization method demonstrates an additional phasing scheme, wherein the a
 
 Following this, additional phases impose compactness constraints to reign in fractals and compose uniform boundaries for the districts
 
-![Alt text](Figs/final_districts.png)
+![Alt text](Figs/after.png)
