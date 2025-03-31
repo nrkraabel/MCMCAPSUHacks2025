@@ -20,10 +20,6 @@ We include two examples applying this tool: Optimal streamflow gage placement in
 
 We use MCMC annealing to learn the optimal placement of streamflow gages on rivers and streams in the JRB. Beginning from a random selection of gage locations, we optimize placement based on river location, geographic topology, and size of the stream/river (larger is more important).
 
-Proper placement of these gages will allow better hydrologic simulations like the one below:
-
-![Alt text](Figs/mean_discharge_animation_50fps_plasma.gif)
-
 
 ### Optimization routine progresses as follows:
 
