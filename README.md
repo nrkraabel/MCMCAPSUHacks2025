@@ -1,5 +1,5 @@
 # SpatialForge
-Generic, Scalable Markov Chain Monto Carlo Annealing
+Markov Chain Monto Carlo Annealing
 
 [![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue)]()
 
